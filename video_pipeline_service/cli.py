@@ -13,6 +13,7 @@ import imageio_ffmpeg
 from voice_gen_service.cli import VoiceConfig, run_tts
 from fal_integration_service.scenes import load_storyboard
 from fal_integration_service.storyboard_pipeline import process_storyboard
+from fal_integration_service.fal_face_swap import upload_local_image
 from text_extraction_service.cli import (
     extract_scenes,
     generate_scene_prompt,
@@ -173,6 +174,11 @@ def main() -> None:
         action="store_true",
         help="Keep intermediate per-scene clips.",
     )
+    parser.add_argument(
+        "--face-image",
+        help="Path or URL to a face reference image. The main character "
+        "in every scene will be face-swapped to look like this person.",
+    )
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -254,6 +260,20 @@ def main() -> None:
     voice_manifest_path = os.path.join(output_root, args.voice_manifest)
     write_json(voice_manifest_path, voice_manifest)
 
+    # Resolve face image (upload local file or use URL directly)
+    face_swap_url = None
+    if args.face_image:
+        face_ref = args.face_image
+        if face_ref.startswith(("http://", "https://")):
+            face_swap_url = face_ref
+            logging.info("Face swap: using URL %s", face_swap_url)
+        else:
+            if not os.path.isfile(face_ref):
+                raise SystemExit(f"Face image file not found: {face_ref}")
+            logging.info("Face swap: uploading local image %s", face_ref)
+            face_swap_url = upload_local_image(face_ref)
+            logging.info("Face swap: uploaded to %s", face_swap_url)
+
     logging.info("Step 2/4: Generate video clips per scene")
     storyboard = load_storyboard(scene_plan_path)
     per_scene_durations = build_duration_map(voice_manifest, args.max_seconds)
@@ -262,6 +282,7 @@ def main() -> None:
         per_scene_durations=per_scene_durations,
         output_dir=video_output_dir,
         return_clips=True,
+        face_swap_url=face_swap_url,
     )
     clip_paths = video_result.get("clip_paths", [])
 
