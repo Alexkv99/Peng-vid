@@ -19,16 +19,13 @@ PULID_IMAGE_MODEL = "fal-ai/flux-pulid"
 _OLD_STYLE_PREFIX = "Sketched storyboard style, pencil lines, minimal shading."
 
 _NEW_STYLE_PREFIX = (
-    "Studio Ghibli anime style, Hayao Miyazaki inspired, "
-    "soft watercolor tones, expressive detailed faces, "
-    "warm cinematic palette, clear facial features."
+    "Sketched storyboard style, pencil lines, with some shading."
 )
 
 # Extra prompt fragment added when a face reference is active so the
 # diffusion model foregrounds the protagonist's face.
 _PROTAGONIST_HINT = (
-    " The protagonist is shown prominently in the scene with a clear, "
-    "detailed, front-facing visible face as the central focus of the image."
+    " The protagonist is shown prominently in the scene with a clear, " 
 )
 
 
@@ -38,7 +35,6 @@ def _ensure_api_key() -> None:
             "FAL_KEY environment variable is not set. "
             "Copy .env.example to .env and add your key."
         )
-
 
 def _extract_image_url(result: dict) -> str:
     """Extract the image URL from a fal image-generation response."""

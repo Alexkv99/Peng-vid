@@ -1,0 +1,62 @@
+{
+  "project_id": null,
+  "style_preset": "sketched_storyboard",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "title": "Deleting Instagram, gaining focus",
+      "main_point": "Removing Instagram freed time and attention for intentional reading.",
+      "scene_summary": "After deleting Instagram, I found more time, energy, and attention to read intentionally.",
+      "key_elements": [
+        "Phone with Instagram deleted",
+        "Book reading",
+        "Calm, focused routine"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person at home in a calm routine, holding a phone showing Instagram deleted.\nThey set the phone aside and read a book with focused attention."
+    },
+    {
+      "scene_id": 2,
+      "title": "Curiosity-led reading and Feynman\u2019s warning",
+      "main_point": "A simple daily reading quota led to ideas from Deutsch and Holiday, anchored by Feynman\u2019s principle.",
+      "scene_summary": "I read one hour daily, and Feynman\u2019s warning hit: don\u2019t fool yourself.",
+      "key_elements": [
+        "One-hour timer",
+        "The Beginning of Infinity",
+        "Ego is the Enemy",
+        "Richard Feynman quote"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person sits at a desk at home, one-hour timer beside them, reading \u201cThe Beginning of Infinity\u201d with \u201cEgo is the Enemy\u201d stacked nearby.\nThey pause and jot down \u201cDon\u2019t fool yourself \u2014 Richard Feynman\u201d on a notepad, looking thoughtful."
+    },
+    {
+      "scene_id": 3,
+      "title": "How high ego fooled me",
+      "main_point": "High ego distorted reality, blocked beginnerhood, and eased avoidance; low ego enabled growth.",
+      "scene_summary": "High ego made me dodge beginner work, until rejection pushed me to learn and improve.",
+      "key_elements": [
+        "Guitar beginner fear",
+        "Learning from a kid",
+        "Searching for purpose vs basic habits",
+        "Hackathon rejection early 2025",
+        "No-code learning",
+        "Hackathons: finalist twice, third prize once"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA young adult sits with a guitar, tense and hesitant, while a confident kid demonstrates a simple chord.\nIn a small practice room, the adult watches and starts copying the basics, humbled but determined."
+    },
+    {
+      "scene_id": 4,
+      "title": "Bad explanations vs good explanations",
+      "main_point": "Seeking good explanations through questions and humility prevented self-deception; ego needed management.",
+      "scene_summary": "I questioned bad explanations, stayed humble about what I didn\u2019t know, and managed ego deliberately.",
+      "key_elements": [
+        "David Deutsch on good explanations",
+        "Religion and authority",
+        "Galileo and heliocentrism",
+        "Universe vastness, Earth as speck",
+        "Asking hard questions",
+        "Humility and continued learning"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA thoughtful narrator sits at a desk with open books labeled \u201cDeutsch,\u201d \u201cReligion/Authority,\u201d and \u201cGalileo,\u201d writing questions on a page.\nBehind them, a small Earth speck floats in a vast universe sketch, implying humility and continued learning."
+    }
+  ],
+  "warnings": []
+}

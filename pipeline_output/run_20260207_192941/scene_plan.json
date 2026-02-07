@@ -1,0 +1,59 @@
+{
+  "project_id": null,
+  "style_preset": "sketched_storyboard",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "title": "Deleting Instagram, gaining focus",
+      "main_point": "Removing Instagram freed time and attention for intentional reading.",
+      "scene_summary": "After deleting Instagram, I had more time, energy, and attention to read intentionally.",
+      "key_elements": [
+        "Phone with Instagram deleted",
+        "Book reading time",
+        "Calm, focused routine"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person at home sets down a phone showing Instagram deleted and opens a book.\nQuiet reading routine, calm and focused."
+    },
+    {
+      "scene_id": 2,
+      "title": "Curiosity-led reading and Feynman\u2019s warning",
+      "main_point": "Reading followed curiosity, and Feynman\u2019s quote warned against self-deception.",
+      "scene_summary": "I read by curiosity for one hour daily, and Feynman warned I was easiest to fool.",
+      "key_elements": [
+        "One-hour reading quota",
+        "The Beginning of Infinity",
+        "Ego is the Enemy",
+        "Richard Feynman quote"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person sits at a desk at home, reading with a one-hour quota noted beside them.\nOn the desk are the books \u201cThe Beginning of Infinity\u201d and \u201cEgo is the Enemy,\u201d with Richard Feynman\u2019s quote written on a nearby note as a warning."
+    },
+    {
+      "scene_id": 3,
+      "title": "High ego blocks learning and progress",
+      "main_point": "High ego created false stories, blocked beginner mindset, and delayed doing necessary work.",
+      "scene_summary": "High ego made me fear looking stupid, avoid practice, and chase purpose over basics.",
+      "key_elements": [
+        "Guitar learning fear",
+        "Refusing to learn from a kid",
+        "Searching for purpose",
+        "Doing unglamorous tasks"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA young adult with a guitar hesitates to practice, tense and self-conscious, in a simple room.\nNearby, a kid demonstrates a basic chord while the adult turns away, clutching a notebook labeled \u201cpurpose\u201d instead of doing the basics."
+    },
+    {
+      "scene_id": 4,
+      "title": "Bad explanations vs. good explanations",
+      "main_point": "Bad explanations and authority blocked truth; questioning and humility led to better understanding.",
+      "scene_summary": "Bad explanations resisted questions, but seeking good explanations kept humility and reduced self-deception.",
+      "key_elements": [
+        "David Deutsch on explanations",
+        "Religion and authority",
+        "Galileo and heliocentrism",
+        "Asking hard questions",
+        "Humility and continued learning"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nIn a simple lecture hall, David Deutsch gestures toward a chalkboard labeled \u201cBad explanations\u201d and \u201cGood explanations\u201d while a stern religious authority figure stands with crossed arms.\nA student raises a hand to ask a hard question; Deutsch listens calmly, the authority looks resistant."
+    }
+  ],
+  "warnings": []
+}

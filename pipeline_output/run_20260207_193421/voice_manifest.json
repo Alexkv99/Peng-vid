@@ -1,0 +1,57 @@
+{
+  "project_id": null,
+  "style_preset": "sketched_storyboard",
+  "voice_id": "ihi0W74n1uzNk15b",
+  "model_name": "default",
+  "output_format": "wav",
+  "items": [
+    {
+      "scene_id": 1,
+      "title": "Deleting Instagram, finding focus",
+      "text_field": "scene_summary",
+      "text": "After deleting Instagram, I gained time, energy, and attention to read intentionally.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_193421/voice_output/scene_001.wav",
+      "request_id": "EMMy3_m9PDw",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 2,
+      "title": "Curiosity-led reading and Feynman\u2019s warning",
+      "text_field": "scene_summary",
+      "text": "I read by curiosity for one hour daily, and Feynman warned: don\u2019t fool yourself.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_193421/voice_output/scene_002.wav",
+      "request_id": "lT142rk5C38",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 3,
+      "title": "How high ego fooled me",
+      "text_field": "scene_summary",
+      "text": "High ego made me dodge beginner work, until rejection pushed me to learn and improve.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_193421/voice_output/scene_003.wav",
+      "request_id": "A-l7tr6FlUc",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 4,
+      "title": "Bad explanations vs good explanations",
+      "text_field": "scene_summary",
+      "text": "Bad explanations thrived under authority; asking harder questions kept me humble and learning.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_193421/voice_output/scene_004.wav",
+      "request_id": "bTDKCSUb23U",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    }
+  ]
+}
