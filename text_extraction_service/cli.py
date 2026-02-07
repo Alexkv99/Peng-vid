@@ -119,7 +119,10 @@ def call_structured_output(
 def extract_scenes(
     client: OpenAI, model: str, source_text: str, number_of_scenes: int, verbose: bool
 ) -> Dict[str, Any]:
-    system_prompt = "You are extracting filmable scene beats from a text."
+    system_prompt = (
+        "You are a script editor extracting filmable scene beats and concise "
+        "voiceover narration for a short video."
+    )
     user_prompt = (
         "Text:\n"
         f"{source_text}\n\n"
@@ -128,11 +131,16 @@ def extract_scenes(
         "2) Each scene should represent a single beat that could fit ~5 seconds.\n"
         "3) Stay faithful to the text; do not invent new events or entities.\n"
         "4) Keep scenes distinct; merge duplicates.\n"
-        "5) Write scene_summary as narration in first person, as if the narrator is\n"
-        "   speaking directly (no third-person framing like 'Ada says').\n"
-        f"6) Aim for exactly {number_of_scenes} scenes when possible. "
+        "5) Write scene_summary as concise explanatory narration in past tense.\n"
+        "   Describe the idea/event directly; avoid meta phrasing like\n"
+        "   'I describe/I explain/I outline' or 'this scene shows'.\n"
+        "   Use first-person only when the source text is explicitly first-person;\n"
+        "   otherwise use neutral narration.\n"
+        "6) Keep scene_summary short enough to narrate in under 6 seconds.\n"
+        "   Target 12-16 words, max 18 words.\n"
+        f"7) Aim for exactly {number_of_scenes} scenes when possible. "
         "If the text is too short, return fewer and add a warning.\n"
-        "7) Output MUST match the JSON schema."
+        "8) Output MUST match the JSON schema."
     )
     return call_structured_output(
         client=client,
