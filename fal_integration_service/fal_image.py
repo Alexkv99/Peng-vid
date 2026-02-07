@@ -1,7 +1,11 @@
 """Thin wrapper around the fal-client SDK for text-to-image generation."""
 
+from __future__ import annotations
+
 import os
 import fal_client
+
+from .art_styles import ArtStyle, get_style
 
 # Default image model — Flux Dev produces high-quality stylized images.
 # Alternatives:
@@ -13,20 +17,6 @@ DEFAULT_IMAGE_MODEL = "fal-ai/flux/dev"
 # Embeds a reference face directly into the diffusion process so the
 # generated character already looks like the target person.
 PULID_IMAGE_MODEL = "fal-ai/flux-pulid"
-
-# Style prefix injected by text_extraction_service — we intercept and
-# replace it here so the extraction layer stays untouched.
-_OLD_STYLE_PREFIX = "Sketched storyboard style, pencil lines, minimal shading."
-
-_NEW_STYLE_PREFIX = (
-    "Sketched storyboard style, pencil lines, with some shading."
-)
-
-# Extra prompt fragment added when a face reference is active so the
-# diffusion model foregrounds the protagonist's face.
-_PROTAGONIST_HINT = (
-    " The protagonist is shown prominently in the scene with a clear, " 
-)
 
 
 def _ensure_api_key() -> None:
@@ -54,15 +44,20 @@ def _extract_image_url(result: dict) -> str:
     raise RuntimeError(f"Could not extract image URL from fal response: {result}")
 
 
-def _restyle_prompt(prompt: str, *, face_mode: bool) -> str:
-    """Replace the old sketch style with Miyazaki anime style.
+def _restyle_prompt(prompt: str, *, face_mode: bool, style: ArtStyle) -> str:
+    """Replace the short style prefix with the full image directive.
 
-    When *face_mode* is True an extra hint is appended so the model
-    keeps the protagonist's face prominent and recognisable.
+    The scene prompt begins with the style's ``prompt_prefix`` (a short
+    phrase the LLM was told to use).  This function swaps it out for the
+    much more detailed ``image_prefix`` so the image model receives
+    strict, consistent styling instructions.
+
+    When *face_mode* is True the style's protagonist hint is appended so
+    the model foregrounds the character's face.
     """
-    restyled = prompt.replace(_OLD_STYLE_PREFIX, _NEW_STYLE_PREFIX, 1)
+    restyled = prompt.replace(style.prompt_prefix, style.image_prefix, 1)
     if face_mode:
-        restyled = restyled.rstrip() + _PROTAGONIST_HINT
+        restyled = restyled.rstrip() + style.protagonist_hint
     return restyled
 
 
@@ -72,6 +67,7 @@ def generate_image(
     model: str = DEFAULT_IMAGE_MODEL,
     image_size: str = "landscape_16_9",
     reference_face_url: str | None = None,
+    style_key: str | None = None,
 ) -> str:
     """Generate an image and return the image URL.
 
@@ -79,14 +75,17 @@ def generate_image(
     PuLID Flux model so the generated character inherits the identity of
     the reference face.  Without it, plain Flux Dev is used as before.
 
-    The prompt style is always upgraded from the legacy sketch preset to
-    a Miyazaki anime style for better face visibility.
+    The prompt's short style prefix is replaced with the full image
+    directive for the chosen art style (defaults to ``miyazaki``).
 
     Returns the direct URL string to the generated image.
     """
     _ensure_api_key()
 
-    styled_prompt = _restyle_prompt(prompt, face_mode=bool(reference_face_url))
+    style = get_style(style_key)
+    styled_prompt = _restyle_prompt(
+        prompt, face_mode=bool(reference_face_url), style=style,
+    )
 
     if reference_face_url:
         active_model = PULID_IMAGE_MODEL

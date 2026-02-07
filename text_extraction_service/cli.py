@@ -10,7 +10,17 @@ from typing import Any, Dict, List
 from dotenv import load_dotenv
 from openai import OpenAI
 
-STYLE_PREFIX = "Sketched storyboard style, pencil lines, minimal shading."
+from fal_integration_service.art_styles import (
+    DEFAULT_STYLE,
+    ArtStyle,
+    available_styles,
+    get_style,
+    style_choices_help,
+)
+
+# Legacy prefix kept only so normalize_prompt() can detect prompts
+# generated before the art-style system existed.
+_LEGACY_STYLE_PREFIX = "Sketched storyboard style, pencil lines, minimal shading."
 
 EXTRACT_SCENES_SCHEMA: Dict[str, Any] = {
     "type": "object",
@@ -173,6 +183,8 @@ def generate_scene_prompt(
     scene: Dict[str, Any],
     verbose: bool,
     all_scenes: List[Dict[str, Any]] | None = None,
+    *,
+    style: ArtStyle | None = None,
 ) -> Dict[str, Any]:
     total = len(all_scenes) if all_scenes else 0
     scene_id = scene.get("scene_id", 0)
@@ -213,6 +225,10 @@ def generate_scene_prompt(
     else:
         context_block = ""
 
+    if style is None:
+        style = get_style(DEFAULT_STYLE)
+    style_prefix = style.prompt_prefix
+
     system_prompt = (
         "You will generate ONE short image-generation prompt for the given "
         "scene. The scene is part of a single continuous story — keep visual "
@@ -224,7 +240,7 @@ def generate_scene_prompt(
         "Scene JSON:\n"
         f"{json.dumps(scene, ensure_ascii=True)}\n\n"
         "Rules:\n"
-        f'1) Start with the exact style prefix: "{STYLE_PREFIX}"\n'
+        f'1) Start with the exact style prefix: "{style_prefix}"\n'
         "2) 2-4 lines max. Keep it concise.\n"
         "3) Describe only: who is present, what happens (single beat), "
         "where it happens, implied emotion (only if explicit).\n"
@@ -260,15 +276,19 @@ def normalize_scene_ids(
 
 
 def normalize_prompt(
-    scene_id: int, prompt: str, warnings: List[str]
+    scene_id: int, prompt: str, warnings: List[str], *, style: ArtStyle | None = None,
 ) -> str:
+    if style is None:
+        style = get_style(DEFAULT_STYLE)
+    prefix = style.prompt_prefix
+
     cleaned = prompt.strip()
-    if not cleaned.startswith(STYLE_PREFIX):
+    if not cleaned.startswith(prefix):
         warnings.append(
             f"scene_id {scene_id}: prompt did not start with the style prefix; "
             "prefix was added."
         )
-        cleaned = f"{STYLE_PREFIX} {cleaned.lstrip()}"
+        cleaned = f"{prefix} {cleaned.lstrip()}"
 
     if BANNED_TERMS_PATTERN.search(cleaned):
         warnings.append(
@@ -282,7 +302,12 @@ def merge_scene_prompts(
     scenes: List[Dict[str, Any]],
     prompts: List[Dict[str, Any]],
     warnings: List[str],
+    *,
+    style: ArtStyle | None = None,
 ) -> Dict[str, Any]:
+    if style is None:
+        style = get_style(DEFAULT_STYLE)
+
     prompt_by_id = {item["scene_id"]: item["scene_prompt"] for item in prompts}
     merged_scenes: List[Dict[str, Any]] = []
 
@@ -291,8 +316,8 @@ def merge_scene_prompts(
         prompt = prompt_by_id.get(scene_id)
         if not prompt:
             warnings.append(f"Missing prompt for scene_id {scene_id}.")
-            prompt = STYLE_PREFIX
-        prompt = normalize_prompt(scene_id, prompt, warnings)
+            prompt = style.prompt_prefix
+        prompt = normalize_prompt(scene_id, prompt, warnings, style=style)
         merged_scene = dict(scene)
         merged_scene["scene_prompt"] = prompt
         merged_scenes.append(merged_scene)
@@ -300,7 +325,7 @@ def merge_scene_prompts(
     project_id = datetime.now(timezone.utc).strftime("proj_%Y%m%d_%H%M%S")
     return {
         "project_id": project_id,
-        "style_preset": "sketched_storyboard",
+        "style_preset": style.key,
         "scenes": merged_scenes,
         "warnings": warnings,
     }
@@ -345,6 +370,16 @@ def main() -> None:
         help="Write JSON output to a file (defaults to stdout).",
     )
     parser.add_argument(
+        "--style",
+        default=DEFAULT_STYLE,
+        choices=available_styles(),
+        help=(
+            "Art style for the generated images. "
+            f"Default: {DEFAULT_STYLE}. Available:\n"
+            + style_choices_help()
+        ),
+    )
+    parser.add_argument(
         "--verbose",
         action="store_true",
         help="Print LLM responses to the terminal.",
@@ -362,6 +397,8 @@ def main() -> None:
 
     load_env()
     client = OpenAI()
+    art_style = get_style(args.style)
+    logging.info("Using art style: %s (%s)", art_style.key, art_style.name)
 
     logging.info("Step 1/3: Extract scenes")
     extract_result = extract_scenes(
@@ -390,6 +427,7 @@ def main() -> None:
             scene=scene,
             verbose=args.verbose,
             all_scenes=scenes,
+            style=art_style,
         )
         if prompt_result.get("scene_id") != scene.get("scene_id"):
             warnings.append(
@@ -405,6 +443,7 @@ def main() -> None:
         scenes=scenes,
         prompts=prompt_results,
         warnings=warnings,
+        style=art_style,
     )
 
     output_json = json.dumps(final_plan, indent=2, ensure_ascii=True)
