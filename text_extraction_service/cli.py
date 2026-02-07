@@ -136,9 +136,11 @@ def extract_scenes(
         "   'I describe/I explain/I outline' or 'this scene shows'.\n"
         "   Use first-person only when the source text is explicitly first-person;\n"
         "   otherwise use neutral narration.\n"
-        f"6) Aim for exactly {number_of_scenes} scenes when possible. "
+        "6) Keep scene_summary short enough to narrate in under 6 seconds.\n"
+        "   Target 12-16 words, max 18 words.\n"
+        f"7) Aim for exactly {number_of_scenes} scenes when possible. "
         "If the text is too short, return fewer and add a warning.\n"
-        "7) Output MUST match the JSON schema."
+        "8) Output MUST match the JSON schema."
     )
     return call_structured_output(
         client=client,
