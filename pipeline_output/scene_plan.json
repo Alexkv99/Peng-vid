@@ -1,61 +1,164 @@
 {
-  "project_id": null,
+  "project_id": "proj_20260207_155631",
   "style_preset": "sketched_storyboard",
   "scenes": [
     {
       "scene_id": 1,
-      "title": "Feeling trapped vs. values-aligned work",
-      "main_point": "Avoid building a life that traps you in misaligned work; optimize for success plus meaning and values alignment.",
-      "scene_summary": "I describe the fear of waking up late in my career feeling trapped by lifestyle and expectations, and I frame the goal as finding work that blends success with meaningful, values-aligned fulfillment.",
+      "title": "Rituals amid uncertainty",
+      "main_point": "Rituals provide structure when life feels uncertain.",
+      "scene_summary": "I realized rituals mattered most when uncertainty made everything feel unsteady.",
       "key_elements": [
-        "Mirror reflection",
-        "Sense of being trapped by lifestyle/expectations",
-        "Career success vs. meaningfulness",
-        "Values alignment"
+        "uncertainty",
+        "daily structure",
+        "personal realization"
       ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person stands before a mirror in a home hallway, seeing their reflection boxed in by symbols of lifestyle and expectations.\nThey hesitate, torn between career success and meaningful, values-aligned work, with an explicit trapped expression."
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person pauses mid-morning routine, hands hovering over a simple daily ritual, realizing its importance.\nIn a modest home interior with a small table and everyday items; emotion: uncertain but steadied."
     },
     {
       "scene_id": 2,
-      "title": "Curiosity Loops: fast structured advice gathering",
-      "main_point": "Use a structured outreach to get contextual, high-signal input quickly.",
-      "scene_summary": "I explain how I run a curiosity loop by sending a lightweight, specific question to a curated group, making it easy to respond, then processing the feedback and closing the loop with thanks so I can make smarter, more contextual decisions.",
+      "title": "Religion to secular life",
+      "main_point": "Religion historically provided structure; secularization reduced reliance on it.",
+      "scene_summary": "For a long time, religion gave people structure, until secularization reduced its role.",
       "key_elements": [
-        "Email to ~10\u201311 people",
-        "Specific, unbiased question with rationale",
-        "Curate subject-matter experts + people who know me",
-        "Low cognitive load prompt (pick top 2\u20133 and why)",
-        "Process responses and thank people"
+        "religion",
+        "structure",
+        "secularization",
+        "Enlightenment in Europe"
       ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person at a desk types an email on a laptop to a small list of 10\u201311 recipients, with a clear, unbiased question and brief rationale on screen.\nNearby notes show \u201cpick top 2\u20133 and why,\u201d implying a low-effort reply request; the setting is a simple home office, mood focused."
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nIn an Enlightenment-era European town square, townspeople step away from a church doorway toward a civic building with posted notices.\nA priest remains at the church entrance while a scholar gestures to the notices, suggesting a shift from religious structure to secular life."
     },
     {
       "scene_id": 3,
-      "title": "Values exercise applied to real decisions",
-      "main_point": "Clarify personal values to guide choices against external pressure.",
-      "scene_summary": "I walk through a quick values exercise that turns a word list into a ranked set of guiding sentences, then I apply it to a real decision about what to say yes/no to, using values as an internal scorecard instead of chasing the external scorecard.",
+      "title": "Problems are inevitable",
+      "main_point": "Change brings problems, and problems can be useful rather than purely bad.",
+      "scene_summary": "Change brought problems, and I treated them as inevitable fuel for growth.",
       "key_elements": [
-        "Values word list \u2192 filter \u2192 stack-rank",
-        "Example values: adventure, optimism, generosity, improvement",
-        "Decision tension: more opportunities vs. doing less",
-        "Inner scorecard vs. outer scorecard"
+        "change",
+        "problems",
+        "positive engagement",
+        "acceptance"
       ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA presenter at a desk with a values word list on paper, crossing out words and arranging the remaining into a ranked stack with short guiding sentences.\nIn a simple office setting, they compare two columns labeled \u201cyes/no\u201d and \u201cinner scorecard/outer scorecard,\u201d looking focused."
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA single person stands at a desk with scattered papers labeled \u201cchange\u201d and \u201cproblems,\u201d calmly sorting them into a \u201cgrowth\u201d folder.\nSmall office workspace; expression shows acceptance and positive engagement."
     },
     {
       "scene_id": 4,
-      "title": "Career growth: explore/exploit + hard skills practice",
-      "main_point": "Early career is for exploration with a thesis; build skills by repeating discomfort until it becomes competence.",
-      "scene_summary": "I outline how I navigated my early career by exploring roles and environments, then exploiting specific learning goals, and I emphasize \u2018eating your vegetables\u2019\u2014repeating uncomfortable skills like networking or posting consistently until I\u2019m genuinely good enough to judge whether I like it.",
+      "title": "Morning reading ritual",
+      "main_point": "A daily one-hour, phone-free reading ritual anchors the day.",
+      "scene_summary": "I started each day with one focused hour of reading, with no phone nearby.",
       "key_elements": [
-        "Explore vs. exploit framework",
-        "Learning-driven career moves",
-        "Boiling frog metaphor (watch the trend)",
-        "\u2018Eating your vegetables\u2019 (10\u201312 exposures)",
-        "Networking rule: hand out 10 business cards + touch back wall",
-        "LinkedIn 30 / repeated outreach practice"
+        "one-hour reading",
+        "no phone",
+        "Kindle or physical book",
+        "morning ritual"
       ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA young professional stands in a conference lobby, handing out business cards while stepping to the back wall, determined.\nNearby, a small whiteboard shows \u201cExplore \u2192 Exploit\u201d and \u201c10\u201312 exposures / LinkedIn 30\u201d as they practice uncomfortable skills."
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person sits at a small table, reading a Kindle or physical book for a focused hour.\nMorning ritual at home; a phone is placed far away, out of reach."
+    },
+    {
+      "scene_id": 5,
+      "title": "Stoicism as balance",
+      "main_point": "Stoicism is about balance, not suppressing emotions.",
+      "scene_summary": "Stoic ideas aimed for balance, not emotion suppression, and felt practical in daily life.",
+      "key_elements": [
+        "Ego is the Enemy",
+        "Ryan Holiday",
+        "stoicism",
+        "balance"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person reads \u201cEgo is the Enemy\u201d by Ryan Holiday at a simple desk.\nThey pause, holding the book open, appearing calm and balanced as they reflect on stoicism."
+    },
+    {
+      "scene_id": 6,
+      "title": "To be vs to do",
+      "main_point": "Process beats outcome-driven visualization; focus on what you do now.",
+      "scene_summary": "Outcome-driven visualization missed the grind, so I focused on doing what mattered now.",
+      "key_elements": [
+        "visualization",
+        "daily grind",
+        "process orientation",
+        "Derek Sivers quote"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person at a desk with a notebook, crossing out a thought bubble of a trophy labeled \u201cvisualization\u201d and writing a simple to-do list labeled \u201cdaily grind.\u201d\nOn the wall, a small quote card reads \u201cTo be vs to do \u2014 Derek Sivers,\u201d showing a shift to process orientation."
+    },
+    {
+      "scene_id": 7,
+      "title": "Don\u2019t chase passion",
+      "main_point": "\u201cFind your passion\u201d can inflate ego; consistent work matters more.",
+      "scene_summary": "Chasing passion fed ego, so I chose steady work over grand quests.",
+      "key_elements": [
+        "Cal Newport",
+        "Dr Anna Lembke",
+        "ego",
+        "dispassionate excellence"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person at a simple desk with a notebook labeled \u201cdispassionate excellence,\u201d while a thought bubble reading \u201cFind your passion\u201d swells into an ego-shaped balloon.\nIn a quiet study, they set the balloon aside and keep writing steadily, calm and focused.\nSmall book spines on the desk read \u201cCal Newport\u201d and \u201cDr Anna Lembke.\u201d"
+    },
+    {
+      "scene_id": 8,
+      "title": "Endurance sports consistency",
+      "main_point": "Inspiration came from consistent action, not obsession or hype.",
+      "scene_summary": "In endurance sports, I stayed unromantic about running and admired consistency over hype.",
+      "key_elements": [
+        "running",
+        "Kipchoge mention",
+        "real-life role models",
+        "consistency"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA runner trains steadily on a simple track, focused and unromantic.\nA small note references Kipchoge and real-life role models, emphasizing consistency over hype."
+    },
+    {
+      "scene_id": 9,
+      "title": "Earn trust through grunt work",
+      "main_point": "Make teammates look good; reliability builds trust over time.",
+      "scene_summary": "Early on, I took disliked tasks, delivered well, and earned trust through reliability.",
+      "key_elements": [
+        "teamwork",
+        "grunt work",
+        "internships",
+        "trust",
+        "deliver more"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nAn intern and a small team in an office workspace; the intern takes on a stack of disliked tasks while teammates focus on their work.\nTeammates glance over with growing trust as the intern delivers completed work reliably."
+    },
+    {
+      "scene_id": 10,
+      "title": "Get out of your head",
+      "main_point": "Perfectionism and spotlight effect come from ego; most people aren\u2019t watching.",
+      "scene_summary": "Ego pushed perfection and spotlight fears, but most people stayed absorbed in themselves.",
+      "key_elements": [
+        "vision boards",
+        "perfect plan",
+        "perfectionism",
+        "spotlight effect"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person stands by a wall of vision boards and a \u201cperfect plan\u201d checklist, looking tense.\nAround them, several people in the same room stay focused on their own tasks, not watching."
+    },
+    {
+      "scene_id": 11,
+      "title": "Restraint under rejection",
+      "main_point": "Feel frustration, but practice restraint; ego seeks mic-drop moments.",
+      "scene_summary": "Rejections and silence hurt, but restraint kept ego from turning pain into drama.",
+      "key_elements": [
+        "interview rejection",
+        "cold emails",
+        "immigrant hiring struggle",
+        "anger",
+        "restraint"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nAn immigrant job seeker sits at a small desk, laptop open to an interview rejection and unanswered cold emails.\nThey clench a fist, then relax it, holding back anger in a quiet room."
+    },
+    {
+      "scene_id": 12,
+      "title": "Infinite game and humble action",
+      "main_point": "Avoid entitlement and stories; focus on controllable actions and lead with accountability.",
+      "scene_summary": "I dropped entitlement and big stories, focused on daily actions, and owned outcomes as a leader.",
+      "key_elements": [
+        "no finish line",
+        "feedback as gift",
+        "cold emailing",
+        "control response",
+        "give credit/take blame"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA leader at a desk reads blunt feedback notes and types a cold email, calm and accountable.\nOffice workspace with a simple wall note reading \u201cNo finish line,\u201d and a small list: \u201cGive credit / Take blame.\u201d"
     }
   ],
   "warnings": []
