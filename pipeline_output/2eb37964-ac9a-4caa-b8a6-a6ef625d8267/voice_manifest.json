@@ -1,0 +1,153 @@
+{
+  "project_id": null,
+  "style_preset": "miyazaki",
+  "voice_id": "gVJ57663V-6qJdOv",
+  "model_name": "default",
+  "output_format": "wav",
+  "items": [
+    {
+      "scene_id": 1,
+      "title": "Three-front war for growth",
+      "text_field": "scene_summary",
+      "text": "AI raised customer expectations, collapsed channels, and put everyone after your value prop.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "/Users/aliimran/Sehar/text-breakdown/pipeline_output/2eb37964-ac9a-4caa-b8a6-a6ef625d8267/voice_output/scene_001.wav",
+      "request_id": "XLDpKStk6Yg",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 2,
+      "title": "A new playbook: Trust",
+      "text_field": "scene_summary",
+      "text": "A new growth playbook emerged, and it centered on one concept: trust.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "/Users/aliimran/Sehar/text-breakdown/pipeline_output/2eb37964-ac9a-4caa-b8a6-a6ef625d8267/voice_output/scene_002.wav",
+      "request_id": "BQ4HlxSM6EM",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 3,
+      "title": "Sponsor: Cello referral platform",
+      "text_field": "scene_summary",
+      "text": "Cello automated referrals, attribution, and rewards to drive predictable product-led growth.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "/Users/aliimran/Sehar/text-breakdown/pipeline_output/2eb37964-ac9a-4caa-b8a6-a6ef625d8267/voice_output/scene_003.wav",
+      "request_id": "o02IXu4vuwA",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 4,
+      "title": "Classic acquisition channels deteriorated",
+      "text_field": "scene_summary",
+      "text": "Marketing channels got pricier and weaker, and the trend kept getting worse.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "/Users/aliimran/Sehar/text-breakdown/pipeline_output/2eb37964-ac9a-4caa-b8a6-a6ef625d8267/voice_output/scene_004.wav",
+      "request_id": "xVfX5JbMUok",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 5,
+      "title": "SEO and search traffic broke",
+      "text_field": "scene_summary",
+      "text": "AI slop flooded SEO, and AI answers intercepted clicks before users reached websites.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "/Users/aliimran/Sehar/text-breakdown/pipeline_output/2eb37964-ac9a-4caa-b8a6-a6ef625d8267/voice_output/scene_005.wav",
+      "request_id": "sRe76L2-jiU",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 6,
+      "title": "Paid search economics collapsed",
+      "text_field": "scene_summary",
+      "text": "SEM bids spiked on flat search volume, while $20 AI tools replaced keyword-driven solutions.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "/Users/aliimran/Sehar/text-breakdown/pipeline_output/2eb37964-ac9a-4caa-b8a6-a6ef625d8267/voice_output/scene_006.wav",
+      "request_id": "NgnfLifDZoQ",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 7,
+      "title": "Corporate social lost conversion power",
+      "text_field": "scene_summary",
+      "text": "Social platforms favored on-platform engagement, so corporate posts struggled to drive external traffic.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "/Users/aliimran/Sehar/text-breakdown/pipeline_output/2eb37964-ac9a-4caa-b8a6-a6ef625d8267/voice_output/scene_007.wav",
+      "request_id": "byLMidGe79s",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 8,
+      "title": "Trust-based acquisition channels worked",
+      "text_field": "scene_summary",
+      "text": "Employee voices, creator partnerships, and communities transferred trust and fueled word of mouth.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "/Users/aliimran/Sehar/text-breakdown/pipeline_output/2eb37964-ac9a-4caa-b8a6-a6ef625d8267/voice_output/scene_008.wav",
+      "request_id": "thdnPsOmYhw",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 9,
+      "title": "Brand became a product job",
+      "text_field": "scene_summary",
+      "text": "Brand came from product experience, and every interaction either built or broke trust.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "/Users/aliimran/Sehar/text-breakdown/pipeline_output/2eb37964-ac9a-4caa-b8a6-a6ef625d8267/voice_output/scene_009.wav",
+      "request_id": "wgBYgEk6rsg",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 10,
+      "title": "AI weakened traditional retention value props",
+      "text_field": "scene_summary",
+      "text": "AI beat most SaaS on cost and speed, weakening efficiency-based retention.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "/Users/aliimran/Sehar/text-breakdown/pipeline_output/2eb37964-ac9a-4caa-b8a6-a6ef625d8267/voice_output/scene_010.wav",
+      "request_id": "0h_HLfL6ZW0",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 11,
+      "title": "Trust-based retention system",
+      "text_field": "scene_summary",
+      "text": "Customers stayed when they trusted ongoing outcomes\u2014roadmaps, fast iteration, WOW UX, aligned pricing.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "/Users/aliimran/Sehar/text-breakdown/pipeline_output/2eb37964-ac9a-4caa-b8a6-a6ef625d8267/voice_output/scene_011.wav",
+      "request_id": "Ac-hlz4Zeh8",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 12,
+      "title": "Operational shift and urgent close",
+      "text_field": "scene_summary",
+      "text": "Teams aligned, shipped fast, built in public, and treated trust as the compounding moat.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "/Users/aliimran/Sehar/text-breakdown/pipeline_output/2eb37964-ac9a-4caa-b8a6-a6ef625d8267/voice_output/scene_012.wav",
+      "request_id": "_Hdbt_BzmN0",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    }
+  ]
+}

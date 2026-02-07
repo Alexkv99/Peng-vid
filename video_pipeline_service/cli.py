@@ -33,7 +33,7 @@ from openai import OpenAI
 
 
 def load_env() -> None:
-    load_dotenv()
+    load_dotenv(override=True)
     missing = []
     if not os.getenv("GRADIUM_API_KEY"):
         missing.append("GRADIUM_API_KEY")
@@ -220,7 +220,7 @@ def main() -> None:
     parser.add_argument(
         "--number-of-scenes",
         type=int,
-        default=12,
+        default=6,
         help="Target number of scenes when extracting from text.",
     )
     parser.add_argument(

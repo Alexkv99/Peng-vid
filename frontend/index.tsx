@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Aurora from "@/components/Aurora";
 import { Sparkles, ArrowRight, Paperclip, Image, Mic, X, Check } from "lucide-react";
 import penguinIcon from "@/assets/penguin-icon.svg";
@@ -20,7 +20,9 @@ const Index = () => {
   const [attachedVoice, setAttachedVoice] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [logText, setLogText] = useState<string>("");
   const placeholderText = useTypewriter(PLACEHOLDER_PHRASES, 70, 35, 2200);
+  const currentRunIdRef = useRef<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const photoInputRef = useRef<HTMLInputElement>(null);
@@ -35,6 +37,9 @@ const Index = () => {
     setIsGenerating(true);
     setError(null);
     setVideoUrl(null);
+    setLogText("");
+    const runId = crypto.randomUUID();
+    currentRunIdRef.current = runId;
 
     const formData = new FormData();
     if (attachedFile) {
@@ -44,6 +49,7 @@ const Index = () => {
     }
     formData.append("photo", attachedPhoto);
     formData.append("voice", attachedVoice);
+    formData.append("run_id", runId);
 
     try {
       const response = await fetch(`${API_BASE}/generate`, {
@@ -61,9 +67,19 @@ const Index = () => {
         return;
       }
       const url = payload?.video_url;
+      const responseRunId = payload?.run_id;
       if (!url) {
         setError("Video URL missing from API response.");
         return;
+      }
+      if (responseRunId) {
+        const logsResponse = await fetch(`${API_BASE}/logs/${responseRunId}`);
+        if (logsResponse.ok) {
+          const logsPayload = await logsResponse.json();
+          if (typeof logsPayload?.log === "string") {
+            setLogText(logsPayload.log);
+          }
+        }
       }
       setVideoUrl(url);
     } catch (err) {
@@ -73,6 +89,41 @@ const Index = () => {
     }
   };
 
+  useEffect(() => {
+    if (!isGenerating) return;
+    let active = true;
+    let timer: number | undefined;
+
+    const poll = async () => {
+      try {
+        if (!active) return;
+        const runId = currentRunIdRef.current;
+        if (!runId) {
+          return;
+        }
+        const response = await fetch(`${API_BASE}/logs/${runId}`);
+        if (response.ok) {
+          const payload = await response.json();
+          if (typeof payload?.log === "string") {
+            setLogText(payload.log);
+          }
+        }
+      } catch {
+        // Ignore log polling errors while generating.
+      } finally {
+        if (active) {
+          timer = window.setTimeout(poll, 2000);
+        }
+      }
+    };
+
+    poll();
+    return () => {
+      active = false;
+      if (timer) window.clearTimeout(timer);
+    };
+  }, [isGenerating]);
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-background">
       {/* Hidden file inputs */}
@@ -80,7 +131,7 @@ const Index = () => {
         ref={fileInputRef}
         type="file"
         className="hidden"
-        accept=".pdf,.doc,.docx,.txt,.md,.csv"
+        accept=".txt,.md,.csv"
         onChange={(e) => setAttachedFile(e.target.files?.[0] || null)}
       />
       <input
@@ -263,6 +314,15 @@ const Index = () => {
             {error && (
               <div className="mt-6 text-sm text-red-200/90">
                 {error}
+              </div>
+            )}
+
+            {(isGenerating || logText) && (
+              <div className="mt-6 w-full max-w-3xl rounded-xl border border-border/30 bg-card/60 p-4 text-left text-xs text-foreground/80">
+                <div className="mb-2 font-semibold text-foreground">Pipeline logs</div>
+                <pre className="max-h-64 overflow-auto whitespace-pre-wrap">
+                  {logText || "Running..."}
+                </pre>
               </div>
             )}
 

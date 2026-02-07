@@ -23,8 +23,8 @@ app.add_middleware(
 )
 
 
-def _create_run_dir() -> tuple[str, Path]:
-    run_id = f"run_{time.strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
+def _create_run_dir(run_id: str | None = None) -> tuple[str, Path]:
+    run_id = run_id or f"run_{time.strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
     run_dir = OUTPUT_ROOT / run_id
     run_dir.mkdir(parents=True, exist_ok=False)
     return run_id, run_dir
@@ -38,6 +38,45 @@ def _save_upload(upload: UploadFile, run_dir: Path, stem: str) -> Path:
     return path
 
 
+def _write_text_upload(upload: UploadFile, run_dir: Path) -> Path:
+    suffix = Path(upload.filename or "").suffix.lower()
+    allowed = {".txt", ".md", ".csv"}
+    if suffix not in allowed:
+        raise HTTPException(
+            status_code=400,
+            detail="Only text files are supported right now. Paste the text instead.",
+        )
+    raw = upload.file.read()
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise HTTPException(
+            status_code=400,
+            detail="Text file must be UTF-8 encoded. Paste the text instead.",
+        ) from exc
+    path = run_dir / "input.txt"
+    path.write_text(text, encoding="utf-8")
+    return path
+
+
+def _read_log_tail(path: Path, max_bytes: int = 8000) -> str:
+    if not path.exists():
+        return ""
+    with path.open("rb") as handle:
+        handle.seek(0, 2)
+        size = handle.tell()
+        handle.seek(max(size - max_bytes, 0))
+        return handle.read().decode("utf-8", errors="replace").strip()
+
+
+def _safe_voice_name(filename: str | None) -> str:
+    raw = Path(filename or "").stem.strip()
+    if not raw:
+        return f"custom_voice_{int(time.time())}"
+    safe = "".join(ch if ch.isalnum() or ch in ("-", "_") else "_" for ch in raw)
+    return safe[:64] or f"custom_voice_{int(time.time())}"
+
+
 @app.post("/generate")
 async def generate(
     request: Request,
@@ -45,6 +84,7 @@ async def generate(
     file: UploadFile | None = File(None),
     photo: UploadFile = File(...),
     voice: UploadFile = File(...),
+    run_id: str | None = Form(None),
 ) -> dict[str, str]:
     if bool(text) == bool(file):
         raise HTTPException(
@@ -52,17 +92,18 @@ async def generate(
             detail="Provide either text or a file (but not both).",
         )
 
-    run_id, run_dir = _create_run_dir()
+    run_id, run_dir = _create_run_dir(run_id)
     input_path = None
     try:
         if file is not None:
-            input_path = _save_upload(file, run_dir, "input")
+            input_path = _write_text_upload(file, run_dir)
         else:
             input_path = run_dir / "input.txt"
             input_path.write_text(text or "", encoding="utf-8")
 
         photo_path = _save_upload(photo, run_dir, "photo")
         voice_path = _save_upload(voice, run_dir, "voice")
+        voice_name = _safe_voice_name(voice.filename)
 
         cmd = [
             sys.executable,
@@ -72,14 +113,24 @@ async def generate(
             "--create-custom-voice",
             "--custom-voice-audio",
             str(voice_path),
+            "--custom-voice-name",
+            voice_name,
             "--face-image",
             str(photo_path),
             "--output-dir",
             str(run_dir),
         ]
-        result = subprocess.run(cmd, capture_output=True, text=True)
-        if result.returncode != 0:
-            detail = result.stderr.strip() or result.stdout.strip() or "Pipeline failed."
+        log_path = run_dir / "pipeline.log"
+        with log_path.open("w", encoding="utf-8") as handle:
+            process = subprocess.Popen(
+                cmd,
+                stdout=handle,
+                stderr=subprocess.STDOUT,
+                text=True,
+            )
+            returncode = process.wait()
+        if returncode != 0:
+            detail = _read_log_tail(log_path) or "Pipeline failed."
             raise HTTPException(status_code=500, detail=detail)
     finally:
         for upload in (file, photo, voice):
@@ -100,6 +151,14 @@ def get_video(run_id: str) -> FileResponse:
     if not video_path.exists():
         raise HTTPException(status_code=404, detail="Video not found.")
     return FileResponse(video_path, media_type="video/mp4", filename=f"{run_id}.mp4")
+
+
+@app.get("/logs/{run_id}")
+def get_logs(run_id: str) -> dict[str, str]:
+    log_path = OUTPUT_ROOT / run_id / "pipeline.log"
+    if not log_path.exists():
+        return {"log": ""}
+    return {"log": log_path.read_text(encoding="utf-8", errors="replace")}
 
 
 if __name__ == "__main__":

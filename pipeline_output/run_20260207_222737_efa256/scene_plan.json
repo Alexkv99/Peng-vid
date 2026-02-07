@@ -1,0 +1,167 @@
+{
+  "project_id": null,
+  "style_preset": "miyazaki",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "title": "Three-front war for growth",
+      "main_point": "AI raised expectations, broke distribution, and intensified competition.",
+      "scene_summary": "AI raised customer expectations, collapsed channels, and put everyone after your value prop.",
+      "key_elements": [
+        "AI-driven market shift",
+        "higher customer expectations",
+        "collapsing distribution",
+        "incumbents/startups/customers competing"
+      ],
+      "scene_prompt": "Studio Ghibli anime style, soft pastel colors, hand-painted backgrounds, gentle lighting.\nA lone startup founder stands in a bustling marketplace where three crowds\u2014incumbent executives, scrappy startups, and demanding customers\u2014press in from different directions.\nAbove them, swirling AI-like glyphs and shifting signboards hint at collapsing distribution and rising expectations; the founder looks tense but determined."
+    },
+    {
+      "scene_id": 2,
+      "title": "A new playbook: Trust",
+      "main_point": "Trust became the core concept behind the emerging growth model.",
+      "scene_summary": "A new growth playbook emerged, and it centered on one concept: trust.",
+      "key_elements": [
+        "trust as core lever",
+        "new growth model",
+        "shift in thinking"
+      ],
+      "scene_prompt": "Studio Ghibli anime style, soft pastel colors, hand-painted backgrounds, gentle lighting.\nIn the same war-room from scene 1, the same small startup team gathers around the table as the chaotic three-front battle map is replaced by a clean diagram labeled \u201cTRUST\u201d at the center.\nThey pause, focused and hopeful, as they begin sketching a new growth model radiating outward from trust."
+    },
+    {
+      "scene_id": 3,
+      "title": "Sponsor: Cello referral platform",
+      "main_point": "Cello positioned referrals and affiliates as scalable, embedded growth.",
+      "scene_summary": "Cello turned referrals and affiliates into embedded, automated, predictable product-led growth.",
+      "key_elements": [
+        "Cello referral platform",
+        "product-led businesses",
+        "automated attribution and rewards",
+        "performance optimization"
+      ],
+      "scene_prompt": "Studio Ghibli anime style, soft pastel colors, hand-painted backgrounds, gentle lighting.\nIn the same cozy startup workspace as before, the same founder and small team gather around a desk as a friendly \u201cCello\u201d referral platform dashboard appears on a laptop.\nThey connect referral and affiliate icons into the product flow, with automated attribution and reward badges lighting up, focused and hopeful."
+    },
+    {
+      "scene_id": 4,
+      "title": "Classic acquisition broke down",
+      "main_point": "Traditional distribution got more expensive and less efficient.",
+      "scene_summary": "Marketing channels got pricier and weaker, and they didn\u2019t look like they\u2019d recover soon.",
+      "key_elements": [
+        "channel efficiency decline",
+        "rising CAC",
+        "distribution collapse",
+        "Andrew Chen reference"
+      ],
+      "scene_prompt": "Studio Ghibli anime style, soft pastel colors, hand-painted backgrounds, gentle lighting.\nSame startup team from prior scenes stands around a whiteboard of funnel charts as the CAC line climbs and conversion bars shrink, looking worried.\nIn their cozy office, a wall poster reads \u201cAndrew Chen\u201d while a cracked \u201cDistribution\u201d pipeline diagram slumps downward."
+    },
+    {
+      "scene_id": 5,
+      "title": "SEO and search traffic eroded",
+      "main_point": "AI content and AI answers reduced organic search value.",
+      "scene_summary": "AI slop flooded SEO, and AI answers intercepted clicks before users reached websites.",
+      "key_elements": [
+        "AI-generated content",
+        "Google AI answers",
+        "ChatGPT/Claude/Perplexity discovery",
+        "reduced web traffic"
+      ],
+      "scene_prompt": "Studio Ghibli anime style, soft pastel colors, hand-painted backgrounds, gentle lighting.\nSame startup team from prior scenes stands in their office by a wall of growth charts as a wave of AI-generated blog pages floods a laptop screen.\nA Google results page shows an AI answer box and nearby ChatGPT/Claude/Perplexity icons, while the team watches the organic traffic line sink, worried."
+    },
+    {
+      "scene_id": 6,
+      "title": "Paid search got squeezed",
+      "main_point": "SEM economics worsened as competition rose and AI substitutes appeared.",
+      "scene_summary": "SEM bids climbed on flat search volume, while $20 AI tools competed for the same jobs.",
+      "key_elements": [
+        "SEM cost inflation",
+        "keyword competition",
+        "ROAS pressure",
+        "AI tool substitution"
+      ],
+      "scene_prompt": "Studio Ghibli anime style, soft pastel colors, hand-painted backgrounds, gentle lighting.\nIn the same small startup office, the same founder and teammate stare at a laptop showing a paid search dashboard as bid prices and CPC numbers climb while ROAS drops.\nOn the desk beside the laptop, a small \u201c$20 AI tool\u201d box sits next to a crowded list of competing keywords, both looking worried."
+    },
+    {
+      "scene_id": 7,
+      "title": "Corporate social lost leverage",
+      "main_point": "Platforms deprioritized external links and punished corporate distribution.",
+      "scene_summary": "Social algorithms favored on-platform engagement, and corporate links stopped converting into traffic.",
+      "key_elements": [
+        "platform hostility to links",
+        "algorithm volatility",
+        "creative treadmill",
+        "interruption marketing"
+      ],
+      "scene_prompt": "Studio Ghibli anime style, soft pastel colors, hand-painted backgrounds, gentle lighting.\nIn the same small startup office, the founder and marketer watch their corporate social post on a laptop as external link previews fade and engagement stays trapped on-platform.\nA wall monitor shows volatile algorithm graphs and a growing queue of new creatives, conveying frustration at the interruption-marketing treadmill."
+    },
+    {
+      "scene_id": 8,
+      "title": "Trust-based acquisition channels",
+      "main_point": "People, creators, community, and product experience transferred trust and drove word of mouth.",
+      "scene_summary": "Employee voices, creators, communities, and product experience drove word of mouth through trust.",
+      "key_elements": [
+        "employee-led social",
+        "creator partnerships",
+        "community-driven growth",
+        "product-led brand",
+        "word of mouth"
+      ],
+      "scene_prompt": "Studio Ghibli anime style, soft pastel colors, hand-painted backgrounds, gentle lighting.\nIn the same startup office from earlier scenes, the core team shares authentic posts on a wall display while a friendly creator partner chats beside them.\nNearby, a small community circle gathers around a laptop showing the product experience, as word-of-mouth notes and referral arrows spread across a whiteboard, mood: hopeful trust."
+    },
+    {
+      "scene_id": 9,
+      "title": "AI weakened retention value props",
+      "main_point": "Cheaper/faster value props got commoditized; trust became the differentiator.",
+      "scene_summary": "AI beat many SaaS tools on cost and speed, so trust decided what users kept.",
+      "key_elements": [
+        "three value props: cheaper/efficient/effective",
+        "AI efficiency advantage",
+        "commoditization",
+        "retention risk"
+      ],
+      "scene_prompt": "Studio Ghibli anime style, soft pastel colors, hand-painted backgrounds, gentle lighting.\nIn the same cozy startup war-room, the small team watches a chalkboard of three value props (cheaper/efficient/effective) as a friendly AI spirit rapidly rewrites them into identical, generic notes.\nTheir faces show quiet worry as the \u201cretention\u201d column on the board fades, hinting commoditization and risk."
+    },
+    {
+      "scene_id": 10,
+      "title": "How trust-based retention got built",
+      "main_point": "Roadmap transparency, fast feedback loops, WOW UX, thoughtful comms, and aligned monetization built confidence.",
+      "scene_summary": "Teams built trust with real roadmaps, fast iteration, WOW moments, thoughtful comms, and outcome pricing.",
+      "key_elements": [
+        "transparent roadmap",
+        "responsive iteration",
+        "UX love marks",
+        "lifecycle communications",
+        "monetization aligned with outcomes"
+      ],
+      "scene_prompt": "Studio Ghibli anime style, soft pastel colors, hand-painted backgrounds, gentle lighting.\nIn the same cozy startup office, the same small team gathers around a wall-sized transparent roadmap board covered with clear milestones and sticky-note feedback.\nOne teammate updates the roadmap while another refines a product screen showing a small \u201cWOW\u201d heart mark, and a third drafts a calm lifecycle message beside an outcome-based pricing chart, conveying steady confidence."
+    },
+    {
+      "scene_id": 11,
+      "title": "Trust unified acquisition and retention",
+      "main_point": "Trust operated as one system across the journey, reinforced by personal examples.",
+      "scene_summary": "Trust powered both acquisition and retention, and referrals plus continuous improvement made products dependable.",
+      "key_elements": [
+        "single trust system",
+        "referrals as discovery",
+        "continuous evolution",
+        "list of trusted products",
+        "personal trust statement"
+      ],
+      "scene_prompt": "Studio Ghibli anime style, soft pastel colors, hand-painted backgrounds, gentle lighting.\nIn the same cozy workshop office from earlier scenes, the founder stands beside a wall-sized \u201cTrust System\u201d board linking Acquisition \u2192 Referrals \u2192 Retention in one loop.\nA small group of teammates adds sticky notes labeled \u201creferrals,\u201d \u201ccontinuous improvement,\u201d and a short list of trusted products, while the founder writes a personal trust statement; the mood is calm and confident."
+    },
+    {
+      "scene_id": 12,
+      "title": "Operational shift and closing warning",
+      "main_point": "Org structure, velocity, and building in public created compounding trust as channels collapsed.",
+      "scene_summary": "Teams broke silos, shipped fast, built in public, and shifted before channels collapsed completely.",
+      "key_elements": [
+        "cross-functional alignment",
+        "optimize for velocity",
+        "micro-releases",
+        "build in public",
+        "trust as moat",
+        "closing warning"
+      ],
+      "scene_prompt": "Studio Ghibli anime style, soft pastel colors, hand-painted backgrounds, gentle lighting.\nIn the same startup war-room, the familiar cross-functional team stands together at a shared board labeled \u201cVelocity\u201d and \u201cMicro-releases,\u201d pinning public update notes while old channel charts fade behind them.\nThey look resolved yet cautious as a final note reads \u201cTrust is the moat\u2014shift before collapse.\u201d"
+    }
+  ],
+  "warnings": []
+}
