@@ -1,0 +1,57 @@
+{
+  "project_id": null,
+  "style_preset": "sketched_storyboard",
+  "voice_id": "YTpq7expH9539ERJ",
+  "model_name": "default",
+  "output_format": "wav",
+  "items": [
+    {
+      "scene_id": 1,
+      "title": "Feeling trapped vs. values-aligned work",
+      "text_field": "scene_summary",
+      "text": "I describe the fear of waking up late in my career feeling trapped by lifestyle",
+      "trimmed": true,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/voice_output/scene_001.wav",
+      "request_id": "vycky-OfLAQ",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 2,
+      "title": "Curiosity Loops: fast structured advice gathering",
+      "text_field": "scene_summary",
+      "text": "I explain how I run a curiosity loop by sending a lightweight, specific question to",
+      "trimmed": true,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/voice_output/scene_002.wav",
+      "request_id": "tK4SYAEN-AE",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 3,
+      "title": "Values exercise applied to real decisions",
+      "text_field": "scene_summary",
+      "text": "I walk through a quick values exercise that turns a word list into a ranked",
+      "trimmed": true,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/voice_output/scene_003.wav",
+      "request_id": "gn7y-vG9CDo",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 4,
+      "title": "Career growth: explore/exploit + hard skills practice",
+      "text_field": "scene_summary",
+      "text": "I outline how I navigated my early career by exploring roles and environments, then exploiting",
+      "trimmed": true,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/voice_output/scene_004.wav",
+      "request_id": "2246gWp2ZcA",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    }
+  ]
+}

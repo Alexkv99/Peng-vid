@@ -1,0 +1,62 @@
+{
+  "project_id": null,
+  "style_preset": "sketched_storyboard",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "title": "Feeling trapped vs. values-aligned work",
+      "main_point": "Avoid building a life that traps you in misaligned work; optimize for success plus meaning and values alignment.",
+      "scene_summary": "I describe the fear of waking up late in my career feeling trapped by lifestyle and expectations, and I frame the goal as finding work that blends success with meaningful, values-aligned fulfillment.",
+      "key_elements": [
+        "Mirror reflection",
+        "Sense of being trapped by lifestyle/expectations",
+        "Career success vs. meaningfulness",
+        "Values alignment"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person stands before a mirror in a home hallway, seeing their reflection boxed in by symbols of lifestyle and expectations.\nThey hesitate, torn between career success and meaningful, values-aligned work, with an explicit trapped expression."
+    },
+    {
+      "scene_id": 2,
+      "title": "Curiosity Loops: fast structured advice gathering",
+      "main_point": "Use a structured outreach to get contextual, high-signal input quickly.",
+      "scene_summary": "I explain how I run a curiosity loop by sending a lightweight, specific question to a curated group, making it easy to respond, then processing the feedback and closing the loop with thanks so I can make smarter, more contextual decisions.",
+      "key_elements": [
+        "Email to ~10\u201311 people",
+        "Specific, unbiased question with rationale",
+        "Curate subject-matter experts + people who know me",
+        "Low cognitive load prompt (pick top 2\u20133 and why)",
+        "Process responses and thank people"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person at a desk types an email on a laptop to a small list of 10\u201311 recipients, with a clear, unbiased question and brief rationale on screen.\nNearby notes show \u201cpick top 2\u20133 and why,\u201d implying a low-effort reply request; the setting is a simple home office, mood focused."
+    },
+    {
+      "scene_id": 3,
+      "title": "Values exercise applied to real decisions",
+      "main_point": "Clarify personal values to guide choices against external pressure.",
+      "scene_summary": "I walk through a quick values exercise that turns a word list into a ranked set of guiding sentences, then I apply it to a real decision about what to say yes/no to, using values as an internal scorecard instead of chasing the external scorecard.",
+      "key_elements": [
+        "Values word list \u2192 filter \u2192 stack-rank",
+        "Example values: adventure, optimism, generosity, improvement",
+        "Decision tension: more opportunities vs. doing less",
+        "Inner scorecard vs. outer scorecard"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA presenter at a desk with a values word list on paper, crossing out words and arranging the remaining into a ranked stack with short guiding sentences.\nIn a simple office setting, they compare two columns labeled \u201cyes/no\u201d and \u201cinner scorecard/outer scorecard,\u201d looking focused."
+    },
+    {
+      "scene_id": 4,
+      "title": "Career growth: explore/exploit + hard skills practice",
+      "main_point": "Early career is for exploration with a thesis; build skills by repeating discomfort until it becomes competence.",
+      "scene_summary": "I outline how I navigated my early career by exploring roles and environments, then exploiting specific learning goals, and I emphasize \u2018eating your vegetables\u2019\u2014repeating uncomfortable skills like networking or posting consistently until I\u2019m genuinely good enough to judge whether I like it.",
+      "key_elements": [
+        "Explore vs. exploit framework",
+        "Learning-driven career moves",
+        "Boiling frog metaphor (watch the trend)",
+        "\u2018Eating your vegetables\u2019 (10\u201312 exposures)",
+        "Networking rule: hand out 10 business cards + touch back wall",
+        "LinkedIn 30 / repeated outreach practice"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA young professional stands in a conference lobby, handing out business cards while stepping to the back wall, determined.\nNearby, a small whiteboard shows \u201cExplore \u2192 Exploit\u201d and \u201c10\u201312 exposures / LinkedIn 30\u201d as they practice uncomfortable skills."
+    }
+  ],
+  "warnings": []
+}

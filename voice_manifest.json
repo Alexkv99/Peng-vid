@@ -1,0 +1,63 @@
+{
+  "project_id": "proj_20260207_131911",
+  "style_preset": "sketched_storyboard",
+  "voice_id": "YTpq7expH9539ERJ",
+  "model_name": "default",
+  "output_format": "wav",
+  "items": [
+    {
+      "scene_id": 1,
+      "title": "Mirror moment: feeling trapped late-career",
+      "text_field": "scene_prompt",
+      "text": "Sketched storyboard style, pencil lines, minimal shading.\nAda speaks to the camera beside a mirror, her reflection visible.\nIn a small room, she gestures as if warning about feeling trapped by others\u2019 expectations, expression serious.",
+      "audio_path": "voice_output/scene_001.wav",
+      "request_id": "plhHP5JM0IQ",
+      "sample_rate": 48000
+    },
+    {
+      "scene_id": 2,
+      "title": "Curiosity Loop: quick structured outreach",
+      "text_field": "scene_prompt",
+      "text": "Sketched storyboard style, pencil lines, minimal shading.\nAda at her desk drafting and sending an email with a structured prompt, a list of 2\u20133 topics visible on her screen.\nAs she hits send, replies begin appearing in her inbox, with a note about anonymized feedback.",
+      "audio_path": "voice_output/scene_002.wav",
+      "request_id": "4csc6EyOg_4",
+      "sample_rate": 48000
+    },
+    {
+      "scene_id": 3,
+      "title": "How to structure it: good question + right people",
+      "text_field": "scene_prompt",
+      "text": "Sketched storyboard style, pencil lines, minimal shading.\nAda stands at a whiteboard in a simple office, pointing as two on-screen examples show a vague question crossed out and a specific unbiased question highlighted.\nBeside it, she writes two advisor criteria: \u201cexpertise\u201d and \u201cknows you,\u201d and a small note: \u201ckeep the ask lightweight,\u201d looking focused.",
+      "audio_path": "voice_output/scene_003.wav",
+      "request_id": "tGVd2m7z36o",
+      "sample_rate": 48000
+    },
+    {
+      "scene_id": 4,
+      "title": "Personal example: estate planning age debate",
+      "text_field": "scene_prompt",
+      "text": "Sketched storyboard style, pencil lines, minimal shading.\nAda and her partner sit at a kitchen table with notes, casually asking a small group of family/friends about inheritance age (18 vs 25).\nThe group\u2019s responses cluster away from 18, and one person mentions executive function peaking around 30; the parents look thoughtful.",
+      "audio_path": "voice_output/scene_004.wav",
+      "request_id": "KmW5Kk5dtPY",
+      "sample_rate": 48000
+    },
+    {
+      "scene_id": 5,
+      "title": "Values exercise: building an inner scorecard",
+      "text_field": "scene_prompt",
+      "text": "Sketched storyboard style, pencil lines, minimal shading.\nAda and Lenny sit at a small table with a values word list between them; Lenny reads his chosen values aloud while Ada points to the list.\nThey apply the values to his dilemma about saying yes or no to projects with a baby on the way, thoughtful mood.",
+      "audio_path": "voice_output/scene_005.wav",
+      "request_id": "5LFEnJhhucw",
+      "sample_rate": 48000
+    },
+    {
+      "scene_id": 6,
+      "title": "Early career strategy: explore then exploit",
+      "text_field": "scene_prompt",
+      "text": "Sketched storyboard style, pencil lines, minimal shading.\nAda stands at a whiteboard in a simple office, drawing a timeline: Microsoft \u2192 startup \u2192 founder \u2192 LinkedIn \u2192 SurveyMonkey.\nShe points to two labeled phases, \u201cExplore\u201d then \u201cExploit,\u201d emphasizing learning goals (growth/subscriptions) over promotions.",
+      "audio_path": "voice_output/scene_006.wav",
+      "request_id": "pNwL4AHgS1U",
+      "sample_rate": 48000
+    }
+  ]
+}
