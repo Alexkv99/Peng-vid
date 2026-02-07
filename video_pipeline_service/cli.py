@@ -262,7 +262,7 @@ def main() -> None:
     parser.add_argument(
         "--max-seconds",
         type=float,
-        default=6.0,
+        default=7.0,
         help="Max narration duration per scene.",
     )
     parser.add_argument(

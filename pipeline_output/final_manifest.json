@@ -1,0 +1,5 @@
+{
+  "scene_plan": null,
+  "voice_manifest": "pipeline_output/voice_manifest.json",
+  "final_video": "pipeline_output/final_video.mp4"
+}

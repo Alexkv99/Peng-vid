@@ -1,164 +1,52 @@
 {
-  "project_id": "proj_20260207_155631",
+  "project_id": null,
   "style_preset": "sketched_storyboard",
   "scenes": [
     {
       "scene_id": 1,
-      "title": "Rituals amid uncertainty",
-      "main_point": "Rituals provide structure when life feels uncertain.",
-      "scene_summary": "I realized rituals mattered most when uncertainty made everything feel unsteady.",
+      "title": "Three-front war and the new moat",
+      "main_point": "AI raised expectations, broke distribution, and intensified competition\u2014so growth shifted to trust.",
+      "scene_summary": "AI raised expectations, collapsed channels, and intensified competition, so growth depended on trust.",
       "key_elements": [
-        "uncertainty",
-        "daily structure",
-        "personal realization"
+        "Three-front war: expectations, distribution collapse, value-prop attacks",
+        "AI as the accelerant",
+        "Trust as the emerging playbook",
+        "Growth model reframed around trust"
       ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person pauses mid-morning routine, hands hovering over a simple daily ritual, realizing its importance.\nIn a modest home interior with a small table and everyday items; emotion: uncertain but steadied."
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA startup founder stands at a whiteboard in a small office, drawing three converging arrows labeled expectations, distribution collapse, and value-prop attacks, with \u201cAI\u201d pushing them forward.\nThey underline \u201cTRUST\u201d as a new moat, looking focused and determined."
     },
     {
       "scene_id": 2,
-      "title": "Religion to secular life",
-      "main_point": "Religion historically provided structure; secularization reduced reliance on it.",
-      "scene_summary": "For a long time, religion gave people structure, until secularization reduced its role.",
+      "title": "Trust-based acquisition replaces broken channels",
+      "main_point": "SEO/SEM/corporate social weakened; trust-driven channels like people, creators, community, and product experience worked.",
+      "scene_summary": "SEO, SEM, and corporate social weakened, while people, creators, community, and product built trust.",
       "key_elements": [
-        "religion",
-        "structure",
-        "secularization",
-        "Enlightenment in Europe"
+        "SEO disrupted by AI content and answer engines",
+        "SEM costs rose as searches stagnated and AI tools competed",
+        "Corporate social throttled links and demanded costly creative",
+        "Employee-led social and transparency",
+        "Influencer/creator trust transfer",
+        "Community-driven growth and word of mouth",
+        "Product-led brand: brand came from product experience",
+        "Sponsor mention: Cello referral platform (brief)"
       ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nIn an Enlightenment-era European town square, townspeople step away from a church doorway toward a civic building with posted notices.\nA priest remains at the church entrance while a scholar gestures to the notices, suggesting a shift from religious structure to secular life."
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nIn a simple office whiteboard area, a marketer crosses out \u201cSEO/SEM/Corporate Social\u201d on a funnel chart while teammates point to \u201cpeople, creators, community, product experience\u201d as the new path.\nA creator and an employee share a post on a phone, and a small \u201cCello referrals\u201d note sits beside the word-of-mouth arrow, implying renewed trust."
     },
     {
       "scene_id": 3,
-      "title": "Problems are inevitable",
-      "main_point": "Change brings problems, and problems can be useful rather than purely bad.",
-      "scene_summary": "Change brought problems, and I treated them as inevitable fuel for growth.",
+      "title": "Trust-based retention becomes the growth system",
+      "main_point": "AI commoditized cost/efficiency value props; retention and operations required compounding trust through product and org velocity.",
+      "scene_summary": "As AI commoditized utility, retention came from roadmap transparency, fast iteration, WOW UX, and aligned pricing.",
       "key_elements": [
-        "change",
-        "problems",
-        "positive engagement",
-        "acceptance"
+        "Value prop triad: cheaper, more efficient, more effective",
+        "AI beat many SaaS on cost and speed; commoditization risk",
+        "Trust defined as confidence the team kept delivering better outcomes",
+        "Trust builders: real roadmap visibility, feedback-driven shipping, WOW moments, thoughtful comms, outcome-aligned monetization",
+        "Trust unified acquisition and retention",
+        "Operational shift: break silos, optimize velocity, ship micro-releases, build in public via real people",
+        "Trust compounded; channels and value props collapsed faster than expected"
       ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA single person stands at a desk with scattered papers labeled \u201cchange\u201d and \u201cproblems,\u201d calmly sorting them into a \u201cgrowth\u201d folder.\nSmall office workspace; expression shows acceptance and positive engagement."
-    },
-    {
-      "scene_id": 4,
-      "title": "Morning reading ritual",
-      "main_point": "A daily one-hour, phone-free reading ritual anchors the day.",
-      "scene_summary": "I started each day with one focused hour of reading, with no phone nearby.",
-      "key_elements": [
-        "one-hour reading",
-        "no phone",
-        "Kindle or physical book",
-        "morning ritual"
-      ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person sits at a small table, reading a Kindle or physical book for a focused hour.\nMorning ritual at home; a phone is placed far away, out of reach."
-    },
-    {
-      "scene_id": 5,
-      "title": "Stoicism as balance",
-      "main_point": "Stoicism is about balance, not suppressing emotions.",
-      "scene_summary": "Stoic ideas aimed for balance, not emotion suppression, and felt practical in daily life.",
-      "key_elements": [
-        "Ego is the Enemy",
-        "Ryan Holiday",
-        "stoicism",
-        "balance"
-      ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person reads \u201cEgo is the Enemy\u201d by Ryan Holiday at a simple desk.\nThey pause, holding the book open, appearing calm and balanced as they reflect on stoicism."
-    },
-    {
-      "scene_id": 6,
-      "title": "To be vs to do",
-      "main_point": "Process beats outcome-driven visualization; focus on what you do now.",
-      "scene_summary": "Outcome-driven visualization missed the grind, so I focused on doing what mattered now.",
-      "key_elements": [
-        "visualization",
-        "daily grind",
-        "process orientation",
-        "Derek Sivers quote"
-      ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person at a desk with a notebook, crossing out a thought bubble of a trophy labeled \u201cvisualization\u201d and writing a simple to-do list labeled \u201cdaily grind.\u201d\nOn the wall, a small quote card reads \u201cTo be vs to do \u2014 Derek Sivers,\u201d showing a shift to process orientation."
-    },
-    {
-      "scene_id": 7,
-      "title": "Don\u2019t chase passion",
-      "main_point": "\u201cFind your passion\u201d can inflate ego; consistent work matters more.",
-      "scene_summary": "Chasing passion fed ego, so I chose steady work over grand quests.",
-      "key_elements": [
-        "Cal Newport",
-        "Dr Anna Lembke",
-        "ego",
-        "dispassionate excellence"
-      ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person at a simple desk with a notebook labeled \u201cdispassionate excellence,\u201d while a thought bubble reading \u201cFind your passion\u201d swells into an ego-shaped balloon.\nIn a quiet study, they set the balloon aside and keep writing steadily, calm and focused.\nSmall book spines on the desk read \u201cCal Newport\u201d and \u201cDr Anna Lembke.\u201d"
-    },
-    {
-      "scene_id": 8,
-      "title": "Endurance sports consistency",
-      "main_point": "Inspiration came from consistent action, not obsession or hype.",
-      "scene_summary": "In endurance sports, I stayed unromantic about running and admired consistency over hype.",
-      "key_elements": [
-        "running",
-        "Kipchoge mention",
-        "real-life role models",
-        "consistency"
-      ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA runner trains steadily on a simple track, focused and unromantic.\nA small note references Kipchoge and real-life role models, emphasizing consistency over hype."
-    },
-    {
-      "scene_id": 9,
-      "title": "Earn trust through grunt work",
-      "main_point": "Make teammates look good; reliability builds trust over time.",
-      "scene_summary": "Early on, I took disliked tasks, delivered well, and earned trust through reliability.",
-      "key_elements": [
-        "teamwork",
-        "grunt work",
-        "internships",
-        "trust",
-        "deliver more"
-      ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nAn intern and a small team in an office workspace; the intern takes on a stack of disliked tasks while teammates focus on their work.\nTeammates glance over with growing trust as the intern delivers completed work reliably."
-    },
-    {
-      "scene_id": 10,
-      "title": "Get out of your head",
-      "main_point": "Perfectionism and spotlight effect come from ego; most people aren\u2019t watching.",
-      "scene_summary": "Ego pushed perfection and spotlight fears, but most people stayed absorbed in themselves.",
-      "key_elements": [
-        "vision boards",
-        "perfect plan",
-        "perfectionism",
-        "spotlight effect"
-      ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person stands by a wall of vision boards and a \u201cperfect plan\u201d checklist, looking tense.\nAround them, several people in the same room stay focused on their own tasks, not watching."
-    },
-    {
-      "scene_id": 11,
-      "title": "Restraint under rejection",
-      "main_point": "Feel frustration, but practice restraint; ego seeks mic-drop moments.",
-      "scene_summary": "Rejections and silence hurt, but restraint kept ego from turning pain into drama.",
-      "key_elements": [
-        "interview rejection",
-        "cold emails",
-        "immigrant hiring struggle",
-        "anger",
-        "restraint"
-      ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nAn immigrant job seeker sits at a small desk, laptop open to an interview rejection and unanswered cold emails.\nThey clench a fist, then relax it, holding back anger in a quiet room."
-    },
-    {
-      "scene_id": 12,
-      "title": "Infinite game and humble action",
-      "main_point": "Avoid entitlement and stories; focus on controllable actions and lead with accountability.",
-      "scene_summary": "I dropped entitlement and big stories, focused on daily actions, and owned outcomes as a leader.",
-      "key_elements": [
-        "no finish line",
-        "feedback as gift",
-        "cold emailing",
-        "control response",
-        "give credit/take blame"
-      ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA leader at a desk reads blunt feedback notes and types a cold email, calm and accountable.\nOffice workspace with a simple wall note reading \u201cNo finish line,\u201d and a small list: \u201cGive credit / Take blame.\u201d"
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA SaaS product team and a customer sit together in a simple office, looking at a shared roadmap board labeled \u201cmicro-releases\u201d and \u201cfeedback shipped,\u201d while an \u201cAI cheaper/faster\u201d sign fades in the background.\nThey point to recent updates and aligned pricing notes, conveying calm confidence and growing trust."
     }
   ],
   "warnings": []
