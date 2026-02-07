@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 import imageio_ffmpeg
 
 from voice_gen_service.cli import VoiceConfig, run_tts
-from fal_integration_service.scenes import load_storyboard
+from fal_integration_service.scenes import load_storyboard, parse_storyboard
 from fal_integration_service.storyboard_pipeline import process_storyboard
 from fal_integration_service.fal_face_swap import upload_local_image
 from text_extraction_service.cli import (
@@ -152,6 +152,15 @@ def main() -> None:
         help="Voice manifest output filename.",
     )
     parser.add_argument(
+        "--voice-manifest-input",
+        help="Path to an existing voice manifest JSON (skip TTS generation).",
+    )
+    parser.add_argument(
+        "--max-scenes",
+        type=int,
+        help="Limit processing to the first N scenes from the plan.",
+    )
+    parser.add_argument(
         "--max-seconds",
         type=float,
         default=6.0,
@@ -176,8 +185,17 @@ def main() -> None:
     )
     parser.add_argument(
         "--face-image",
-        help="Path or URL to a face reference image. The main character "
-        "in every scene will be face-swapped to look like this person.",
+        help=(
+            "Path or URL to a face reference image. Used as a Kling reference "
+            "element for character identity."
+        ),
+    )
+    parser.add_argument(
+        "--face-reference-images",
+        help=(
+            "Comma-separated list of additional face reference images (URLs or "
+            "local paths) to improve identity consistency."
+        ),
     )
     args = parser.parse_args()
 
@@ -243,39 +261,87 @@ def main() -> None:
         output_format="wav",
     )
 
-    voice_manifest = asyncio.run(
-        run_tts(
-            plan=plan,
-            scenes=plan["scenes"],
-            voice_config=voice_config,
-            text_field=args.text_field,
-            output_dir=voice_output_dir,
-            dry_run=False,
-            max_seconds=args.max_seconds,
-            words_per_sec=args.words_per_sec,
-            retries=2,
-            backoff_sec=1.0,
-        )
-    )
-    voice_manifest_path = os.path.join(output_root, args.voice_manifest)
-    write_json(voice_manifest_path, voice_manifest)
+    if args.max_scenes:
+        plan["scenes"] = plan["scenes"][: args.max_scenes]
 
-    # Resolve face image (upload local file or use URL directly)
+    if args.voice_manifest_input:
+        if not os.path.isfile(args.voice_manifest_input):
+            raise SystemExit(f"Voice manifest file not found: {args.voice_manifest_input}")
+        with open(args.voice_manifest_input, "r", encoding="utf-8") as handle:
+            voice_manifest = json.load(handle)
+        voice_manifest_path = args.voice_manifest_input
+    else:
+        voice_manifest = asyncio.run(
+            run_tts(
+                plan=plan,
+                scenes=plan["scenes"],
+                voice_config=voice_config,
+                text_field=args.text_field,
+                output_dir=voice_output_dir,
+                dry_run=False,
+                max_seconds=args.max_seconds,
+                words_per_sec=args.words_per_sec,
+                retries=2,
+                backoff_sec=1.0,
+            )
+        )
+        voice_manifest_path = os.path.join(output_root, args.voice_manifest)
+        write_json(voice_manifest_path, voice_manifest)
+
+    # Resolve reference images (upload local files or use URLs directly)
     face_swap_url = None
+    reference_element = None
     if args.face_image:
         face_ref = args.face_image
         if face_ref.startswith(("http://", "https://")):
-            face_swap_url = face_ref
-            logging.info("Face swap: using URL %s", face_swap_url)
+            frontal_url = face_ref
+            logging.info("Reference face: using URL %s", frontal_url)
         else:
             if not os.path.isfile(face_ref):
                 raise SystemExit(f"Face image file not found: {face_ref}")
-            logging.info("Face swap: uploading local image %s", face_ref)
-            face_swap_url = upload_local_image(face_ref)
-            logging.info("Face swap: uploaded to %s", face_swap_url)
+            logging.info("Reference face: uploading local image %s", face_ref)
+            frontal_url = upload_local_image(face_ref)
+            logging.info("Reference face: uploaded to %s", frontal_url)
+
+        reference_urls: List[str] = []
+        if args.face_reference_images:
+            for raw in args.face_reference_images.split(","):
+                item = raw.strip()
+                if not item:
+                    continue
+                if item.startswith(("http://", "https://")):
+                    reference_urls.append(item)
+                else:
+                    if not os.path.isfile(item):
+                        raise SystemExit(f"Reference image file not found: {item}")
+                    logging.info("Reference face: uploading local image %s", item)
+                    reference_urls.append(upload_local_image(item))
+
+        if not reference_urls:
+            reference_urls = [frontal_url]
+
+        reference_element = {
+            "frontal_image_url": frontal_url,
+            "reference_image_urls": reference_urls,
+        }
+        face_swap_url = frontal_url
+    elif args.face_reference_images:
+        raise SystemExit("--face-reference-images requires --face-image.")
+
+    if args.max_scenes:
+        selected_ids = {scene["scene_id"] for scene in plan["scenes"]}
+        voice_items = [
+            item for item in voice_manifest.get("items", [])
+            if int(item.get("scene_id", 0)) in selected_ids
+        ]
+        voice_manifest = dict(voice_manifest)
+        voice_manifest["items"] = voice_items
 
     logging.info("Step 2/4: Generate video clips per scene")
-    storyboard = load_storyboard(scene_plan_path)
+    if args.max_scenes:
+        storyboard = parse_storyboard(plan)
+    else:
+        storyboard = load_storyboard(scene_plan_path)
     per_scene_durations = build_duration_map(voice_manifest, args.max_seconds)
     video_result = process_storyboard(
         storyboard,
@@ -283,6 +349,7 @@ def main() -> None:
         output_dir=video_output_dir,
         return_clips=True,
         face_swap_url=face_swap_url,
+        reference_element=reference_element,
     )
     clip_paths = video_result.get("clip_paths", [])
 
