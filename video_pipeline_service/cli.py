@@ -12,7 +12,10 @@ import imageio_ffmpeg
 
 from voice_gen_service.cli import VoiceConfig, run_tts
 from fal_integration_service.scenes import load_storyboard, parse_storyboard
-from fal_integration_service.storyboard_pipeline import process_storyboard
+from fal_integration_service.storyboard_pipeline import (
+    DEFAULT_FAL_CONCURRENCY,
+    process_storyboard,
+)
 from fal_integration_service.fal_face_swap import upload_local_image
 from text_extraction_service.cli import (
     extract_scenes,
@@ -197,6 +200,15 @@ def main() -> None:
             "local paths) to improve identity consistency."
         ),
     )
+    parser.add_argument(
+        "--fal-concurrency",
+        type=int,
+        default=DEFAULT_FAL_CONCURRENCY,
+        help=(
+            "Max parallel FAL API calls for image/video generation. "
+            f"Default: {DEFAULT_FAL_CONCURRENCY}."
+        ),
+    )
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -350,6 +362,7 @@ def main() -> None:
         return_clips=True,
         face_swap_url=face_swap_url,
         reference_element=reference_element,
+        fal_concurrency=args.fal_concurrency,
     )
     clip_paths = video_result.get("clip_paths", [])
 
