@@ -58,54 +58,14 @@ async def create_custom_voice(
     description: str | None,
     start_s: float | None,
     *,
-    max_attempts: int = 6,
+    max_attempts: int = 30,
     wait_seconds: float = 10.0,
 ) -> str:
     if not os.path.isfile(audio_path):
         raise SystemExit(f"Custom voice audio file not found: {audio_path}")
     client = gradium.client.GradiumClient()
-    last_error = None
-    for attempt in range(1, max_attempts + 1):
-        logging.info(
-            "Custom voice: create attempt %d/%d",
-            attempt,
-            max_attempts,
-        )
-        result = await gradium.voices.create(
-            client,
-            audio_file=audio_path,
-            name=name,
-            description=description,
-            start_s=start_s or 0.0,
-        )
-        if isinstance(result, dict) and result.get("error"):
-            last_error = result.get("error")
-            if isinstance(last_error, str) and "wait" in last_error.lower():
-                logging.info(
-                    "Custom voice: not ready yet, waiting %.1fs",
-                    wait_seconds,
-                )
-                await asyncio.sleep(wait_seconds)
-                continue
-            raise SystemExit(f"Gradium voice creation failed: {last_error}")
 
-        voice_id = None
-        if isinstance(result, dict):
-            voice_id = result.get("uid") or result.get("voice_id") or result.get("id")
-        else:
-            voice_id = getattr(result, "uid", None) or getattr(result, "voice_id", None)
-        if voice_id:
-            logging.info("Custom voice: ready with voice id %s", voice_id)
-            return str(voice_id)
-        last_error = "No voice id returned"
-        logging.info(
-            "Custom voice: no voice id returned, retrying in %.1fs",
-            wait_seconds,
-        )
-        await asyncio.sleep(wait_seconds)
-    logging.info(
-        "Custom voice: create attempts exhausted, checking existing voices"
-    )
+    # Fast path: reuse existing voice with the same name.
     voices = await gradium.voices.get(client)
     if isinstance(voices, list):
         matches = [
@@ -121,6 +81,57 @@ async def create_custom_voice(
                     voice_id,
                 )
                 return str(voice_id)
+
+    last_error = None
+    logging.info("Custom voice: create request")
+    result = await gradium.voices.create(
+        client,
+        audio_file=audio_path,
+        name=name,
+        description=description,
+        start_s=start_s or 0.0,
+    )
+    if isinstance(result, dict) and result.get("error"):
+        last_error = result.get("error")
+        raise SystemExit(f"Gradium voice creation failed: {last_error}")
+
+    voice_id = None
+    if isinstance(result, dict):
+        voice_id = result.get("uid") or result.get("voice_id") or result.get("id")
+    else:
+        voice_id = getattr(result, "uid", None) or getattr(result, "voice_id", None)
+    if not voice_id:
+        raise SystemExit("Gradium voice creation did not return a voice id.")
+
+    # Poll voice status until ready or attempts exhausted.
+    for attempt in range(1, max_attempts + 1):
+        logging.info(
+            "Custom voice: status check %d/%d",
+            attempt,
+            max_attempts,
+        )
+        try:
+            voice = await gradium.voices.get(client, voice_uid=str(voice_id))
+        except Exception as exc:
+            last_error = str(exc)
+            logging.info(
+                "Custom voice: status check failed (%s), retrying in %.1fs",
+                last_error,
+                wait_seconds,
+            )
+            await asyncio.sleep(wait_seconds)
+            continue
+
+        if isinstance(voice, dict):
+            if voice.get("is_pending") is False and voice.get("has_audio") is True:
+                logging.info("Custom voice: ready with voice id %s", voice_id)
+                return str(voice_id)
+        logging.info(
+            "Custom voice: not ready yet, waiting %.1fs",
+            wait_seconds,
+        )
+        await asyncio.sleep(wait_seconds)
+
     raise SystemExit(last_error or "No voice id returned")
 
 

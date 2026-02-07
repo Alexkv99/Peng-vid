@@ -4,11 +4,14 @@ version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
     "fal-client",
+    "fastapi",
     "imageio-ffmpeg",
     "gradium",
     "openai>=2.17.0",
+    "python-multipart",
     "python-dotenv>=1.2.1",
     "requests",
+    "uvicorn",
 ]
 
 [project.scripts]

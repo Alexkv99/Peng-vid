@@ -1,52 +1,90 @@
 {
   "project_id": null,
-  "style_preset": "sketched_storyboard",
+  "style_preset": "cyberpunk",
   "scenes": [
     {
       "scene_id": 1,
-      "title": "Three-front war and the new moat",
-      "main_point": "AI raised expectations, broke distribution, and intensified competition\u2014so growth shifted to trust.",
-      "scene_summary": "AI raised expectations, collapsed channels, and intensified competition, so growth depended on trust.",
+      "title": "Three-front war for growth",
+      "main_point": "AI raised expectations, collapsed distribution, and intensified competition for every value prop.",
+      "scene_summary": "AI raised expectations, collapsed distribution, and put everyone in a three-front war.",
       "key_elements": [
-        "Three-front war: expectations, distribution collapse, value-prop attacks",
-        "AI as the accelerant",
-        "Trust as the emerging playbook",
-        "Growth model reframed around trust"
+        "Higher customer expectations",
+        "Distribution channels collapsing",
+        "Incumbents, startups, and customers competing",
+        "Pressure on value proposition"
       ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA startup founder stands at a whiteboard in a small office, drawing three converging arrows labeled expectations, distribution collapse, and value-prop attacks, with \u201cAI\u201d pushing them forward.\nThey underline \u201cTRUST\u201d as a new moat, looking focused and determined."
+      "scene_prompt": "Cyberpunk neon style, dark urban setting, glowing neon lights, futuristic tech.\nA lone startup founder stands at a neon-lit street intersection where three holographic fronts collide: rising customer expectation graphs, crumbling distribution pipelines, and rival silhouettes of incumbents, startups, and customers.\nIn a rain-slick alley of towering digital billboards, the founder braces under pressure as their value proposition flickers like a stressed hologram."
     },
     {
       "scene_id": 2,
-      "title": "Trust-based acquisition replaces broken channels",
-      "main_point": "SEO/SEM/corporate social weakened; trust-driven channels like people, creators, community, and product experience worked.",
-      "scene_summary": "SEO, SEM, and corporate social weakened, while people, creators, community, and product built trust.",
+      "title": "The new playbook: Trust",
+      "main_point": "A new growth model emerged around trust as the core lever.",
+      "scene_summary": "A new playbook emerged, and it centered growth on one concept: trust.",
       "key_elements": [
-        "SEO disrupted by AI content and answer engines",
-        "SEM costs rose as searches stagnated and AI tools competed",
-        "Corporate social throttled links and demanded costly creative",
-        "Employee-led social and transparency",
-        "Influencer/creator trust transfer",
-        "Community-driven growth and word of mouth",
-        "Product-led brand: brand came from product experience",
-        "Sponsor mention: Cello referral platform (brief)"
+        "Trust as core concept",
+        "Growth model shift",
+        "Acquisition and retention reframed"
       ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nIn a simple office whiteboard area, a marketer crosses out \u201cSEO/SEM/Corporate Social\u201d on a funnel chart while teammates point to \u201cpeople, creators, community, product experience\u201d as the new path.\nA creator and an employee share a post on a phone, and a small \u201cCello referrals\u201d note sits beside the word-of-mouth arrow, implying renewed trust."
+      "scene_prompt": "Cyberpunk neon style, dark urban setting, glowing neon lights, futuristic tech.\nThe same lone strategist from scene 1 stands before a holographic city-growth dashboard, replacing three competing warfront icons with one radiant symbol labeled \u201cTRUST.\u201d\nOn a rain-slick rooftop overlooking the neon skyline, the model reorganizes into acquisition and retention paths orbiting the trust core, conveying focused resolve."
     },
     {
       "scene_id": 3,
-      "title": "Trust-based retention becomes the growth system",
-      "main_point": "AI commoditized cost/efficiency value props; retention and operations required compounding trust through product and org velocity.",
-      "scene_summary": "As AI commoditized utility, retention came from roadmap transparency, fast iteration, WOW UX, and aligned pricing.",
+      "title": "Classic channels stopped working",
+      "main_point": "SEO, paid search, and corporate social degraded as AI changed discovery and economics.",
+      "scene_summary": "SEO, SEM, and corporate social got pricier and weaker as AI intercepted attention.",
       "key_elements": [
-        "Value prop triad: cheaper, more efficient, more effective",
-        "AI beat many SaaS on cost and speed; commoditization risk",
-        "Trust defined as confidence the team kept delivering better outcomes",
-        "Trust builders: real roadmap visibility, feedback-driven shipping, WOW moments, thoughtful comms, outcome-aligned monetization",
-        "Trust unified acquisition and retention",
-        "Operational shift: break silos, optimize velocity, ship micro-releases, build in public via real people",
-        "Trust compounded; channels and value props collapsed faster than expected"
+        "AI content flood",
+        "LLM answer engines replacing search clicks",
+        "Rising keyword competition",
+        "Platforms limiting external links"
       ],
-      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA SaaS product team and a customer sit together in a simple office, looking at a shared roadmap board labeled \u201cmicro-releases\u201d and \u201cfeedback shipped,\u201d while an \u201cAI cheaper/faster\u201d sign fades in the background.\nThey point to recent updates and aligned pricing notes, conveying calm confidence and growing trust."
+      "scene_prompt": "Cyberpunk neon style, dark urban setting, glowing neon lights, futuristic tech.\nSame startup strategist from prior scene stands before a holographic dashboard in a neon alley office, watching SEO/SEM graphs spike in cost while clicks collapse.\nA torrent of AI-generated content and LLM answer panels floods the display as corporate social posts show throttled external links, the strategist looks tense."
+    },
+    {
+      "scene_id": 4,
+      "title": "Trust-based acquisition channels",
+      "main_point": "Employee-led social, creators, community, and product-led brand built word of mouth.",
+      "scene_summary": "Employee voices, creators, community, and product experience drove word of mouth through trust.",
+      "key_elements": [
+        "Employee-led social transparency",
+        "Influencer/creator trust transfer",
+        "Community-driven growth",
+        "Product-led brand",
+        "Word of mouth"
+      ],
+      "scene_prompt": "Cyberpunk neon style, dark urban setting, glowing neon lights, futuristic tech.\nSame startup founder from prior scenes stands in a neon-lit alley hub, surrounded by employees livestreaming transparently on holo-screens, a trusted creator amplifying the message, and a small community circle engaging.\nThe product\u2019s glowing interface is shared hand-to-hand as word-of-mouth ripples outward through connected neon network lines, mood: confident trust."
+    },
+    {
+      "scene_id": 5,
+      "title": "Trust-based retention in a commoditized world",
+      "main_point": "AI weakened cost/efficiency value props; retention depended on confidence in ongoing outcomes.",
+      "scene_summary": "As AI commoditized utility, customers stayed with products they trusted to keep improving.",
+      "key_elements": [
+        "Why you: cheaper/efficient/effective",
+        "AI beats efficiency and cost",
+        "Trust as confidence over time",
+        "Roadmap transparency",
+        "Fast feedback iteration",
+        "WOW UX",
+        "Lifecycle comms",
+        "Outcome-aligned monetization"
+      ],
+      "scene_prompt": "Cyberpunk neon style, dark urban setting, glowing neon lights, futuristic tech.\nThe same startup founder and small team from prior scenes stand in their neon-lit street-level workspace, facing a wall-sized holographic dashboard labeled \u201cTrust,\u201d \u201cRoadmap,\u201d \u201cFeedback,\u201d \u201cWOW UX,\u201d \u201cLifecycle,\u201d \u201cOutcome pricing.\u201d\nAround them, generic AI vendor kiosks blur into identical glowing signs, while loyal customers remain engaged at the team\u2019s console, implying calm confidence in ongoing improvements."
+    },
+    {
+      "scene_id": 6,
+      "title": "Operational shift and closing warning",
+      "main_point": "Trust required org alignment, velocity, and building in public; collapse accelerated.",
+      "scene_summary": "Teams aligned, shipped fast, built in public, and raced before channels collapsed completely.",
+      "key_elements": [
+        "Cross-functional alignment",
+        "Founder/executive visibility",
+        "Optimize for velocity and micro-releases",
+        "Build in public via builders",
+        "Trust compounds; features commoditize",
+        "Closing warning: collapsing faster than expected"
+      ],
+      "scene_prompt": "Cyberpunk neon style, dark urban setting, glowing neon lights, futuristic tech.\nSame founder/executive and cross-functional team from prior scenes huddle around a holographic roadmap, rapidly pushing micro-releases while builder avatars stream updates publicly.\nOn a rooftop command hub overlooking the neon city, acquisition-channel billboards flicker and collapse as trust metrics surge, the team urgent and resolved."
     }
   ],
   "warnings": []
