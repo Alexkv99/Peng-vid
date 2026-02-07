@@ -135,9 +135,19 @@ async def _generate_image_async(
     semaphore: asyncio.Semaphore,
     scene: Scene,
     face_swap_url: str | None,
+    progress: dict,
+    progress_lock: asyncio.Lock,
+    total: int,
 ) -> tuple[Scene, str]:
     """Generate an image for a single scene, bounded by *semaphore*."""
     async with semaphore:
+        async with progress_lock:
+            progress["images_started"] += 1
+            logging.info(
+                "VideoGen: [img] started %d/%d",
+                progress["images_started"],
+                total,
+            )
         if face_swap_url:
             logging.info(
                 "VideoGen: Scene %s - [img] generating (PuLID Flux, face-conditioned)",
@@ -151,6 +161,13 @@ async def _generate_image_async(
             scene.scene_prompt,
             reference_face_url=face_swap_url,
         )
+        async with progress_lock:
+            progress["images_done"] += 1
+            logging.info(
+                "VideoGen: [img] done %d/%d",
+                progress["images_done"],
+                total,
+            )
         logging.info(
             "VideoGen: Scene %s - [img] ready: %s...",
             scene.scene_id,
@@ -166,9 +183,19 @@ async def _generate_video_async(
     kling_dur: str,
     video_model: str | None,
     reference_element: dict | None,
+    progress: dict,
+    progress_lock: asyncio.Lock,
+    total: int,
 ) -> tuple[Scene, str, dict]:
     """Animate an image into a video for a single scene, bounded by *semaphore*."""
     async with semaphore:
+        async with progress_lock:
+            progress["videos_started"] += 1
+            logging.info(
+                "VideoGen: [vid] started %d/%d",
+                progress["videos_started"],
+                total,
+            )
         logging.info(
             "VideoGen: Scene %s - [vid] animating (%ss clip)",
             scene.scene_id,
@@ -197,6 +224,13 @@ async def _generate_video_async(
                 image_url,
                 scene.scene_prompt,
                 **i2v_kwargs,
+            )
+        async with progress_lock:
+            progress["videos_done"] += 1
+            logging.info(
+                "VideoGen: [vid] done %d/%d",
+                progress["videos_done"],
+                total,
             )
 
         logging.info("VideoGen: Scene %s - [vid] ready", scene.scene_id)
@@ -236,6 +270,13 @@ async def _process_storyboard_parallel(
         default_per_scene = None
 
     semaphore = asyncio.Semaphore(fal_concurrency)
+    progress_lock = asyncio.Lock()
+    progress = {
+        "images_started": 0,
+        "images_done": 0,
+        "videos_started": 0,
+        "videos_done": 0,
+    }
     logging.info(
         "VideoGen: processing %d scenes (max %d parallel FAL calls)",
         num_scenes,
@@ -247,7 +288,14 @@ async def _process_storyboard_parallel(
     # ------------------------------------------------------------------
     logging.info("VideoGen: Phase 1/2 – generating images for all scenes")
     image_tasks = [
-        _generate_image_async(semaphore, scene, face_swap_url)
+        _generate_image_async(
+            semaphore,
+            scene,
+            face_swap_url,
+            progress,
+            progress_lock,
+            num_scenes,
+        )
         for scene in storyboard.scenes
     ]
     image_results: list[tuple[Scene, str]] = await asyncio.gather(*image_tasks)
@@ -267,8 +315,15 @@ async def _process_storyboard_parallel(
         kling_dur = _pick_kling_duration(target_duration) if target_duration else "5"
         video_tasks.append(
             _generate_video_async(
-                semaphore, scene, image_url, kling_dur,
-                video_model, reference_element,
+                semaphore,
+                scene,
+                image_url,
+                kling_dur,
+                video_model,
+                reference_element,
+                progress,
+                progress_lock,
+                num_scenes,
             )
         )
     video_results: list[tuple[Scene, str, dict]] = await asyncio.gather(*video_tasks)
