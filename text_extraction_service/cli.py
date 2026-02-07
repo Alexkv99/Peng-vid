@@ -10,7 +10,8 @@ from typing import Any, Dict, List
 from dotenv import load_dotenv
 from openai import OpenAI
 
-STYLE_PREFIX = "Sketched storyboard style, pencil lines, minimal shading."
+STYLE_PREFIX = "Sketched style, pencil lines, minimal shading."
+SCENE_PROMPT_MAX_TOKENS = 40
 
 EXTRACT_SCENES_SCHEMA: Dict[str, Any] = {
     "type": "object",
@@ -138,11 +139,12 @@ def extract_scenes(
         "   passive framing like 'was framed/was described/was positioned'.\n"
         "   Use first-person only when the source text is explicitly first-person;\n"
         "   otherwise use neutral narration.\n"
-        "6) Keep scene_summary short enough to narrate in under 6 seconds.\n"
+        "6) Make the first scene feel introductory and the last scene feel like a closing.\n"
+        "7) Keep scene_summary short enough to narrate in under 6 seconds.\n"
         "   Target 12-16 words, max 18 words.\n"
-        f"7) Aim for exactly {number_of_scenes} scenes when possible. "
+        f"8) Aim for exactly {number_of_scenes} scenes when possible. "
         "If the text is too short, return fewer and add a warning.\n"
-        "8) Output MUST match the JSON schema."
+        "9) Output MUST match the JSON schema."
     )
     return call_structured_output(
         client=client,
@@ -210,6 +212,13 @@ def normalize_prompt(
     if BANNED_TERMS_PATTERN.search(cleaned):
         warnings.append(
             f"scene_id {scene_id}: prompt may contain banned camera/lighting terms."
+        )
+
+    tokens = cleaned.split()
+    if len(tokens) > SCENE_PROMPT_MAX_TOKENS:
+        cleaned = " ".join(tokens[:SCENE_PROMPT_MAX_TOKENS])
+        warnings.append(
+            f"scene_id {scene_id}: prompt trimmed to {SCENE_PROMPT_MAX_TOKENS} tokens."
         )
 
     return cleaned

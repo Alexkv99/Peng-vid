@@ -3,6 +3,7 @@
 import asyncio
 import json
 import logging
+import math
 import os
 import subprocess
 import tempfile
@@ -11,12 +12,16 @@ import imageio_ffmpeg
 
 from .scenes import Scene, Storyboard
 from .fal_image import generate_image
-from .fal_video import generate_video_from_image, generate_video_from_reference
+from .fal_video import (
+    DEFAULT_REF_I2V_MODEL,
+    generate_video_from_image,
+    generate_video_from_reference,
+)
 
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "output")
 
-# Kling only supports these clip durations.
+# Kling only supports these clip durations (image-to-video).
 KLING_DURATIONS = [5, 10]
 
 # Default max concurrent FAL API calls.  Keeps us under typical rate limits.
@@ -51,6 +56,12 @@ def _pick_kling_duration(target_seconds: float) -> str:
     if target_seconds >= 7.5:
         return "10"
     return "5"
+
+
+def _pick_reference_duration(target_seconds: float) -> int:
+    """Round up to whole seconds for reference-to-video models."""
+    rounded = int(math.ceil(target_seconds))
+    return min(8, max(1, rounded))
 
 
 def _adjust_clip_speed(input_path: str, output_path: str, target_seconds: float) -> None:
@@ -180,7 +191,7 @@ async def _generate_video_async(
     semaphore: asyncio.Semaphore,
     scene: Scene,
     image_url: str,
-    kling_dur: str,
+    duration: int | str,
     video_model: str | None,
     reference_element: dict | None,
     progress: dict,
@@ -199,26 +210,31 @@ async def _generate_video_async(
         logging.info(
             "VideoGen: Scene %s - [vid] animating (%ss clip)",
             scene.scene_id,
-            kling_dur,
+            duration,
         )
 
-        i2v_kwargs: dict = {"duration": kling_dur}
-        if video_model:
-            i2v_kwargs["model"] = video_model
-
         if reference_element:
+            reference_model = video_model or DEFAULT_REF_I2V_MODEL
             ref_prompt = (
-                f"{scene.scene_prompt}\n"
-                "Main character: @Element1. Use @Image1 as style reference."
+                scene.scene_prompt
+                if reference_model.startswith("fal-ai/vidu/")
+                else (
+                    f"{scene.scene_prompt}\n"
+                    "Main character: @Element1. Use @Image1 as style reference."
+                )
             )
             video_response = await asyncio.to_thread(
                 generate_video_from_reference,
                 elements=[reference_element],
                 image_urls=[image_url],
                 prompt=ref_prompt,
-                **i2v_kwargs,
+                model=reference_model,
+                duration=duration,
             )
         else:
+            i2v_kwargs: dict = {"duration": duration}
+            if video_model:
+                i2v_kwargs["model"] = video_model
             video_response = await asyncio.to_thread(
                 generate_video_from_image,
                 image_url,
@@ -312,13 +328,24 @@ async def _process_storyboard_parallel(
         if target_duration is None:
             target_duration = default_per_scene
 
-        kling_dur = _pick_kling_duration(target_duration) if target_duration else "5"
+        if reference_element:
+            duration = (
+                _pick_reference_duration(target_duration)
+                if target_duration
+                else 5
+            )
+        else:
+            duration = (
+                _pick_kling_duration(target_duration)
+                if target_duration
+                else "5"
+            )
         video_tasks.append(
             _generate_video_async(
                 semaphore,
                 scene,
                 image_url,
-                kling_dur,
+                duration,
                 video_model,
                 reference_element,
                 progress,
