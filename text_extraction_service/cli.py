@@ -122,7 +122,10 @@ def extract_scenes(
 ) -> Dict[str, Any]:
     system_prompt = (
         "You are a script editor extracting filmable scene beats and concise "
-        "voiceover narration for a short video."
+        "voiceover narration for a short video. You think in terms of a "
+        "complete narrative arc: every story has a beginning that sets the "
+        "stage, a middle that develops the core events, and an ending that "
+        "resolves or concludes the story."
     )
     user_prompt = (
         "Text:\n"
@@ -158,20 +161,77 @@ def extract_scenes(
 
 
 def generate_scene_prompt(
-    client: OpenAI, model: str, scene: Dict[str, Any], verbose: bool
+    client: OpenAI,
+    model: str,
+    scene: Dict[str, Any],
+    verbose: bool,
+    all_scenes: List[Dict[str, Any]] | None = None,
+    *,
+    style: ArtStyle | None = None,
 ) -> Dict[str, Any]:
-    system_prompt = "You will generate ONE short prompt for the given scene."
+    total = len(all_scenes) if all_scenes else 0
+    scene_id = scene.get("scene_id", 0)
+
+    if total > 0:
+        if scene_id == 1:
+            position_hint = (
+                "This is the OPENING scene (scene 1 of {total}). "
+                "It should establish the setting and introduce the subject."
+            ).format(total=total)
+        elif scene_id == total:
+            position_hint = (
+                "This is the FINAL scene (scene {sid} of {total}). "
+                "It should convey resolution or a concluding moment."
+            ).format(sid=scene_id, total=total)
+        else:
+            position_hint = (
+                "This is scene {sid} of {total} (middle of the story). "
+                "It should continue naturally from the previous scene."
+            ).format(sid=scene_id, total=total)
+    else:
+        position_hint = ""
+
+    # Build a brief outline of surrounding scenes for continuity.
+    context_lines: List[str] = []
+    if all_scenes and total > 1:
+        for s in all_scenes:
+            sid = s.get("scene_id", 0)
+            marker = " <-- current" if sid == scene_id else ""
+            context_lines.append(
+                f"  Scene {sid}: {s.get('title', '')}{marker}"
+            )
+        context_block = (
+            "Story outline (all scenes in order):\n"
+            + "\n".join(context_lines)
+            + "\n\n"
+        )
+    else:
+        context_block = ""
+
+    if style is None:
+        style = get_style(DEFAULT_STYLE)
+    style_prefix = style.prompt_prefix
+
+    system_prompt = (
+        "You will generate ONE short image-generation prompt for the given "
+        "scene. The scene is part of a single continuous story — keep visual "
+        "continuity with the scenes before and after it."
+    )
     user_prompt = (
+        f"{context_block}"
+        f"{position_hint}\n\n"
         "Scene JSON:\n"
         f"{json.dumps(scene, ensure_ascii=True)}\n\n"
         "Rules:\n"
-        f'1) Start with the exact style prefix: "{STYLE_PREFIX}"\n'
+        f'1) Start with the exact style prefix: "{style_prefix}"\n'
         "2) 2-4 lines max. Keep it concise.\n"
         "3) Describe only: who is present, what happens (single beat), "
         "where it happens, implied emotion (only if explicit).\n"
-        "4) Do NOT add camera/lens/lighting/day-night/fps/aspect-ratio instructions.\n"
-        "5) Do NOT invent new plot points beyond the provided scene fields.\n"
-        "6) Output MUST match the JSON schema."
+        "4) Maintain visual continuity: characters and settings that appeared "
+        "in earlier scenes should be depicted consistently.\n"
+        "5) Do NOT add camera/lens/lighting/day-night/fps/aspect-ratio instructions.\n"
+        "6) Do NOT invent new plot points beyond the provided scene fields.\n"
+        "7) Output MUST match the JSON schema."
     )
     return call_structured_output(
         client=client,
@@ -199,15 +259,19 @@ def normalize_scene_ids(
 
 
 def normalize_prompt(
-    scene_id: int, prompt: str, warnings: List[str]
+    scene_id: int, prompt: str, warnings: List[str], *, style: ArtStyle | None = None,
 ) -> str:
+    if style is None:
+        style = get_style(DEFAULT_STYLE)
+    prefix = style.prompt_prefix
+
     cleaned = prompt.strip()
-    if not cleaned.startswith(STYLE_PREFIX):
+    if not cleaned.startswith(prefix):
         warnings.append(
             f"scene_id {scene_id}: prompt did not start with the style prefix; "
             "prefix was added."
         )
-        cleaned = f"{STYLE_PREFIX} {cleaned.lstrip()}"
+        cleaned = f"{prefix} {cleaned.lstrip()}"
 
     if BANNED_TERMS_PATTERN.search(cleaned):
         warnings.append(
@@ -228,7 +292,12 @@ def merge_scene_prompts(
     scenes: List[Dict[str, Any]],
     prompts: List[Dict[str, Any]],
     warnings: List[str],
+    *,
+    style: ArtStyle | None = None,
 ) -> Dict[str, Any]:
+    if style is None:
+        style = get_style(DEFAULT_STYLE)
+
     prompt_by_id = {item["scene_id"]: item["scene_prompt"] for item in prompts}
     merged_scenes: List[Dict[str, Any]] = []
 
@@ -237,8 +306,8 @@ def merge_scene_prompts(
         prompt = prompt_by_id.get(scene_id)
         if not prompt:
             warnings.append(f"Missing prompt for scene_id {scene_id}.")
-            prompt = STYLE_PREFIX
-        prompt = normalize_prompt(scene_id, prompt, warnings)
+            prompt = style.prompt_prefix
+        prompt = normalize_prompt(scene_id, prompt, warnings, style=style)
         merged_scene = dict(scene)
         merged_scene["scene_prompt"] = prompt
         merged_scenes.append(merged_scene)
@@ -246,7 +315,7 @@ def merge_scene_prompts(
     project_id = datetime.now(timezone.utc).strftime("proj_%Y%m%d_%H%M%S")
     return {
         "project_id": project_id,
-        "style_preset": "sketched_storyboard",
+        "style_preset": style.key,
         "scenes": merged_scenes,
         "warnings": warnings,
     }
@@ -291,6 +360,16 @@ def main() -> None:
         help="Write JSON output to a file (defaults to stdout).",
     )
     parser.add_argument(
+        "--style",
+        default=DEFAULT_STYLE,
+        choices=available_styles(),
+        help=(
+            "Art style for the generated images. "
+            f"Default: {DEFAULT_STYLE}. Available:\n"
+            + style_choices_help()
+        ),
+    )
+    parser.add_argument(
         "--verbose",
         action="store_true",
         help="Print LLM responses to the terminal.",
@@ -308,6 +387,8 @@ def main() -> None:
 
     load_env()
     client = OpenAI()
+    art_style = get_style(args.style)
+    logging.info("Using art style: %s (%s)", art_style.key, art_style.name)
 
     logging.info("Step 1/3: Extract scenes")
     extract_result = extract_scenes(
@@ -335,6 +416,8 @@ def main() -> None:
             model=args.model,
             scene=scene,
             verbose=args.verbose,
+            all_scenes=scenes,
+            style=art_style,
         )
         if prompt_result.get("scene_id") != scene.get("scene_id"):
             warnings.append(
@@ -350,6 +433,7 @@ def main() -> None:
         scenes=scenes,
         prompts=prompt_results,
         warnings=warnings,
+        style=art_style,
     )
 
     output_json = json.dumps(final_plan, indent=2, ensure_ascii=True)

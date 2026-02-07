@@ -18,6 +18,12 @@ from fal_integration_service.storyboard_pipeline import (
     process_storyboard,
 )
 from fal_integration_service.fal_face_swap import upload_local_image
+from fal_integration_service.art_styles import (
+    DEFAULT_STYLE,
+    available_styles,
+    get_style,
+    style_choices_help,
+)
 from text_extraction_service.cli import (
     extract_scenes,
     generate_scene_prompt,
@@ -305,10 +311,23 @@ def main() -> None:
             f"Default: {DEFAULT_FAL_CONCURRENCY}."
         ),
     )
+    parser.add_argument(
+        "--style",
+        default=DEFAULT_STYLE,
+        choices=available_styles(),
+        help=(
+            "Art style for the generated images. "
+            f"Default: {DEFAULT_STYLE}. Available:\n"
+            + style_choices_help()
+        ),
+    )
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
     load_env()
+
+    art_style = get_style(args.style)
+    logging.info("Using art style: %s (%s)", art_style.key, art_style.name)
 
     if bool(args.input_file) == bool(args.scene_plan):
         raise SystemExit("Provide exactly one of --input-file or --scene-plan.")
@@ -347,11 +366,13 @@ def main() -> None:
                 model=args.llm_model,
                 scene=scene,
                 verbose=False,
+                all_scenes=scenes,
+                style=art_style,
             )
             scene["scene_prompt"] = prompt_result["scene_prompt"]
         plan = {
             "project_id": None,
-            "style_preset": "sketched_storyboard",
+            "style_preset": art_style.key,
             "scenes": scenes,
             "warnings": warnings,
         }
@@ -490,6 +511,7 @@ def main() -> None:
         face_swap_url=face_swap_url,
         reference_element=reference_element,
         fal_concurrency=args.fal_concurrency,
+        style_key=art_style.key,
     )
     clip_paths = video_result.get("clip_paths", [])
 
