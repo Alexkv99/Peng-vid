@@ -1,16 +1,30 @@
+import animate from "tailwindcss-animate";
+import typography from "@tailwindcss/typography";
+
 /** @type {import("tailwindcss").Config} */
 export default {
+  darkMode: ["class"],
   content: ["./index.html", "./**/*.{ts,tsx}"],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: "hsl(var(--primary))",
-        "primary-foreground": "hsl(var(--primary-foreground))",
-        muted: "hsl(var(--muted))",
-        card: "hsl(var(--card))",
-        border: "hsl(var(--border))",
+        background: "hsl(var(--background) / <alpha-value>)",
+        foreground: "hsl(var(--foreground) / <alpha-value>)",
+        primary: "hsl(var(--primary) / <alpha-value>)",
+        "primary-foreground": "hsl(var(--primary-foreground) / <alpha-value>)",
+        muted: "hsl(var(--muted) / <alpha-value>)",
+        "muted-foreground": "hsl(var(--muted-foreground) / <alpha-value>)",
+        card: "hsl(var(--card) / <alpha-value>)",
+        "card-foreground": "hsl(var(--card-foreground) / <alpha-value>)",
+        border: "hsl(var(--border) / <alpha-value>)",
+        ring: "hsl(var(--ring) / <alpha-value>)",
       },
       keyframes: {
         "fade-in-up": {
@@ -23,5 +37,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [animate, typography],
 };
