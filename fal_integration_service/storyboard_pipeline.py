@@ -10,7 +10,7 @@ import imageio_ffmpeg
 
 from .scenes import Storyboard
 from .fal_image import generate_image
-from .fal_video import generate_video_from_image
+from .fal_video import generate_video_from_image, generate_video_from_reference
 
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "output")
@@ -133,6 +133,7 @@ def process_storyboard(
     output_dir: str | None = None,
     return_clips: bool = False,
     face_swap_url: str | None = None,
+    reference_element: dict | None = None,
 ) -> dict:
     """Generate a video for each scene and combine into one final video.
 
@@ -140,6 +141,8 @@ def process_storyboard(
             Uses PuLID Flux (identity-conditioned) when a face reference is
             provided, otherwise plain Flux Dev.
     Step 2: Animate that image into a video clip with fal.ai (Kling).
+            If a reference element is provided, use Kling O1 reference-to-video
+            to preserve identity.
     Step 3: Adjust each clip to the target per-scene duration (if total_duration set).
     Step 4: Concatenate all clips into one video with ffmpeg.
 
@@ -150,6 +153,9 @@ def process_storyboard(
         face_swap_url: URL of a reference face image. When provided, PuLID Flux
                        conditions generation on this face so the main character
                        inherits the person's identity.
+        reference_element: Reference element dict for Kling O1. When provided,
+                          this is used for identity conditioning during video
+                          generation.
 
     Returns a result dict containing:
         - scenes: list of per-scene results (scene, image_url, video_url)
@@ -207,11 +213,26 @@ def process_storyboard(
             if video_model:
                 i2v_kwargs["model"] = video_model
 
-            video_response = generate_video_from_image(
-                image_url,
-                scene.scene_prompt,
-                **i2v_kwargs,
-            )
+            if reference_element:
+                logging.info(
+                    "VideoGen: [2/2] Animating with Kling O1 reference-to-video"
+                )
+                ref_prompt = (
+                    f"{scene.scene_prompt}\n"
+                    "Main character: @Element1. Use @Image1 as style reference."
+                )
+                video_response = generate_video_from_reference(
+                    elements=[reference_element],
+                    image_urls=[image_url],
+                    prompt=ref_prompt,
+                    **i2v_kwargs,
+                )
+            else:
+                video_response = generate_video_from_image(
+                    image_url,
+                    scene.scene_prompt,
+                    **i2v_kwargs,
+                )
 
             video_url = _extract_video_url(video_response)
 

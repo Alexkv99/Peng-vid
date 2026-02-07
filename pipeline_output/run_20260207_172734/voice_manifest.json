@@ -1,0 +1,153 @@
+{
+  "project_id": null,
+  "style_preset": "sketched_storyboard",
+  "voice_id": "m86j6D7UZpGzHsNu",
+  "model_name": "default",
+  "output_format": "wav",
+  "items": [
+    {
+      "scene_id": 1,
+      "title": "Rituals against uncertainty",
+      "text_field": "scene_summary",
+      "text": "I realized rituals mattered most when uncertainty made everything feel unsteady.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_172734/voice_output/scene_001.wav",
+      "request_id": "pZa1ZS3lhZI",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 2,
+      "title": "Religion to secular life",
+      "text_field": "scene_summary",
+      "text": "Religion once gave people structure, then secularization made society rely on it less.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_172734/voice_output/scene_002.wav",
+      "request_id": "IogV7JxYthY",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 3,
+      "title": "Problems are inevitable",
+      "text_field": "scene_summary",
+      "text": "I accepted that change brings problems, and problems keep our minds engaged.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_172734/voice_output/scene_003.wav",
+      "request_id": "xlZWXuMP4lk",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 4,
+      "title": "Morning reading ritual",
+      "text_field": "scene_summary",
+      "text": "I started each day with one focused hour of reading\u2014no phone, just a book.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_172734/voice_output/scene_004.wav",
+      "request_id": "NCoZUFVMM8U",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 5,
+      "title": "Stoicism as balance",
+      "text_field": "scene_summary",
+      "text": "Stoicism aimed for balance, not emotionless suppression like many people assumed.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_172734/voice_output/scene_005.wav",
+      "request_id": "YExCHcZtp5w",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 6,
+      "title": "To be vs to do",
+      "text_field": "scene_summary",
+      "text": "Outcome-driven visualization missed the daily grind, so I focused on doing now.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_172734/voice_output/scene_006.wav",
+      "request_id": "uFHPFpiyCgU",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 7,
+      "title": "Don\u2019t chase passion",
+      "text_field": "scene_summary",
+      "text": "Chasing passion fed ego, so I chose steady work over grand quests.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_172734/voice_output/scene_007.wav",
+      "request_id": "ne5uHPIjmFs",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 8,
+      "title": "Endurance sports consistency",
+      "text_field": "scene_summary",
+      "text": "I wasn\u2019t passionate about running, but consistency in training kept moving me forward.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_172734/voice_output/scene_008.wav",
+      "request_id": "2Cy35d0WDc8",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 9,
+      "title": "Make the team look good",
+      "text_field": "scene_summary",
+      "text": "I built trust by doing disliked tasks well and delivering more than I talked.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_172734/voice_output/scene_009.wav",
+      "request_id": "4M3NGgBzy1o",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 10,
+      "title": "Get out of your head",
+      "text_field": "scene_summary",
+      "text": "I dropped perfectionist fantasies and remembered most people stayed focused on themselves.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_172734/voice_output/scene_010.wav",
+      "request_id": "SH7tk52ucU8",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 11,
+      "title": "Restraint through rejection",
+      "text_field": "scene_summary",
+      "text": "Rejections and ignored emails hurt, so I practiced restraint instead of lashing out.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_172734/voice_output/scene_011.wav",
+      "request_id": "7oqioxvrN5w",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 12,
+      "title": "Infinite game and leadership",
+      "text_field": "scene_summary",
+      "text": "I played the infinite game: act daily, reject entitlement, credit the team, own failures.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_172734/voice_output/scene_012.wav",
+      "request_id": "pOlZpH77jQc",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    }
+  ]
+}

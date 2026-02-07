@@ -1,0 +1,168 @@
+{
+  "project_id": null,
+  "style_preset": "sketched_storyboard",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "title": "Rituals against uncertainty",
+      "main_point": "Rituals provide structure when life feels uncertain.",
+      "scene_summary": "I realized rituals mattered most when uncertainty made everything feel unsteady.",
+      "key_elements": [
+        "uncertainty",
+        "daily structure",
+        "rituals"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person at a small desk at home, arranging a simple daily ritual (notebook and cup) into a neat routine.\nThe room feels unsteady with scattered items around, while the ritual area is orderly, implying uncertainty held in check."
+    },
+    {
+      "scene_id": 2,
+      "title": "Religion to secular life",
+      "main_point": "Religion historically provided structure; secularization reduced reliance on it.",
+      "scene_summary": "Religion once gave people structure, then secularization made society rely on it less.",
+      "key_elements": [
+        "religion",
+        "structure",
+        "secularization",
+        "Enlightenment in Europe"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nIn an Enlightenment-era European town square, townspeople shift from gathering around a church for guidance to consulting a civic notice board.\nThe church stands in the background as secular institutions take focus, implying a calmer, more self-directed mood."
+    },
+    {
+      "scene_id": 3,
+      "title": "Problems are inevitable",
+      "main_point": "Change brings problems, and problems can be useful and meaningful.",
+      "scene_summary": "I accepted that change brings problems, and problems keep our minds engaged.",
+      "key_elements": [
+        "change",
+        "problems",
+        "gratitude",
+        "meaning"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person sits at a simple desk, looking at a page labeled \u201cChange\u201d with a small list of \u201cProblems,\u201d hands relaxed in gratitude.\nQuiet room setting; expression thoughtful, finding meaning in the problems."
+    },
+    {
+      "scene_id": 4,
+      "title": "Morning reading ritual",
+      "main_point": "A focused, phone-free hour of reading starts the day.",
+      "scene_summary": "I started each day with one focused hour of reading\u2014no phone, just a book.",
+      "key_elements": [
+        "one-hour reading",
+        "no phone",
+        "Kindle or physical book",
+        "morning ritual"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person sits in bed or at a small bedside chair, reading a Kindle or physical book for an hour.\nA phone is set aside and untouched on the nightstand, emphasizing a calm morning ritual."
+    },
+    {
+      "scene_id": 5,
+      "title": "Stoicism as balance",
+      "main_point": "Stoicism is about balance, not suppressing emotions.",
+      "scene_summary": "Stoicism aimed for balance, not emotionless suppression like many people assumed.",
+      "key_elements": [
+        "Ego is the Enemy",
+        "Ryan Holiday",
+        "stoicism",
+        "emotional balance"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nRyan Holiday stands in a simple study beside a copy of \u201cEgo is the Enemy,\u201d calmly holding one hand over his heart and the other open, illustrating stoicism as emotional balance rather than suppression."
+    },
+    {
+      "scene_id": 6,
+      "title": "To be vs to do",
+      "main_point": "Process beats outcome-driven visualization; focus on what to do now.",
+      "scene_summary": "Outcome-driven visualization missed the daily grind, so I focused on doing now.",
+      "key_elements": [
+        "visualization",
+        "daily grind",
+        "process orientation",
+        "Derek Sivers quote"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person at a desk with a vision board labeled \u201cOutcome\u201d pushed aside, writing a simple to-do list labeled \u201cProcess\u201d while a small note shows a Derek Sivers quote.\nHome workspace; focused, determined."
+    },
+    {
+      "scene_id": 7,
+      "title": "Don\u2019t chase passion",
+      "main_point": "\u201cFind your passion\u201d can feed ego; consistent work matters more.",
+      "scene_summary": "Chasing passion fed ego, so I chose steady work over grand quests.",
+      "key_elements": [
+        "don\u2019t be passionate",
+        "ego",
+        "Cal Newport",
+        "Anna Lembke"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA single person at a desk closes a book labeled \u201cPassion\u201d and opens a notebook labeled \u201cSteady Work,\u201d with \u201cEgo\u201d scribbled and crossed out.\nOn the desk lie two books titled \u201cCal Newport\u201d and \u201cAnna Lembke,\u201d in a quiet study; the person looks resolved."
+    },
+    {
+      "scene_id": 8,
+      "title": "Endurance sports consistency",
+      "main_point": "Dispassionate consistency in running inspired more than hype or fandom.",
+      "scene_summary": "I wasn\u2019t passionate about running, but consistency in training kept moving me forward.",
+      "key_elements": [
+        "endurance sports",
+        "running",
+        "consistency",
+        "Kipchoge mention"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA lone runner trains steadily on a simple track, focused and calm, not hyped.\nA small note or sign nearby references \u201cKipchoge,\u201d emphasizing consistency in endurance running."
+    },
+    {
+      "scene_id": 9,
+      "title": "Make the team look good",
+      "main_point": "Early career trust comes from reliable grunt work and delivery.",
+      "scene_summary": "I built trust by doing disliked tasks well and delivering more than I talked.",
+      "key_elements": [
+        "teamwork",
+        "grunt work",
+        "internships",
+        "trust",
+        "reliability"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nAn intern and a small team at an office workspace; the intern quietly completes a stack of disliked grunt-work tasks and hands the finished results to teammates.\nThe team looks relieved and trusting."
+    },
+    {
+      "scene_id": 10,
+      "title": "Get out of your head",
+      "main_point": "Perfectionism and spotlight effect come from ego; most people aren\u2019t watching.",
+      "scene_summary": "I dropped perfectionist fantasies and remembered most people stayed focused on themselves.",
+      "key_elements": [
+        "vision boards",
+        "perfect plan",
+        "perfectionism",
+        "spotlight effect",
+        "ego"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person stands in a room with vision boards and a \u201cperfect plan\u201d pinned up, then lowers their shoulders and steps back from the wall.\nAround them, other people in the same space stay focused on their own tasks, not looking over; the person looks relieved."
+    },
+    {
+      "scene_id": 11,
+      "title": "Restraint through rejection",
+      "main_point": "Rejection and silence sting; restraint keeps ego from taking over.",
+      "scene_summary": "Rejections and ignored emails hurt, so I practiced restraint instead of lashing out.",
+      "key_elements": [
+        "interview rejection",
+        "cold emails",
+        "immigrant job search",
+        "anger",
+        "restraint"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nAn immigrant job seeker sits at a small desk, staring at a laptop showing an interview rejection and unanswered cold emails.\nThey clench a fist in anger, then relax their hand, practicing restraint in the quiet room."
+    },
+    {
+      "scene_id": 12,
+      "title": "Infinite game and leadership",
+      "main_point": "Stay a student, focus on actions, avoid entitlement, and lead with credit and responsibility.",
+      "scene_summary": "I played the infinite game: act daily, reject entitlement, credit the team, own failures.",
+      "key_elements": [
+        "no finish line",
+        "feedback",
+        "entitlement vs control",
+        "daily actions",
+        "management rules",
+        "give credit",
+        "take blame"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA leader stands at a whiteboard labeled \u201cNo finish line,\u201d facing a small team in a meeting room.\nThey point to a list of daily actions and feedback notes, while writing \u201cCredit team\u201d and \u201cTake blame,\u201d with a calm, accountable expression."
+    }
+  ],
+  "warnings": []
+}

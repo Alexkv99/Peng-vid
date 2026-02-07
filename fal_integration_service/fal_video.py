@@ -16,6 +16,9 @@ DEFAULT_MODEL = "fal-ai/minimax/video-01"
 #   "fal-ai/kling-video/v2/master/image-to-video"    — Master quality
 DEFAULT_I2V_MODEL = "fal-ai/kling-video/v2.1/standard/image-to-video"
 
+# Default reference-to-video model (Kling O1 reference).
+DEFAULT_REF_I2V_MODEL = "fal-ai/kling-video/o1/reference-to-video"
+
 
 def _ensure_api_key() -> None:
     if not os.environ.get("FAL_KEY"):
@@ -63,6 +66,37 @@ def generate_video_from_image(
         model,
         arguments={
             "image_url": image_url,
+            "prompt": prompt,
+            "duration": duration,
+            "aspect_ratio": aspect_ratio,
+        },
+        with_logs=True,
+    )
+    return result
+
+
+def generate_video_from_reference(
+    *,
+    elements: list[dict],
+    image_urls: list[str],
+    prompt: str,
+    model: str = DEFAULT_REF_I2V_MODEL,
+    duration: str = "5",
+    aspect_ratio: str = "16:9",
+) -> dict:
+    """Submit a reference-to-video request and wait for the result.
+
+    The request uses reference elements (e.g. character identity) and optional
+    image URLs for style or starting frame. Prompt should reference @Element1,
+    @Image1, etc. as needed.
+    """
+    _ensure_api_key()
+
+    result = fal_client.subscribe(
+        model,
+        arguments={
+            "elements": elements,
+            "image_urls": image_urls,
             "prompt": prompt,
             "duration": duration,
             "aspect_ratio": aspect_ratio,
