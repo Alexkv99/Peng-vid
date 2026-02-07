@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import argparse
 import json
 import logging
@@ -11,7 +13,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 STYLE_PREFIX = "Sketched style, pencil lines, minimal shading."
-SCENE_PROMPT_MAX_TOKENS = 40
+SCENE_PROMPT_MAX_TOKENS = 25
 
 EXTRACT_SCENES_SCHEMA: Dict[str, Any] = {
     "type": "object",
