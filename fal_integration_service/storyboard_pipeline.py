@@ -138,6 +138,7 @@ async def _generate_image_async(
     progress: dict,
     progress_lock: asyncio.Lock,
     total: int,
+    style_key: str | None = None,
 ) -> tuple[Scene, str]:
     """Generate an image for a single scene, bounded by *semaphore*."""
     async with semaphore:
@@ -160,6 +161,7 @@ async def _generate_image_async(
             generate_image,
             scene.scene_prompt,
             reference_face_url=face_swap_url,
+            style_key=style_key,
         )
         async with progress_lock:
             progress["images_done"] += 1
@@ -253,6 +255,7 @@ async def _process_storyboard_parallel(
     face_swap_url: str | None,
     reference_element: dict | None,
     fal_concurrency: int,
+    style_key: str | None = None,
 ) -> dict:
     output_root = output_dir or OUTPUT_DIR
     os.makedirs(output_root, exist_ok=True)
@@ -295,6 +298,7 @@ async def _process_storyboard_parallel(
             progress,
             progress_lock,
             num_scenes,
+            style_key=style_key,
         )
         for scene in storyboard.scenes
     ]
@@ -439,6 +443,7 @@ def process_storyboard(
     face_swap_url: str | None = None,
     reference_element: dict | None = None,
     fal_concurrency: int = DEFAULT_FAL_CONCURRENCY,
+    style_key: str | None = None,
 ) -> dict:
     """Generate a video for each scene and combine into one final video.
 
@@ -482,5 +487,6 @@ def process_storyboard(
             face_swap_url=face_swap_url,
             reference_element=reference_element,
             fal_concurrency=fal_concurrency,
+            style_key=style_key,
         )
     )
