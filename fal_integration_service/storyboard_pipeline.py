@@ -11,7 +11,6 @@ import imageio_ffmpeg
 from .scenes import Storyboard
 from .fal_image import generate_image
 from .fal_video import generate_video_from_image
-from .fal_face_swap import face_swap
 
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "output")
@@ -137,8 +136,9 @@ def process_storyboard(
 ) -> dict:
     """Generate a video for each scene and combine into one final video.
 
-    Step 1: Generate a storyboard frame image with fal.ai (Flux).
-    Step 1.5: (Optional) Face-swap the main character with a reference face.
+    Step 1: Generate a storyboard frame image with fal.ai.
+            Uses PuLID Flux (identity-conditioned) when a face reference is
+            provided, otherwise plain Flux Dev.
     Step 2: Animate that image into a video clip with fal.ai (Kling).
     Step 3: Adjust each clip to the target per-scene duration (if total_duration set).
     Step 4: Concatenate all clips into one video with ffmpeg.
@@ -147,9 +147,9 @@ def process_storyboard(
         total_duration: Total video length in seconds. Divided equally across
                         scenes. Each clip is speed-adjusted to match. If None,
                         clips use their native Kling duration (5s each).
-        face_swap_url: URL of a reference face image. When provided, every
-                       generated scene image is face-swapped so the main
-                       character looks like the person in this image.
+        face_swap_url: URL of a reference face image. When provided, PuLID Flux
+                       conditions generation on this face so the main character
+                       inherits the person's identity.
 
     Returns a result dict containing:
         - scenes: list of per-scene results (scene, image_url, video_url)
@@ -179,22 +179,16 @@ def process_storyboard(
             logging.info("VideoGen: Prompt: %s...", scene.scene_prompt[:80])
 
             # --- Step 1: Generate image with fal.ai ---
-            logging.info("VideoGen: [1/2] Generating image with fal.ai (Flux)")
-            image_url = generate_image(scene.scene_prompt)
-            logging.info("VideoGen: Image ready: %s...", image_url[:80])
-
-            # --- Step 1.5 (optional): Face-swap main character ---
             if face_swap_url:
-                logging.info("VideoGen: Applying face swap to scene %s", scene.scene_id)
-                try:
-                    image_url = face_swap(image_url, face_swap_url)
-                    logging.info("VideoGen: Face swap done: %s...", image_url[:80])
-                except Exception:
-                    logging.warning(
-                        "VideoGen: Face swap failed for scene %s, using original image",
-                        scene.scene_id,
-                        exc_info=True,
-                    )
+                logging.info(
+                    "VideoGen: [1/2] Generating image with fal.ai (PuLID Flux, face-conditioned)"
+                )
+            else:
+                logging.info("VideoGen: [1/2] Generating image with fal.ai (Flux)")
+            image_url = generate_image(
+                scene.scene_prompt, reference_face_url=face_swap_url
+            )
+            logging.info("VideoGen: Image ready: %s...", image_url[:80])
 
             # --- Step 2: Animate with fal.ai image-to-video ---
             target_duration = None

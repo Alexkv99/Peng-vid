@@ -9,6 +9,11 @@ import fal_client
 #   "fal-ai/fast-sdxl"       — SDXL-based, general purpose
 DEFAULT_IMAGE_MODEL = "fal-ai/flux/dev"
 
+# PuLID Flux — identity-conditioned generation.
+# Embeds a reference face directly into the diffusion process so the
+# generated character already looks like the target person.
+PULID_IMAGE_MODEL = "fal-ai/flux-pulid"
+
 
 def _ensure_api_key() -> None:
     if not os.environ.get("FAL_KEY"):
@@ -18,28 +23,8 @@ def _ensure_api_key() -> None:
         )
 
 
-def generate_image(
-    prompt: str,
-    *,
-    model: str = DEFAULT_IMAGE_MODEL,
-    image_size: str = "landscape_16_9",
-) -> str:
-    """Generate an image and return the image URL.
-
-    Returns the direct URL string to the generated image.
-    """
-    _ensure_api_key()
-
-    result = fal_client.subscribe(
-        model,
-        arguments={
-            "prompt": prompt,
-            "image_size": image_size,
-        },
-        with_logs=True,
-    )
-
-    # Fal image responses: {"images": [{"url": "..."}]} or {"image": {"url": "..."}}
+def _extract_image_url(result: dict) -> str:
+    """Extract the image URL from a fal image-generation response."""
     images = result.get("images")
     if isinstance(images, list) and images:
         first = images[0]
@@ -54,3 +39,44 @@ def generate_image(
         return image
 
     raise RuntimeError(f"Could not extract image URL from fal response: {result}")
+
+
+def generate_image(
+    prompt: str,
+    *,
+    model: str = DEFAULT_IMAGE_MODEL,
+    image_size: str = "landscape_16_9",
+    reference_face_url: str | None = None,
+) -> str:
+    """Generate an image and return the image URL.
+
+    When *reference_face_url* is provided the function switches to the
+    PuLID Flux model so the generated character inherits the identity of
+    the reference face.  Without it, plain Flux Dev is used as before.
+
+    Returns the direct URL string to the generated image.
+    """
+    _ensure_api_key()
+
+    if reference_face_url:
+        active_model = PULID_IMAGE_MODEL
+        arguments = {
+            "prompt": prompt,
+            "reference_image_url": reference_face_url,
+            "image_size": image_size,
+            "id_weight": 1,
+        }
+    else:
+        active_model = model
+        arguments = {
+            "prompt": prompt,
+            "image_size": image_size,
+        }
+
+    result = fal_client.subscribe(
+        active_model,
+        arguments=arguments,
+        with_logs=True,
+    )
+
+    return _extract_image_url(result)
