@@ -1,0 +1,81 @@
+{
+  "project_id": null,
+  "style_preset": "sketched_storyboard",
+  "voice_id": "ihi0W74n1uzNk15b",
+  "model_name": "default",
+  "output_format": "wav",
+  "items": [
+    {
+      "scene_id": 1,
+      "title": "Deleting Instagram, gaining focus",
+      "text_field": "scene_summary",
+      "text": "After deleting Instagram, I found more time, energy, and attention to read intentionally.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_201255/voice_output/scene_001.wav",
+      "request_id": "otsrVTCcCUI",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 2,
+      "title": "Curiosity-based reading habit",
+      "text_field": "scene_summary",
+      "text": "I read whatever sparked curiosity and hit a one-hour daily quota, with extras as bonus.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_201255/voice_output/scene_002.wav",
+      "request_id": "atDbrnPibgk",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 3,
+      "title": "Two books and a Feynman warning",
+      "text_field": "scene_summary",
+      "text": "I read Deutsch and Holiday, and both echoed Feynman: don\u2019t fool yourself first.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_201255/voice_output/scene_003.wav",
+      "request_id": "bnqbT1PnQEA",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 4,
+      "title": "How high ego blocks learning",
+      "text_field": "scene_summary",
+      "text": "High ego made me fear sounding bad on guitar and resist learning from a kid.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_201255/voice_output/scene_004.wav",
+      "request_id": "YUAFmdzpYVk",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 5,
+      "title": "Purpose fantasies vs doing what\u2019s needed",
+      "text_field": "scene_summary",
+      "text": "I chased world-changing purpose while neglecting basics, until I focused on what needed doing.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_201255/voice_output/scene_005.wav",
+      "request_id": "_Dn_PRajmjY",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 6,
+      "title": "Rejection, growth, and good explanations",
+      "text_field": "scene_summary",
+      "text": "After hackathon rejection, I learned no-code, improved, and kept seeking better explanations with humility.",
+      "trimmed": false,
+      "max_seconds": 6.0,
+      "audio_path": "pipeline_output/run_20260207_201255/voice_output/scene_006.wav",
+      "request_id": "bVCC8pRWBsc",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    }
+  ]
+}

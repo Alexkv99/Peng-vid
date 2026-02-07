@@ -1,0 +1,79 @@
+{
+  "project_id": null,
+  "style_preset": "sketched_storyboard",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "title": "Deleting Instagram, gaining focus",
+      "main_point": "Removing Instagram freed time and attention for intentional reading.",
+      "scene_summary": "After deleting Instagram, I found more time, energy, and attention to read intentionally.",
+      "key_elements": [
+        "Phone with Instagram deleted",
+        "Quiet reading moment",
+        "Sense of regained time and focus"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person at home sets down a phone showing Instagram deleted, then opens a book and begins reading.\nQuiet reading moment at a simple chair or desk, with a clear sense of regained focus."
+    },
+    {
+      "scene_id": 2,
+      "title": "Curiosity-led reading quota",
+      "main_point": "Reading followed curiosity with a simple one-hour daily quota.",
+      "scene_summary": "I read whatever sparked curiosity and aimed for one hour a day, minimum.",
+      "key_elements": [
+        "Timer or clock at one hour",
+        "Book pages turning",
+        "Simple daily routine"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person sits at a desk at home, turning book pages while a timer/clock marks one hour.\nA simple daily routine is implied as they keep reading whatever interests them."
+    },
+    {
+      "scene_id": 3,
+      "title": "Two books and a Feynman warning",
+      "main_point": "Both books pointed to Feynman\u2019s principle: don\u2019t fool yourself.",
+      "scene_summary": "Two books quoted Richard Feynman: the easiest person to fool was yourself.",
+      "key_elements": [
+        "The Beginning of Infinity cover",
+        "Ego is the Enemy cover",
+        "Feynman quote on screen"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person at a desk holds two books: \u201cThe Beginning of Infinity\u201d and \u201cEgo is the Enemy.\u201d\nOn a nearby screen, the Feynman quote appears: \u201cThe easiest person to fool is yourself,\u201d as the person pauses, reflective."
+    },
+    {
+      "scene_id": 4,
+      "title": "High ego blocks beginner work",
+      "main_point": "High ego distorted reality and stopped learning and practice.",
+      "scene_summary": "High ego made up stories, blocked beginner humility, and resisted boring practice like learning guitar.",
+      "key_elements": [
+        "Guitar untouched",
+        "Kid playing guitar better",
+        "Inner resistance to practice"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nIn a living room, an adult sits beside an untouched guitar while a kid nearby plays guitar better.\nThe adult hesitates, hands pulled back from the guitar, showing inner resistance to practice."
+    },
+    {
+      "scene_id": 5,
+      "title": "Reality check through rejection and progress",
+      "main_point": "Dropping ego after rejection enabled steady skill-building and hackathon results.",
+      "scene_summary": "After a hackathon rejection, I learned product-building, joined hackathons, and later placed as a finalist.",
+      "key_elements": [
+        "Rejection message",
+        "No-code tools on screen",
+        "Hackathon teamwork and finalist moment"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person at a desk sees a rejection message on a laptop, then continues working with no-code tools on the screen.\nLater, the same person collaborates with a small hackathon team at a table, ending with a finalist moment on a hackathon stage, determined."
+    },
+    {
+      "scene_id": 6,
+      "title": "Bad explanations and the humility to keep learning",
+      "main_point": "Avoiding bad explanations required questioning, humility, and ongoing learning.",
+      "scene_summary": "Bad explanations thrived under authority, so I kept asking questions and accepted what I didn\u2019t know.",
+      "key_elements": [
+        "Galileo and heliocentric model reference",
+        "Vast universe vs tiny Earth visual",
+        "Questioning and learning mindset"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA lone learner stands in a simple study, holding an open book labeled \u201cGalileo,\u201d looking up at a wall sketch of a vast universe with a tiny Earth.\nThey raise a hand as if asking a question, expression humble and curious."
+    }
+  ],
+  "warnings": []
+}

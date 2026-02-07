@@ -1,0 +1,86 @@
+{
+  "project_id": null,
+  "style_preset": "sketched_storyboard",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "title": "Deleting Instagram, gaining focus",
+      "main_point": "Removing Instagram freed time and attention for intentional reading.",
+      "scene_summary": "After deleting Instagram, I gained time, energy, and attention to read intentionally.",
+      "key_elements": [
+        "phone screen with Instagram deleted",
+        "book in hand",
+        "quiet reading space",
+        "calm, focused posture"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person sits in a quiet reading space, holding a book with a calm, focused posture.\nTheir phone screen nearby shows Instagram deleted, implying freed attention for intentional reading."
+    },
+    {
+      "scene_id": 2,
+      "title": "Curiosity-led reading quota",
+      "main_point": "Reading followed curiosity with a simple one-hour daily quota.",
+      "scene_summary": "I followed curiosity and hit a one-hour reading quota; anything extra felt like bonus.",
+      "key_elements": [
+        "timer set to 1:00:00",
+        "highlighted book pages",
+        "notebook with brief notes",
+        "stack of books"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person at a desk, reading highlighted book pages while a timer is set to 1:00:00.\nNotebook with brief notes beside them and a stack of books nearby, calm focus."
+    },
+    {
+      "scene_id": 3,
+      "title": "Two books and Feynman\u2019s warning",
+      "main_point": "Both books pointed to Feynman\u2019s principle about self-deception.",
+      "scene_summary": "Two books led me to Feynman\u2019s warning: I was the easiest person to fool.",
+      "key_elements": [
+        "The Beginning of Infinity cover",
+        "Ego is the Enemy cover",
+        "Richard Feynman quote on screen",
+        "page flipping close-up"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA person sits at a desk with two books visible: The Beginning of Infinity and Ego is the Enemy.\nThey flip a page while a screen nearby displays Richard Feynman\u2019s quote: \u201cYou are the easiest person to fool.\u201d"
+    },
+    {
+      "scene_id": 4,
+      "title": "High ego blocks beginner work",
+      "main_point": "High ego distorted reality and stopped learning, like avoiding guitar practice.",
+      "scene_summary": "High ego made me fear sounding bad on guitar and resist learning from a kid.",
+      "key_elements": [
+        "unused guitar leaning against wall",
+        "child demonstrating chords",
+        "hesitant hands on strings",
+        "practice exercises sheet"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nIn a simple room, an unused guitar leans against the wall beside a practice exercises sheet.\nA child demonstrates chords while an adult stands close, hesitant hands resting on the strings, resisting learning and feeling self-conscious."
+    },
+    {
+      "scene_id": 5,
+      "title": "Purpose fantasies vs doing what\u2019s needed",
+      "main_point": "Chasing grand purpose hid basic neglect; leaders did necessary work without titles.",
+      "scene_summary": "I chased world-changing purpose while neglecting basics, but leaders did needed work anyway.",
+      "key_elements": [
+        "to-do list with basics: eat well, exercise",
+        "trash bag and toilet brush",
+        "simple chores montage",
+        "titles/awards fading behind"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person in a modest home, staring at a to-do list of basics (eat well, exercise) while holding a trash bag and toilet brush.\nThey begin doing simple chores as faded titles/awards recede behind them, mood: humbled focus."
+    },
+    {
+      "scene_id": 6,
+      "title": "Low ego, better explanations, real progress",
+      "main_point": "Humility and good explanations prevented self-deception and enabled growth after rejection.",
+      "scene_summary": "After hackathon rejection, I learned product-building, questioned bad explanations, and progressed with low ego.",
+      "key_elements": [
+        "rejection email on laptop",
+        "no-code tool interface",
+        "hackathon teamwork shots",
+        "Galileo/heliocentric diagram imagery",
+        "finalist/3rd prize moment"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nThe protagonist at a desk with a laptop showing a hackathon rejection email, then switching to a no-code tool interface.\nQuick cutaway of hackathon teammates collaborating and a simple Galileo heliocentric diagram beside notes, implying humble focus.\nEnds with the protagonist holding a \u201cFinalist / 3rd Prize\u201d sign, calm satisfaction."
+    }
+  ],
+  "warnings": []
+}

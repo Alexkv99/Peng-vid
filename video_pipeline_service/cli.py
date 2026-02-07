@@ -59,7 +59,12 @@ async def create_custom_voice(
         raise SystemExit(f"Custom voice audio file not found: {audio_path}")
     client = gradium.client.GradiumClient()
     last_error = None
-    for _ in range(max_attempts):
+    for attempt in range(1, max_attempts + 1):
+        logging.info(
+            "Custom voice: create attempt %d/%d",
+            attempt,
+            max_attempts,
+        )
         result = await gradium.voices.create(
             client,
             audio_file=audio_path,
@@ -70,6 +75,10 @@ async def create_custom_voice(
         if isinstance(result, dict) and result.get("error"):
             last_error = result.get("error")
             if isinstance(last_error, str) and "wait" in last_error.lower():
+                logging.info(
+                    "Custom voice: not ready yet, waiting %.1fs",
+                    wait_seconds,
+                )
                 await asyncio.sleep(wait_seconds)
                 continue
             raise SystemExit(f"Gradium voice creation failed: {last_error}")
@@ -80,9 +89,32 @@ async def create_custom_voice(
         else:
             voice_id = getattr(result, "uid", None) or getattr(result, "voice_id", None)
         if voice_id:
+            logging.info("Custom voice: ready with voice id %s", voice_id)
             return str(voice_id)
         last_error = "No voice id returned"
+        logging.info(
+            "Custom voice: no voice id returned, retrying in %.1fs",
+            wait_seconds,
+        )
         await asyncio.sleep(wait_seconds)
+    logging.info(
+        "Custom voice: create attempts exhausted, checking existing voices"
+    )
+    voices = await gradium.voices.get(client)
+    if isinstance(voices, list):
+        matches = [
+            voice for voice in voices
+            if isinstance(voice, dict) and voice.get("name") == name
+        ]
+        if matches:
+            match = matches[-1]
+            voice_id = match.get("uid") or match.get("voice_id") or match.get("id")
+            if voice_id:
+                logging.info(
+                    "Custom voice: using existing voice id %s",
+                    voice_id,
+                )
+                return str(voice_id)
     raise SystemExit(last_error or "No voice id returned")
 
 

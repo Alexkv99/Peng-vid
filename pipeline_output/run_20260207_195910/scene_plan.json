@@ -1,0 +1,81 @@
+{
+  "project_id": null,
+  "style_preset": "sketched_storyboard",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "title": "Deleting Instagram, gaining time",
+      "main_point": "Removing Instagram freed time and attention for intentional reading.",
+      "scene_summary": "After deleting Instagram, I found more time, energy, and attention to read intentionally.",
+      "key_elements": [
+        "Phone with Instagram deleted",
+        "Quiet reading moment",
+        "Sense of focus and calm"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person at home sets down a phone showing Instagram deleted, then opens a book and begins reading.\nQuiet reading moment with a sense of focus and calm."
+    },
+    {
+      "scene_id": 2,
+      "title": "Curiosity-led reading quota",
+      "main_point": "Reading followed curiosity with a simple daily one-hour quota.",
+      "scene_summary": "I read whatever sparked curiosity and hit a one-hour daily quota; extra reading felt like bonus.",
+      "key_elements": [
+        "Timer or clock at one hour",
+        "Book pages turning",
+        "Simple daily routine"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person at a desk at home, turning book pages while a timer/clock marks one hour.\nSimple daily routine implied; calm, curious focus."
+    },
+    {
+      "scene_id": 3,
+      "title": "Two books and Feynman\u2019s warning",
+      "main_point": "Two books led to Feynman\u2019s principle about self-deception.",
+      "scene_summary": "I read Deutsch and Holiday, and both echoed Feynman: don\u2019t fool yourself first.",
+      "key_elements": [
+        "The Beginning of Infinity cover",
+        "Ego is the Enemy cover",
+        "Richard Feynman quote on screen"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nA reader sits at a desk with two books visible: The Beginning of Infinity and Ego is the Enemy.\nOn a nearby screen, Richard Feynman\u2019s quote appears: \u201cThe first principle is that you must not fool yourself.\u201d"
+    },
+    {
+      "scene_id": 4,
+      "title": "How high ego blocks learning",
+      "main_point": "High ego created stories, blocked beginner mindset, and resisted doing boring practice.",
+      "scene_summary": "High ego made me fear sounding bad on guitar and resist learning from a kid.",
+      "key_elements": [
+        "Unplayed guitar",
+        "Child playing guitar better",
+        "Awkward first practice attempts"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nIn a small practice room, an adult sits with an unplayed guitar, hesitating and making awkward first strums.\nNearby, a child plays the guitar confidently, the adult looking embarrassed and resistant."
+    },
+    {
+      "scene_id": 5,
+      "title": "Purpose fantasies vs doing what\u2019s needed",
+      "main_point": "Chasing grand purpose hid basic neglect; reality required doing immediate, unglamorous work.",
+      "scene_summary": "I chased world-changing purpose while neglecting basics; real leaders just did needed tasks.",
+      "key_elements": [
+        "To-do list with basic habits",
+        "Trash and cleaning supplies",
+        "Contrast of titles vs chores"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person in a messy room stares at a to-do list of basic habits while holding cleaning supplies beside visible trash.\nA bold \u201cworld-changing purpose\u201d title scribble contrasts with the unglamorous chores, implying humbled realization."
+    },
+    {
+      "scene_id": 6,
+      "title": "Bad explanations, humility, and low ego",
+      "main_point": "Seeking good explanations and humility prevented self-deception; low ego enabled growth after rejection.",
+      "scene_summary": "After hackathon rejection, I learned no-code, improved, placed twice, and valued better explanations.",
+      "key_elements": [
+        "Hackathon rejection message",
+        "No-code tool on laptop",
+        "Finalist/3rd prize moment",
+        "Galileo and heliocentric reference",
+        "Question marks and curiosity motif"
+      ],
+      "scene_prompt": "Sketched storyboard style, pencil lines, minimal shading.\nOne person at a desk with a laptop showing a no-code tool, holding a hackathon rejection message beside it.\nOn the wall, a simple Galileo/heliocentric doodle and floating question marks; the person looks curious and determined."
+    }
+  ],
+  "warnings": []
+}
