@@ -48,27 +48,39 @@ async def create_custom_voice(
     name: str,
     description: str | None,
     start_s: float | None,
+    *,
+    max_attempts: int = 6,
+    wait_seconds: float = 10.0,
 ) -> str:
     if not os.path.isfile(audio_path):
         raise SystemExit(f"Custom voice audio file not found: {audio_path}")
     client = gradium.client.GradiumClient()
-    result = await gradium.voices.create(
-        client,
-        audio_file=audio_path,
-        name=name,
-        description=description,
-        start_s=start_s or 0.0,
-    )
-    if isinstance(result, dict) and result.get("error"):
-        raise SystemExit(f"Gradium voice creation failed: {result['error']}")
-    voice_id = None
-    if isinstance(result, dict):
-        voice_id = result.get("uid") or result.get("voice_id") or result.get("id")
-    else:
-        voice_id = getattr(result, "uid", None) or getattr(result, "voice_id", None)
-    if not voice_id:
-        raise SystemExit("Gradium voice creation did not return a voice id.")
-    return str(voice_id)
+    last_error = None
+    for _ in range(max_attempts):
+        result = await gradium.voices.create(
+            client,
+            audio_file=audio_path,
+            name=name,
+            description=description,
+            start_s=start_s or 0.0,
+        )
+        if isinstance(result, dict) and result.get("error"):
+            last_error = result.get("error")
+            if isinstance(last_error, str) and "wait" in last_error.lower():
+                await asyncio.sleep(wait_seconds)
+                continue
+            raise SystemExit(f"Gradium voice creation failed: {last_error}")
+
+        voice_id = None
+        if isinstance(result, dict):
+            voice_id = result.get("uid") or result.get("voice_id") or result.get("id")
+        else:
+            voice_id = getattr(result, "uid", None) or getattr(result, "voice_id", None)
+        if voice_id:
+            return str(voice_id)
+        last_error = "No voice id returned"
+        await asyncio.sleep(wait_seconds)
+    raise SystemExit(last_error or "No voice id returned")
 
 
 def build_duration_map(voice_manifest: Dict[str, Any], max_seconds: float) -> Dict[int, float]:
