@@ -65,7 +65,7 @@ BANNED_TERMS_PATTERN = re.compile(
 
 
 def load_env() -> None:
-    load_dotenv()
+    load_dotenv(override=True)
     if not os.getenv("OPENAI_API_KEY"):
         raise SystemExit(
             "OPENAI_API_KEY is not set. Add it to .env or your environment."
