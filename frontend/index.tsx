@@ -1,13 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import Aurora from "@/components/Aurora";
 import { Sparkles, ArrowRight, Paperclip, Image, Mic, X, Check } from "lucide-react";
-import penguinIcon from "@/assets/penguin-icon.svg";
+import penguinIcon from "../penguinz.png";
 import useTypewriter from "@/hooks/useTypewriter";
 
 const PLACEHOLDER_PHRASES = [
   "What do you want to talk about?",
   "Describe your idea...",
   "Paste your blog text here...",
+];
+
+const STYLE_OPTIONS = [
+  { key: "miyazaki", name: "Miyazaki / Studio Ghibli" },
+  { key: "superhero", name: "Superhero Comic Book" },
+  { key: "watercolor", name: "Watercolor Painting" },
+  { key: "pixel_art", name: "Retro Pixel Art" },
+  { key: "noir", name: "Film Noir" },
+  { key: "cyberpunk", name: "Cyberpunk Neon" },
+  { key: "disney_classic", name: "Classic Disney Animation" },
+  { key: "manga", name: "Black & White Manga" },
+  { key: "oil_painting", name: "Classical Oil Painting" },
+  { key: "fantasy", name: "Epic Fantasy Illustration" },
 ];
 
 const API_BASE = "http://localhost:8000";
@@ -21,6 +34,7 @@ const Index = () => {
   const [error, setError] = useState<string | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [logText, setLogText] = useState<string>("");
+  const [selectedStyle, setSelectedStyle] = useState<string>(STYLE_OPTIONS[0].key);
   const placeholderText = useTypewriter(PLACEHOLDER_PHRASES, 70, 35, 2200);
   const currentRunIdRef = useRef<string | null>(null);
 
@@ -50,6 +64,9 @@ const Index = () => {
     formData.append("photo", attachedPhoto);
     formData.append("voice", attachedVoice);
     formData.append("run_id", runId);
+    if (selectedStyle) {
+      formData.append("style", selectedStyle);
+    }
 
     try {
       const response = await fetch(`${API_BASE}/generate`, {
@@ -309,6 +326,23 @@ const Index = () => {
                   </span>
                 )
               )}
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+              {STYLE_OPTIONS.map((style) => (
+                <button
+                  key={style.key}
+                  type="button"
+                  onClick={() => setSelectedStyle(style.key)}
+                  className={`rounded-full border px-3 py-1 text-[11px] font-medium transition sm:px-4 sm:text-xs ${
+                    selectedStyle === style.key
+                      ? "border-primary/60 bg-primary/20 text-primary"
+                      : "border-border/30 bg-muted/20 text-foreground/70 hover:border-primary/40 hover:text-foreground"
+                  }`}
+                >
+                  {style.name}
+                </button>
+              ))}
             </div>
 
             {error && (
