@@ -16,8 +16,8 @@ DEFAULT_MODEL = "fal-ai/minimax/video-01"
 #   "fal-ai/kling-video/v2/master/image-to-video"    — Master quality
 DEFAULT_I2V_MODEL = "fal-ai/kling-video/v2.1/standard/image-to-video"
 
-# Default reference-to-video model (Kling O1 reference).
-DEFAULT_REF_I2V_MODEL = "fal-ai/kling-video/o1/reference-to-video"
+# Default reference-to-video model (Vidu Q1 reference-to-video).
+DEFAULT_REF_I2V_MODEL = "fal-ai/vidu/q1/reference-to-video"
 
 
 def _ensure_api_key() -> None:
@@ -81,7 +81,7 @@ def generate_video_from_reference(
     image_urls: list[str],
     prompt: str,
     model: str = DEFAULT_REF_I2V_MODEL,
-    duration: str = "5",
+    duration: int | str = "5",
     aspect_ratio: str = "16:9",
 ) -> dict:
     """Submit a reference-to-video request and wait for the result.
@@ -92,15 +92,44 @@ def generate_video_from_reference(
     """
     _ensure_api_key()
 
-    result = fal_client.subscribe(
-        model,
-        arguments={
+    if model.startswith("fal-ai/vidu/"):
+        reference_image_urls: list[str] = []
+        if elements and isinstance(elements[0], dict):
+            element = elements[0]
+            raw_refs = element.get("reference_image_urls") or []
+            if isinstance(raw_refs, list):
+                reference_image_urls = [url for url in raw_refs if url]
+            frontal_url = element.get("frontal_image_url")
+            if isinstance(frontal_url, str) and frontal_url:
+                reference_image_urls = [
+                    frontal_url,
+                    *[url for url in reference_image_urls if url != frontal_url],
+                ]
+        if not reference_image_urls and image_urls:
+            reference_image_urls = [url for url in image_urls if url]
+        if not reference_image_urls:
+            raise RuntimeError(
+                "Vidu reference-to-video requires reference_image_urls."
+            )
+
+        arguments = {
+            "prompt": prompt,
+            "reference_image_urls": reference_image_urls,
+            "duration": duration,
+            "aspect_ratio": aspect_ratio,
+        }
+    else:
+        arguments = {
             "elements": elements,
             "image_urls": image_urls,
             "prompt": prompt,
             "duration": duration,
             "aspect_ratio": aspect_ratio,
-        },
+        }
+
+    result = fal_client.subscribe(
+        model,
+        arguments=arguments,
         with_logs=True,
     )
     return result
