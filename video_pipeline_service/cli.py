@@ -9,6 +9,7 @@ from typing import Any, Dict, List
 
 from dotenv import load_dotenv
 import imageio_ffmpeg
+import gradium
 
 from voice_gen_service.cli import VoiceConfig, run_tts
 from fal_integration_service.scenes import load_storyboard, parse_storyboard
@@ -40,6 +41,34 @@ def ensure_dir(path: str) -> None:
 def write_json(path: str, payload: Dict[str, Any]) -> None:
     with open(path, "w", encoding="utf-8") as handle:
         json.dump(payload, handle, indent=2, ensure_ascii=True)
+
+
+async def create_custom_voice(
+    audio_path: str,
+    name: str,
+    description: str | None,
+    start_s: float | None,
+) -> str:
+    if not os.path.isfile(audio_path):
+        raise SystemExit(f"Custom voice audio file not found: {audio_path}")
+    client = gradium.client.GradiumClient()
+    result = await gradium.voices.create(
+        client,
+        audio_file=audio_path,
+        name=name,
+        description=description,
+        start_s=start_s or 0.0,
+    )
+    if isinstance(result, dict) and result.get("error"):
+        raise SystemExit(f"Gradium voice creation failed: {result['error']}")
+    voice_id = None
+    if isinstance(result, dict):
+        voice_id = result.get("uid") or result.get("voice_id") or result.get("id")
+    else:
+        voice_id = getattr(result, "uid", None) or getattr(result, "voice_id", None)
+    if not voice_id:
+        raise SystemExit("Gradium voice creation did not return a voice id.")
+    return str(voice_id)
 
 
 def build_duration_map(voice_manifest: Dict[str, Any], max_seconds: float) -> Dict[int, float]:
@@ -135,7 +164,30 @@ def main() -> None:
         default=os.getenv("OPENAI_MODEL", "gpt-5.2"),
         help="OpenAI model for text extraction.",
     )
-    parser.add_argument("--voice-id", required=True, help="Gradium voice_id.")
+    voice_group = parser.add_mutually_exclusive_group(required=True)
+    voice_group.add_argument("--voice-id", help="Gradium voice_id.")
+    voice_group.add_argument(
+        "--create-custom-voice",
+        action="store_true",
+        help="Create a custom voice from an audio file and use it for TTS.",
+    )
+    parser.add_argument(
+        "--custom-voice-audio",
+        help="Path to the audio file used to create the custom voice.",
+    )
+    parser.add_argument(
+        "--custom-voice-name",
+        help="Name for the custom voice.",
+    )
+    parser.add_argument(
+        "--custom-voice-description",
+        help="Optional description for the custom voice.",
+    )
+    parser.add_argument(
+        "--custom-voice-start-s",
+        type=float,
+        help="Optional start offset in seconds for the custom voice sample.",
+    )
     parser.add_argument(
         "--output-dir",
         default="pipeline_output",
@@ -255,8 +307,39 @@ def main() -> None:
 
     logging.info("Step 1/4: Generate narration audio (max %.1fs)", args.max_seconds)
 
+    if args.create_custom_voice:
+        if not args.custom_voice_audio or not args.custom_voice_name:
+            raise SystemExit(
+                "--create-custom-voice requires --custom-voice-audio and "
+                "--custom-voice-name."
+            )
+    else:
+        extra_custom_args = [
+            args.custom_voice_audio,
+            args.custom_voice_name,
+            args.custom_voice_description,
+            args.custom_voice_start_s,
+        ]
+        if any(value is not None for value in extra_custom_args):
+            raise SystemExit(
+                "Custom voice arguments require --create-custom-voice."
+            )
+
+    voice_id = args.voice_id
+    if args.create_custom_voice:
+        logging.info("Creating custom voice from %s", args.custom_voice_audio)
+        voice_id = asyncio.run(
+            create_custom_voice(
+                audio_path=args.custom_voice_audio,
+                name=args.custom_voice_name,
+                description=args.custom_voice_description,
+                start_s=args.custom_voice_start_s,
+            )
+        )
+        logging.info("Custom voice created: %s", voice_id)
+
     voice_config = VoiceConfig(
-        voice_id=args.voice_id,
+        voice_id=voice_id,
         model_name="default",
         output_format="wav",
     )

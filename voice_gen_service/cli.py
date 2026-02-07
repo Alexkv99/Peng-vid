@@ -82,6 +82,34 @@ def build_manifest(
     }
 
 
+async def create_custom_voice(
+    client: gradium.client.GradiumClient,
+    audio_path: str,
+    name: str,
+    description: str | None,
+    start_s: float | None,
+) -> str:
+    if not os.path.isfile(audio_path):
+        raise SystemExit(f"Custom voice audio file not found: {audio_path}")
+    result = await gradium.voices.create(
+        client,
+        audio_file=audio_path,
+        name=name,
+        description=description,
+        start_s=start_s or 0.0,
+    )
+    if isinstance(result, dict) and result.get("error"):
+        raise SystemExit(f"Gradium voice creation failed: {result['error']}")
+    voice_id = None
+    if isinstance(result, dict):
+        voice_id = result.get("uid") or result.get("voice_id") or result.get("id")
+    else:
+        voice_id = getattr(result, "uid", None) or getattr(result, "voice_id", None)
+    if not voice_id:
+        raise SystemExit("Gradium voice creation did not return a voice id.")
+    return str(voice_id)
+
+
 async def tts_with_retry(
     client: gradium.client.GradiumClient,
     text: str,
@@ -207,7 +235,30 @@ def main() -> None:
         default="voice_output",
         help="Directory for generated audio files.",
     )
-    parser.add_argument("--voice-id", required=True, help="Gradium voice_id.")
+    voice_group = parser.add_mutually_exclusive_group(required=True)
+    voice_group.add_argument("--voice-id", help="Gradium voice_id.")
+    voice_group.add_argument(
+        "--create-custom-voice",
+        action="store_true",
+        help="Create a custom voice from an audio file and use it for TTS.",
+    )
+    parser.add_argument(
+        "--custom-voice-audio",
+        help="Path to the audio file used to create the custom voice.",
+    )
+    parser.add_argument(
+        "--custom-voice-name",
+        help="Name for the custom voice.",
+    )
+    parser.add_argument(
+        "--custom-voice-description",
+        help="Optional description for the custom voice.",
+    )
+    parser.add_argument(
+        "--custom-voice-start-s",
+        type=float,
+        help="Optional start offset in seconds for the custom voice sample.",
+    )
     parser.add_argument(
         "--model-name",
         default="default",
@@ -262,8 +313,41 @@ def main() -> None:
 
     plan = read_scene_plan(args.scene_plan)
     scenes = validate_scene_plan(plan)
+    if args.create_custom_voice:
+        if not args.custom_voice_audio or not args.custom_voice_name:
+            raise SystemExit(
+                "--create-custom-voice requires --custom-voice-audio and "
+                "--custom-voice-name."
+            )
+    else:
+        extra_custom_args = [
+            args.custom_voice_audio,
+            args.custom_voice_name,
+            args.custom_voice_description,
+            args.custom_voice_start_s,
+        ]
+        if any(value is not None for value in extra_custom_args):
+            raise SystemExit(
+                "Custom voice arguments require --create-custom-voice."
+            )
+
+    voice_id = args.voice_id
+    if args.create_custom_voice:
+        logging.info("Creating custom voice from %s", args.custom_voice_audio)
+        client = gradium.client.GradiumClient()
+        voice_id = asyncio.run(
+            create_custom_voice(
+                client=client,
+                audio_path=args.custom_voice_audio,
+                name=args.custom_voice_name,
+                description=args.custom_voice_description,
+                start_s=args.custom_voice_start_s,
+            )
+        )
+        logging.info("Custom voice created: %s", voice_id)
+
     voice_config = VoiceConfig(
-        voice_id=args.voice_id,
+        voice_id=voice_id,
         model_name=args.model_name,
         output_format="wav",
     )
