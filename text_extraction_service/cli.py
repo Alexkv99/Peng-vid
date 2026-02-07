@@ -121,7 +121,10 @@ def extract_scenes(
 ) -> Dict[str, Any]:
     system_prompt = (
         "You are a script editor extracting filmable scene beats and concise "
-        "voiceover narration for a short video."
+        "voiceover narration for a short video. You think in terms of a "
+        "complete narrative arc: every story has a beginning that sets the "
+        "stage, a middle that develops the core events, and an ending that "
+        "resolves or concludes the story."
     )
     user_prompt = (
         "Text:\n"
@@ -142,7 +145,16 @@ def extract_scenes(
         "   Target 12-16 words, max 18 words.\n"
         f"7) Aim for exactly {number_of_scenes} scenes when possible. "
         "If the text is too short, return fewer and add a warning.\n"
-        "8) Output MUST match the JSON schema."
+        "8) Treat all scenes as parts of ONE continuous story, not separate "
+        "stories.\n"
+        "   - The first scene should introduce/establish the setting, "
+        "characters, or premise.\n"
+        "   - Middle scenes should build on what came before, developing the "
+        "narrative.\n"
+        "   - The final scene should give a sense of conclusion or resolution.\n"
+        "   - Each scene_summary should flow naturally from the previous one; "
+        "avoid repeating context that was already established.\n"
+        "9) Output MUST match the JSON schema."
     )
     return call_structured_output(
         client=client,
@@ -156,10 +168,59 @@ def extract_scenes(
 
 
 def generate_scene_prompt(
-    client: OpenAI, model: str, scene: Dict[str, Any], verbose: bool
+    client: OpenAI,
+    model: str,
+    scene: Dict[str, Any],
+    verbose: bool,
+    all_scenes: List[Dict[str, Any]] | None = None,
 ) -> Dict[str, Any]:
-    system_prompt = "You will generate ONE short prompt for the given scene."
+    total = len(all_scenes) if all_scenes else 0
+    scene_id = scene.get("scene_id", 0)
+
+    if total > 0:
+        if scene_id == 1:
+            position_hint = (
+                "This is the OPENING scene (scene 1 of {total}). "
+                "It should establish the setting and introduce the subject."
+            ).format(total=total)
+        elif scene_id == total:
+            position_hint = (
+                "This is the FINAL scene (scene {sid} of {total}). "
+                "It should convey resolution or a concluding moment."
+            ).format(sid=scene_id, total=total)
+        else:
+            position_hint = (
+                "This is scene {sid} of {total} (middle of the story). "
+                "It should continue naturally from the previous scene."
+            ).format(sid=scene_id, total=total)
+    else:
+        position_hint = ""
+
+    # Build a brief outline of surrounding scenes for continuity.
+    context_lines: List[str] = []
+    if all_scenes and total > 1:
+        for s in all_scenes:
+            sid = s.get("scene_id", 0)
+            marker = " <-- current" if sid == scene_id else ""
+            context_lines.append(
+                f"  Scene {sid}: {s.get('title', '')}{marker}"
+            )
+        context_block = (
+            "Story outline (all scenes in order):\n"
+            + "\n".join(context_lines)
+            + "\n\n"
+        )
+    else:
+        context_block = ""
+
+    system_prompt = (
+        "You will generate ONE short image-generation prompt for the given "
+        "scene. The scene is part of a single continuous story — keep visual "
+        "continuity with the scenes before and after it."
+    )
     user_prompt = (
+        f"{context_block}"
+        f"{position_hint}\n\n"
         "Scene JSON:\n"
         f"{json.dumps(scene, ensure_ascii=True)}\n\n"
         "Rules:\n"
@@ -167,9 +228,11 @@ def generate_scene_prompt(
         "2) 2-4 lines max. Keep it concise.\n"
         "3) Describe only: who is present, what happens (single beat), "
         "where it happens, implied emotion (only if explicit).\n"
-        "4) Do NOT add camera/lens/lighting/day-night/fps/aspect-ratio instructions.\n"
-        "5) Do NOT invent new plot points beyond the provided scene fields.\n"
-        "6) Output MUST match the JSON schema."
+        "4) Maintain visual continuity: characters and settings that appeared "
+        "in earlier scenes should be depicted consistently.\n"
+        "5) Do NOT add camera/lens/lighting/day-night/fps/aspect-ratio instructions.\n"
+        "6) Do NOT invent new plot points beyond the provided scene fields.\n"
+        "7) Output MUST match the JSON schema."
     )
     return call_structured_output(
         client=client,
@@ -326,6 +389,7 @@ def main() -> None:
             model=args.model,
             scene=scene,
             verbose=args.verbose,
+            all_scenes=scenes,
         )
         if prompt_result.get("scene_id") != scene.get("scene_id"):
             warnings.append(
