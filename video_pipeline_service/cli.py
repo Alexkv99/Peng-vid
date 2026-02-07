@@ -347,6 +347,7 @@ def main() -> None:
                 model=args.llm_model,
                 scene=scene,
                 verbose=False,
+                all_scenes=scenes,
             )
             scene["scene_prompt"] = prompt_result["scene_prompt"]
         plan = {
