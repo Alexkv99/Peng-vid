@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 import sys
@@ -10,6 +11,8 @@ from pathlib import Path
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+
+from fal_integration_service.art_styles import DEFAULT_STYLE, available_styles, get_style
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 OUTPUT_ROOT = ROOT_DIR / "pipeline_output"
@@ -85,6 +88,7 @@ async def generate(
     photo: UploadFile = File(...),
     voice: UploadFile = File(...),
     run_id: str | None = Form(None),
+    style: str | None = Form(None),
 ) -> dict[str, str]:
     if bool(text) == bool(file):
         raise HTTPException(
@@ -105,8 +109,10 @@ async def generate(
         voice_path = _save_upload(voice, run_dir, "voice")
         voice_name = _safe_voice_name(voice.filename)
 
+        style_key = style or DEFAULT_STYLE
         cmd = [
             sys.executable,
+            "-u",
             str(ROOT_DIR / "video_pipeline_service" / "cli.py"),
             "--input-file",
             str(input_path),
@@ -119,14 +125,20 @@ async def generate(
             str(photo_path),
             "--output-dir",
             str(run_dir),
+            "--style",
+            style_key,
         ]
         log_path = run_dir / "pipeline.log"
         with log_path.open("w", encoding="utf-8") as handle:
+            env = os.environ.copy()
+            env["PYTHONUNBUFFERED"] = "1"
             process = subprocess.Popen(
                 cmd,
                 stdout=handle,
                 stderr=subprocess.STDOUT,
                 text=True,
+                bufsize=1,
+                env=env,
             )
             returncode = process.wait()
         if returncode != 0:
@@ -159,6 +171,15 @@ def get_logs(run_id: str) -> dict[str, str]:
     if not log_path.exists():
         return {"log": ""}
     return {"log": log_path.read_text(encoding="utf-8", errors="replace")}
+
+
+@app.get("/styles")
+def get_styles() -> dict[str, object]:
+    styles = []
+    for key in available_styles():
+        style = get_style(key)
+        styles.append({"key": style.key, "name": style.name})
+    return {"default": DEFAULT_STYLE, "styles": styles}
 
 
 if __name__ == "__main__":
