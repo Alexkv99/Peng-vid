@@ -1,6 +1,38 @@
 # Peng-vid
 
-A video generation pipeline that converts text into animated videos with narration. It extracts scenes from text, generates voice narration, creates styled images, and stitches everything into a final video.
+A video generation pipeline that brings your text to life WITH personalization. 
+
+**Your voice, your image, your story - bring it all to life.**
+
+The pipeline extracts chapters from text, generates voice narration with your voice, creates styled videos and then stitches everything together into a final video!
+
+## How generation works (at a glance)
+
+Inputs come from the frontend upload form (or CLI): **text** (directly pasted or `.txt/.md/.csv`), a **reference photo**, and a **voice recording**.
+
+- **OpenAI**: extracts a scene plan from the text and writes per-scene visual prompts (style-aware).
+- **Gradium**: creates/clones a custom voice from the recording and generates per-scene narration audio.
+- **FAL**: generates per-scene video clips from the prompts using the reference prompt
+
+The pipeline then muxes each scene’s audio+video and concatenates everything into a final MP4, along with intermediate manifests/logs under `pipeline_output/`.
+
+```mermaid
+flowchart LR
+  Frontend[Frontend UI] -->|text_file_or_paste| API[Local API]
+  Frontend -->|photo| API
+  Frontend -->|voice_audio| API
+
+  API --> CLI[video_pipeline_service/cli.py]
+
+  CLI -->|scene_extraction_and_prompts| OpenAI[OpenAI]
+  CLI -->|custom_voice_and_tts| Gradium[Gradium]
+  CLI -->|video_generation| FAL[FAL]
+
+  CLI --> Output[Outputs]
+  Output --> MP4[final_video.mp4]
+  Output --> Logs[pipeline.log]
+  Output --> Manifests[scene_plan.json + voice_manifest.json]
+```
 
 ## Prerequisites
 
