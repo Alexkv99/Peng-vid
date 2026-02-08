@@ -1,3 +1,7 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "text-breakdown"
 version = "0.1.0"
@@ -6,12 +10,20 @@ dependencies = [
     "fal-client",
     "fastapi",
     "imageio-ffmpeg",
-    "gradium",
+    "gradium>=0.5.7",
     "openai>=2.17.0",
     "python-multipart",
     "python-dotenv>=1.2.1",
     "requests",
     "uvicorn",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "text_extraction_service",
+    "voice_gen_service",
+    "video_pipeline_service",
+    "fal_integration_service",
 ]
 
 [project.scripts]
