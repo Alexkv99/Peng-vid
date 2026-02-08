@@ -35,6 +35,14 @@ const Index = () => {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [logText, setLogText] = useState<string>("");
   const [selectedStyle, setSelectedStyle] = useState<string>(STYLE_OPTIONS[0].key);
+  const [numberOfScenes, setNumberOfScenes] = useState<number>(6);
+  const [showVoiceChoice, setShowVoiceChoice] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+  const [recordedUrl, setRecordedUrl] = useState<string | null>(null);
+  const audioStreamRef = useRef<MediaStream | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const processorRef = useRef<ScriptProcessorNode | null>(null);
+  const recordedChunksRef = useRef<Float32Array[]>([]);
   const placeholderText = useTypewriter(PLACEHOLDER_PHRASES, 70, 35, 2200);
   const currentRunIdRef = useRef<string | null>(null);
 
@@ -45,6 +53,115 @@ const Index = () => {
   const hasText = prompt.trim().length > 0;
   const hasInput = hasText || Boolean(attachedFile);
   const allUploaded = hasInput && attachedPhoto && attachedVoice;
+
+  const encodeWav = (samples: Float32Array, sampleRate: number) => {
+    const buffer = new ArrayBuffer(44 + samples.length * 2);
+    const view = new DataView(buffer);
+    const writeString = (offset: number, value: string) => {
+      for (let i = 0; i < value.length; i += 1) {
+        view.setUint8(offset + i, value.charCodeAt(i));
+      }
+    };
+
+    let offset = 0;
+    writeString(offset, "RIFF");
+    offset += 4;
+    view.setUint32(offset, 36 + samples.length * 2, true);
+    offset += 4;
+    writeString(offset, "WAVE");
+    offset += 4;
+    writeString(offset, "fmt ");
+    offset += 4;
+    view.setUint32(offset, 16, true);
+    offset += 4;
+    view.setUint16(offset, 1, true);
+    offset += 2;
+    view.setUint16(offset, 1, true);
+    offset += 2;
+    view.setUint32(offset, sampleRate, true);
+    offset += 4;
+    view.setUint32(offset, sampleRate * 2, true);
+    offset += 4;
+    view.setUint16(offset, 2, true);
+    offset += 2;
+    view.setUint16(offset, 16, true);
+    offset += 2;
+    writeString(offset, "data");
+    offset += 4;
+    view.setUint32(offset, samples.length * 2, true);
+    offset += 4;
+
+    for (let i = 0; i < samples.length; i += 1) {
+      const s = Math.max(-1, Math.min(1, samples[i]));
+      view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7fff, true);
+      offset += 2;
+    }
+
+    return new Blob([view], { type: "audio/wav" });
+  };
+
+  const startRecording = async () => {
+    setRecordedUrl(null);
+    recordedChunksRef.current = [];
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const context = new AudioContext();
+    const source = context.createMediaStreamSource(stream);
+    const processor = context.createScriptProcessor(4096, 1, 1);
+
+    processor.onaudioprocess = (event) => {
+      const input = event.inputBuffer.getChannelData(0);
+      recordedChunksRef.current.push(new Float32Array(input));
+    };
+
+    source.connect(processor);
+    processor.connect(context.destination);
+
+    audioStreamRef.current = stream;
+    audioContextRef.current = context;
+    processorRef.current = processor;
+    setIsRecording(true);
+  };
+
+  const stopRecording = () => {
+    setIsRecording(false);
+    const stream = audioStreamRef.current;
+    const context = audioContextRef.current;
+    const processor = processorRef.current;
+
+    if (processor) {
+      processor.disconnect();
+    }
+    if (context) {
+      context.close();
+    }
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+    }
+
+    const sampleRate = audioContextRef.current?.sampleRate || 44100;
+    const totalLength = recordedChunksRef.current.reduce((sum, chunk) => sum + chunk.length, 0);
+    const samples = new Float32Array(totalLength);
+    let offset = 0;
+    recordedChunksRef.current.forEach((chunk) => {
+      samples.set(chunk, offset);
+      offset += chunk.length;
+    });
+    const wavBlob = encodeWav(samples, sampleRate);
+    const file = new File([wavBlob], "recording.wav", { type: "audio/wav" });
+    setAttachedVoice(file);
+    setRecordedUrl(URL.createObjectURL(wavBlob));
+    setShowVoiceChoice(false);
+  };
+
+  const cancelRecording = () => {
+    setIsRecording(false);
+    const stream = audioStreamRef.current;
+    const context = audioContextRef.current;
+    const processor = processorRef.current;
+    if (processor) processor.disconnect();
+    if (context) context.close();
+    if (stream) stream.getTracks().forEach((track) => track.stop());
+  };
 
   const handleGenerate = async () => {
     if (!hasInput || !attachedPhoto || !attachedVoice) return;
@@ -66,6 +183,9 @@ const Index = () => {
     formData.append("run_id", runId);
     if (selectedStyle) {
       formData.append("style", selectedStyle);
+    }
+    if (numberOfScenes) {
+      formData.append("number_of_scenes", String(numberOfScenes));
     }
 
     try {
@@ -275,7 +395,7 @@ const Index = () => {
                     </button>
                     <button
                       type="button"
-                      onClick={() => voiceInputRef.current?.click()}
+                      onClick={() => setShowVoiceChoice(true)}
                       className={`rounded-lg p-1.5 transition-colors hover:bg-muted/30 hover:text-foreground ${attachedVoice ? "text-primary" : ""}`}
                       aria-label="Upload voice"
                     >
@@ -311,6 +431,71 @@ const Index = () => {
               </div>
             </div>
 
+            {showVoiceChoice && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
+                <div className="w-full max-w-md rounded-2xl border border-border/30 bg-card/90 p-6 shadow-2xl backdrop-blur">
+                  <div className="mb-4 flex items-center justify-between">
+                    <h3 className="text-sm font-semibold text-foreground">Add voice</h3>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (isRecording) cancelRecording();
+                        setShowVoiceChoice(false);
+                      }}
+                      className="rounded-full p-1 text-foreground/70 hover:text-foreground"
+                      aria-label="Close"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <button
+                      type="button"
+                      onClick={() => startRecording().catch(() => setError("Microphone access denied."))}
+                      disabled={isRecording}
+                      className="rounded-lg border border-border/30 bg-muted/20 px-4 py-2 text-sm text-foreground/90 hover:border-primary/40"
+                    >
+                      {isRecording ? "Recording..." : "Record voice"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowVoiceChoice(false);
+                        voiceInputRef.current?.click();
+                      }}
+                      className="rounded-lg border border-border/30 bg-muted/20 px-4 py-2 text-sm text-foreground/90 hover:border-primary/40"
+                    >
+                      Upload voice
+                    </button>
+                    {isRecording && (
+                      <button
+                        type="button"
+                        onClick={stopRecording}
+                        className="rounded-lg border border-primary/40 bg-primary/20 px-4 py-2 text-sm text-primary"
+                      >
+                        Stop & use
+                      </button>
+                    )}
+                    {isRecording && (
+                      <button
+                        type="button"
+                        onClick={cancelRecording}
+                        className="rounded-lg border border-border/30 bg-muted/20 px-4 py-2 text-sm text-foreground/70"
+                      >
+                        Cancel
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {recordedUrl && (
+              <div className="mt-3 flex items-center justify-center">
+                <audio controls src={recordedUrl} className="w-full max-w-md" />
+              </div>
+            )}
+
             {/* Feature Pills */}
             <div
               className="mt-6 flex flex-wrap items-center justify-center gap-2 opacity-0 animate-fade-in-up sm:mt-8 sm:gap-3"
@@ -343,6 +528,21 @@ const Index = () => {
                   {style.name}
                 </button>
               ))}
+            </div>
+
+            <div className="mt-4 flex items-center justify-center gap-2 text-xs text-foreground/70">
+              <label htmlFor="scene-count" className="font-medium text-foreground/80">
+                Scenes
+              </label>
+              <input
+                id="scene-count"
+                type="number"
+                min={1}
+                max={20}
+                value={numberOfScenes}
+                onChange={(e) => setNumberOfScenes(Number(e.target.value || 1))}
+                className="w-20 rounded-md border border-border/30 bg-muted/20 px-2 py-1 text-center text-foreground/90 focus:outline-none focus:ring-2 focus:ring-primary/40"
+              />
             </div>
 
             {error && (

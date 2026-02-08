@@ -89,6 +89,7 @@ async def generate(
     voice: UploadFile = File(...),
     run_id: str | None = Form(None),
     style: str | None = Form(None),
+    number_of_scenes: int | None = Form(None),
 ) -> dict[str, str]:
     if bool(text) == bool(file):
         raise HTTPException(
@@ -128,6 +129,8 @@ async def generate(
             "--style",
             style_key,
         ]
+        if number_of_scenes:
+            cmd.extend(["--number-of-scenes", str(number_of_scenes)])
         log_path = run_dir / "pipeline.log"
         with log_path.open("w", encoding="utf-8") as handle:
             env = os.environ.copy()
