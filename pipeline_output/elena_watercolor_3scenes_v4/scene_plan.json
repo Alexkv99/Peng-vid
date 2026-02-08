@@ -1,0 +1,59 @@
+{
+  "project_id": null,
+  "style_preset": "watercolor",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "title": "Three-front war, one new lever",
+      "main_point": "AI raised expectations, broke distribution, and intensified competition\u2014so growth shifted to trust.",
+      "scene_summary": "AI raised expectations, collapsed channels, and attacked value props, so trust became the new playbook.",
+      "key_elements": [
+        "AI-driven market shift",
+        "Higher customer expectations",
+        "Collapsing distribution channels",
+        "Incumbents, startups, and customers competing",
+        "Trust as core concept"
+      ],
+      "scene_prompt": "Delicate watercolor painting style, soft washes, visible brush strokes, muted tones.\nIn a modern office war-room, a startup founder stands at a whiteboard showing three clashing fronts labeled incumbents, startups, and customers, with AI icons pushing pressure arrows.\nBroken distribution channels are sketched as cracked pipelines, while the founder circles a single word \u201cTRUST\u201d as the new lever, conveying tense focus."
+    },
+    {
+      "scene_id": 2,
+      "title": "Trust-based acquisition replaces broken channels",
+      "main_point": "Traditional acquisition weakened; trust-forward channels like people, creators, community, and product experience worked.",
+      "scene_summary": "SEO, SEM, and corporate social weakened, while people-led sharing and community drove word of mouth.",
+      "key_elements": [
+        "SEO disrupted by AI answers and LLM navigation",
+        "SEM costs rising and ROAS pressure",
+        "Corporate social deprioritized links",
+        "Employee-led social transparency",
+        "Creator partnerships transferring trust",
+        "Community-driven growth and user stories",
+        "Product-led brand as product experience",
+        "Word of mouth as ultimate trust signal",
+        "Sponsor mention: Cello referral platform"
+      ],
+      "scene_prompt": "Delicate watercolor painting style, soft washes, visible brush strokes, muted tones.\nIn the same war-room map setting, the same founder and small team turn away from fading SEO/SEM and corporate social charts, and instead connect a chain of people: an employee sharing openly, a creator passing along trust, and a small community circle trading user stories.\nOn the table, a simple \u201cCello\u201d referral card anchors the word-of-mouth flow, with a calm, hopeful mood."
+    },
+    {
+      "scene_id": 3,
+      "title": "Trust-based retention becomes the moat",
+      "main_point": "AI commoditized cost and efficiency value props; retention depended on confidence in ongoing outcomes and iteration.",
+      "scene_summary": "As AI commoditized utility, customers stayed with products that kept earning trust over time.",
+      "key_elements": [
+        "Value prop triad: cheaper, more efficient, more effective",
+        "AI outcompeting efficiency and cost claims",
+        "Trust as confidence in future outcomes",
+        "Transparent roadmap sharing",
+        "Fast iteration from feedback",
+        "WOW moments and thoughtful UX",
+        "Lifecycle communications that build trust",
+        "Outcome-aligned monetization",
+        "Brand as a product job",
+        "Operational shift: cross-functional alignment, velocity, build in public",
+        "Closing warning: channels and value props collapsing fast"
+      ],
+      "scene_prompt": "Delicate watercolor painting style, soft washes, visible brush strokes, muted tones.\nIn the same war-room map setting, the same founder and cross-functional team calmly reinforce a stone moat labeled \u201cTrust\u201d around their product, while faded banners reading \u201cCheaper\u201d and \u201cMore Efficient\u201d drift away.\nOn a nearby board: a transparent roadmap, feedback notes turning into quick iterations, and a small \u201cWOW\u201d UX sketch; the mood is resolved and vigilant."
+    }
+  ],
+  "warnings": []
+}

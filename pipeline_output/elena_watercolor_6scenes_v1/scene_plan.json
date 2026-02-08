@@ -1,0 +1,88 @@
+{
+  "project_id": null,
+  "style_preset": "watercolor",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "title": "Three-front war for growth",
+      "main_point": "AI raised expectations, collapsed channels, and intensified competition for every value prop.",
+      "scene_summary": "AI raised expectations, collapsed distribution, and put incumbents, startups, and customers in competition.",
+      "key_elements": [
+        "AI-driven market shift",
+        "higher customer expectations",
+        "collapsing distribution channels",
+        "competition from incumbents/startups/customers"
+      ],
+      "scene_prompt": "Delicate watercolor painting style, soft washes, visible brush strokes, muted tones.\nIn a modern office, a product leader stands before a whiteboard labeled \u201cExpectations,\u201d \u201cChannels,\u201d and \u201cCompetition,\u201d with simple AI icons and downward arrows.\nAround them, faint silhouettes of an incumbent, a startup founder, and a customer face inward, creating a tense three-front standoff."
+    },
+    {
+      "scene_id": 2,
+      "title": "A new playbook: Trust",
+      "main_point": "Growth increasingly depended on trust as the core organizing principle.",
+      "scene_summary": "A new growth playbook emerged, and it centered on one concept: trust.",
+      "key_elements": [
+        "trust as growth lever",
+        "shift in growth model thinking"
+      ],
+      "scene_prompt": "Delicate watercolor painting style, soft washes, visible brush strokes, muted tones.\nIn the same war-room from scene 1, the same small team of strategists stands around the table, their tense posture easing.\nThey replace the three-front battle map with a single simple diagram labeled \u201cTrust,\u201d quietly aligning around it with focused resolve."
+    },
+    {
+      "scene_id": 3,
+      "title": "Classic channels stopped working",
+      "main_point": "SEO, SEM, and corporate social degraded as AI and platform incentives intercepted traffic and raised costs.",
+      "scene_summary": "SEO, paid search, and corporate social got pricier and weaker as AI intercepted attention.",
+      "key_elements": [
+        "SEO decline",
+        "AI answers intercept clicks",
+        "SEM cost inflation",
+        "social platforms suppress links",
+        "interruption marketing fatigue"
+      ],
+      "scene_prompt": "Delicate watercolor painting style, soft washes, visible brush strokes, muted tones.\nSame startup founder at a desk with a laptop showing a fading \u201cSEO\u201d graph and rising \u201cSEM CPC\u201d numbers, while a large AI chat bubble answers above the search bar, blocking clicks.\nAround them, corporate social posts have link icons crossed out, conveying frustration in a simple office setting."
+    },
+    {
+      "scene_id": 4,
+      "title": "Trust-based acquisition channels",
+      "main_point": "Employee-led social, creators, community, and product-led brand built word of mouth and durable trust.",
+      "scene_summary": "Employee voices, creators, community, and product experience drove word of mouth and trust.",
+      "key_elements": [
+        "employee-led social",
+        "influencer/creator partnerships",
+        "community-driven growth",
+        "product-led brand",
+        "word of mouth"
+      ],
+      "scene_prompt": "Delicate watercolor painting style, soft washes, visible brush strokes, muted tones.\nSame startup team from prior scenes gathered around a table, sharing phones and laptops as employee posts, creator shout-outs, and community messages ripple outward in simple icon-like waves.\nIn the same minimalist office setting, a product box sits open at center, suggesting word-of-mouth trust spreading with calm confidence."
+    },
+    {
+      "scene_id": 5,
+      "title": "Trust-based retention beats commoditization",
+      "main_point": "As AI commoditized efficiency and cost advantages, retention depended on confidence in ongoing outcomes.",
+      "scene_summary": "As AI commoditized features, users stayed with products they trusted to deliver outcomes.",
+      "key_elements": [
+        "value prop pressure from AI",
+        "cheaper vs efficient vs effective",
+        "commoditization risk",
+        "trust as retention moat",
+        "confidence in future delivery"
+      ],
+      "scene_prompt": "Delicate watercolor painting style, soft washes, visible brush strokes, muted tones.\nIn the same minimalist office from prior scenes, the founder and a small team watch two product panels: one labeled \u201ccheap/efficient\u201d fading into identical copies, the other labeled \u201ctrusted outcomes\u201d holding steady.\nThey place a protective hand over the \u201ctrusted outcomes\u201d panel as the commoditized panels blur together, conveying calm confidence."
+    },
+    {
+      "scene_id": 6,
+      "title": "Operational shift and closing warning",
+      "main_point": "Trust required aligned teams, high shipping velocity, and building in public before collapse accelerated.",
+      "scene_summary": "Teams aligned, shipped fast, built in public, and shifted before channels collapsed faster.",
+      "key_elements": [
+        "cross-functional alignment",
+        "optimize for velocity",
+        "micro-releases",
+        "build in public",
+        "trust compounds over time",
+        "closing warning"
+      ],
+      "scene_prompt": "Delicate watercolor painting style, soft washes, visible brush strokes, muted tones.\nThe same startup team from earlier scenes stands together at a shared desk, engineers, product, and support aligned, placing small \u201cmicro-release\u201d notes onto a public roadmap board.\nBehind them, a faded wall of old acquisition-channel posters peels away, while a simple upward \u201ctrust\u201d line on a whiteboard suggests compounding and a quiet closing warning."
+    }
+  ],
+  "warnings": []
+}

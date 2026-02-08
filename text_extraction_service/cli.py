@@ -226,14 +226,16 @@ def generate_scene_prompt(
         f"{json.dumps(scene, ensure_ascii=True)}\n\n"
         "Rules:\n"
         f'1) Start with the exact style prefix: "{style_prefix}"\n'
-        "2) 2-4 lines max. Keep it concise.\n"
-        "3) Describe only: who is present, what happens (single beat), "
+        "2) Immediately reinforce the same style with extra medium/texture "
+        "details from that style; do not mix in other styles.\n"
+        "3) 2-4 lines max. Keep it concise.\n"
+        "4) Describe only: who is present, what happens (single beat), "
         "where it happens, implied emotion (only if explicit).\n"
-        "4) Maintain visual continuity: characters and settings that appeared "
+        "5) Maintain visual continuity: characters and settings that appeared "
         "in earlier scenes should be depicted consistently.\n"
-        "5) Do NOT add camera/lens/lighting/day-night/fps/aspect-ratio instructions.\n"
-        "6) Do NOT invent new plot points beyond the provided scene fields.\n"
-        "7) Output MUST match the JSON schema."
+        "6) Do NOT add camera/lens/lighting/day-night/fps/aspect-ratio instructions.\n"
+        "7) Do NOT invent new plot points beyond the provided scene fields.\n"
+        "8) Output MUST match the JSON schema."
     )
     return call_structured_output(
         client=client,

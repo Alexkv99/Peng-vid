@@ -16,8 +16,8 @@ DEFAULT_MODEL = "fal-ai/minimax/video-01"
 #   "fal-ai/kling-video/v2/master/image-to-video"    — Master quality
 DEFAULT_I2V_MODEL = "fal-ai/kling-video/v2.1/standard/image-to-video"
 
-# Default reference-to-video model (Vidu Q1 reference-to-video).
-DEFAULT_REF_I2V_MODEL = "fal-ai/vidu/q1/reference-to-video"
+# Default reference-to-video model (Kling O3 Pro reference-to-video).
+DEFAULT_REF_I2V_MODEL = "fal-ai/kling-video/o3/pro/reference-to-video"
 
 
 def _ensure_api_key() -> None:

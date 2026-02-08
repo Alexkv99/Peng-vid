@@ -17,6 +17,7 @@ from fal_integration_service.storyboard_pipeline import (
     DEFAULT_FAL_CONCURRENCY,
     process_storyboard,
 )
+from fal_integration_service.fal_image import generate_stylized_reference_image
 from fal_integration_service.fal_face_swap import upload_local_image
 from fal_integration_service.art_styles import (
     DEFAULT_STYLE,
@@ -461,7 +462,7 @@ def main() -> None:
 
     # Resolve reference images (upload local files or use URLs directly)
     face_swap_url = None
-    reference_element = None
+    reference_elements = None
     if args.face_image:
         face_ref = args.face_image
         if face_ref.startswith(("http://", "https://")):
@@ -474,27 +475,50 @@ def main() -> None:
             frontal_url = upload_local_image(face_ref)
             logging.info("Reference face: uploaded to %s", frontal_url)
 
-        reference_urls: List[str] = []
+        additional_reference_urls: List[str] = []
         if args.face_reference_images:
             for raw in args.face_reference_images.split(","):
                 item = raw.strip()
                 if not item:
                     continue
                 if item.startswith(("http://", "https://")):
-                    reference_urls.append(item)
+                    additional_reference_urls.append(item)
                 else:
                     if not os.path.isfile(item):
                         raise SystemExit(f"Reference image file not found: {item}")
                     logging.info("Reference face: uploading local image %s", item)
-                    reference_urls.append(upload_local_image(item))
+                    additional_reference_urls.append(upload_local_image(item))
 
-        if not reference_urls:
-            reference_urls = [frontal_url]
+        stylized_ref_url = None
+        try:
+            logging.info("Reference face: stylizing reference image with Nano Banana")
+            stylized_ref_url = generate_stylized_reference_image(
+                frontal_url,
+                style_key=art_style.key,
+            )
+            logging.info(
+                "Reference face: stylized reference ready %s",
+                stylized_ref_url,
+            )
+        except Exception as exc:
+            logging.warning(
+                "Reference face: stylization failed (%s). Using original reference.",
+                exc,
+            )
 
-        reference_element = {
-            "frontal_image_url": frontal_url,
-            "reference_image_urls": reference_urls,
-        }
+        if not stylized_ref_url:
+            raise SystemExit(
+                "Reference face stylization failed; no stylized reference image available."
+            )
+
+        reference_elements = [
+            {
+                "frontal_image_url": frontal_url,
+                "reference_image_urls": [stylized_ref_url],
+            }
+        ]
+        for ref_url in additional_reference_urls:
+            reference_elements.append({"reference_image_urls": [ref_url]})
         face_swap_url = frontal_url
     elif args.face_reference_images:
         raise SystemExit("--face-reference-images requires --face-image.")
@@ -520,7 +544,7 @@ def main() -> None:
         output_dir=video_output_dir,
         return_clips=True,
         face_swap_url=face_swap_url,
-        reference_element=reference_element,
+        reference_elements=reference_elements,
         fal_concurrency=args.fal_concurrency,
         style_key=art_style.key,
     )

@@ -1,0 +1,81 @@
+{
+  "project_id": null,
+  "style_preset": "watercolor",
+  "voice_id": "gVJ57663V-6qJdOv",
+  "model_name": "default",
+  "output_format": "wav",
+  "items": [
+    {
+      "scene_id": 1,
+      "title": "Three-front war for growth",
+      "text_field": "scene_summary",
+      "text": "AI raised expectations, collapsed distribution, and put incumbents, startups, and customers in competition.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "pipeline_output/elena_watercolor_6scenes_v1/voice_output/scene_001.wav",
+      "request_id": "xGiQnOEwCWk",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 2,
+      "title": "A new playbook: Trust",
+      "text_field": "scene_summary",
+      "text": "A new growth playbook emerged, and it centered on one concept: trust.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "pipeline_output/elena_watercolor_6scenes_v1/voice_output/scene_002.wav",
+      "request_id": "nnIJzzGkZLk",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 3,
+      "title": "Classic channels stopped working",
+      "text_field": "scene_summary",
+      "text": "SEO, paid search, and corporate social got pricier and weaker as AI intercepted attention.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "pipeline_output/elena_watercolor_6scenes_v1/voice_output/scene_003.wav",
+      "request_id": "ZgbtIsBWQaA",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 4,
+      "title": "Trust-based acquisition channels",
+      "text_field": "scene_summary",
+      "text": "Employee voices, creators, community, and product experience drove word of mouth and trust.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "pipeline_output/elena_watercolor_6scenes_v1/voice_output/scene_004.wav",
+      "request_id": "XvOdp_Sd-Io",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 5,
+      "title": "Trust-based retention beats commoditization",
+      "text_field": "scene_summary",
+      "text": "As AI commoditized features, users stayed with products they trusted to deliver outcomes.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "pipeline_output/elena_watercolor_6scenes_v1/voice_output/scene_005.wav",
+      "request_id": "z4iQLf3kbRY",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 6,
+      "title": "Operational shift and closing warning",
+      "text_field": "scene_summary",
+      "text": "Teams aligned, shipped fast, built in public, and shifted before channels collapsed faster.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "pipeline_output/elena_watercolor_6scenes_v1/voice_output/scene_006.wav",
+      "request_id": "PLyD36EBoIc",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "scene_plan": "pipeline_output/elena_watercolor_6scenes_v1/scene_plan.json",
+  "voice_manifest": "pipeline_output/elena_watercolor_6scenes_v1/voice_manifest.json",
+  "final_video": "pipeline_output/elena_watercolor_3scenes_v7/final_video.mp4"
+}

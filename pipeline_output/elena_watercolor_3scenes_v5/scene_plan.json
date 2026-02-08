@@ -1,0 +1,53 @@
+{
+  "project_id": null,
+  "style_preset": "watercolor",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "title": "Three-front war, one new lever",
+      "main_point": "AI raised expectations, broke distribution, and intensified competition; growth shifted to trust.",
+      "scene_summary": "AI raised expectations, collapsed channels, and attacked value props\u2014so growth shifted to trust.",
+      "key_elements": [
+        "Three-front pressure: expectations, distribution collapse, value-prop attacks",
+        "New playbook centered on trust",
+        "Setup for acquisition + retention changes"
+      ],
+      "scene_prompt": "Delicate watercolor painting style, soft washes, visible brush strokes, muted tones.\nA lone startup founder stands at a desk in a simple office, facing a wall board split into three labeled fronts: rising expectations, collapsed distribution channels, and value-prop attacks.\nThey place a single new lever labeled \u201ctrust\u201d at the center, looking tense but determined."
+    },
+    {
+      "scene_id": 2,
+      "title": "Acquisition moved from channels to people",
+      "main_point": "Traditional acquisition weakened; trust-based channels like employees, creators, community, and product experience worked.",
+      "scene_summary": "SEO, SEM, and corporate social weakened; employees, creators, community, and product experience drove trust.",
+      "key_elements": [
+        "SEO disrupted by AI content and answer engines",
+        "SEM costs rose as searches stagnated and AI tools competed",
+        "Corporate social throttled links and favored on-platform engagement",
+        "Employee-led social built transparency and human trust",
+        "Creator partnerships transferred trust when ICP fit was real",
+        "Community and word-of-mouth compounded; features copied, trust not",
+        "Product-led brand: every interaction built or reduced trust",
+        "Sponsor mention: Cello referral platform embedded in product"
+      ],
+      "scene_prompt": "Delicate watercolor painting style, soft washes, visible brush strokes, muted tones.\nIn the same war-room from scene 1, the same startup team stands around a table as a whiteboard shows fading icons for SEO/SEM/corporate social while brighter lines connect employees, creators, community, and product experience.\nOne teammate places a small \u201cCello\u201d referral card into the product sketch, and the group looks focused and hopeful."
+    },
+    {
+      "scene_id": 3,
+      "title": "Retention became a trust moat",
+      "main_point": "AI commoditized cost and efficiency value props; retention depended on confidence the team would keep delivering outcomes.",
+      "scene_summary": "As AI commoditized utility, customers stayed with products they trusted to keep improving outcomes.",
+      "key_elements": [
+        "Value prop buckets: cheaper, more efficient, more effective",
+        "AI outperformed many SaaS on speed and cost; $20/month pressure",
+        "Trust defined as confidence in ongoing better outcomes",
+        "Trust builders: real roadmap visibility, fast feedback iteration, WOW UX details",
+        "Lifecycle comms either built or reduced trust",
+        "Outcome-aligned monetization reduced churn and \u2018sleeping bears\u2019",
+        "Operational shift: break silos, optimize shipping velocity, build in public",
+        "Closing warning: channels and value props collapsed faster than expected"
+      ],
+      "scene_prompt": "Delicate watercolor painting style, soft washes, visible brush strokes, muted tones.\nIn the same startup war-room, the founder and small team stand together at a whiteboard labeled \u201ccheaper / more efficient / more effective,\u201d drawing a protective moat around \u201cTRUST = better outcomes.\u201d\nThey pin up a simple public roadmap and a feedback loop arrow, calmly watching a \u201c$20/mo\u201d price tag drift away from their product icon, conveying resolved confidence."
+    }
+  ],
+  "warnings": []
+}

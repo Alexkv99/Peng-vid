@@ -12,6 +12,7 @@ import imageio_ffmpeg
 
 from .scenes import Scene, Storyboard
 from .fal_image import generate_image
+from .art_styles import get_style
 from .fal_video import (
     DEFAULT_REF_I2V_MODEL,
     generate_video_from_image,
@@ -44,6 +45,38 @@ def _extract_video_url(response: dict) -> str | None:
     if isinstance(video, str):
         return video
     return None
+
+
+def _restyle_video_prompt(
+    prompt: str,
+    *,
+    style_key: str | None,
+    face_mode: bool,
+) -> str:
+    """Replace the short style prefix with the full image directive."""
+    style = get_style(style_key)
+    if style.prompt_prefix in prompt:
+        restyled = prompt.replace(style.prompt_prefix, style.image_prefix, 1)
+    else:
+        restyled = f"{style.image_prefix} {prompt.lstrip()}"
+    if face_mode:
+        restyled = restyled.rstrip() + style.protagonist_hint
+    return restyled
+
+
+def _build_reference_prompt(base_prompt: str, element_count: int) -> str:
+    """Append reference-element instructions for video generation."""
+    if element_count <= 1:
+        return (
+            f"{base_prompt}\n"
+            "Main character: @Element1. Use @Image1 as style reference."
+        )
+    extra = ", ".join(f"@Element{idx}" for idx in range(2, element_count + 1))
+    return (
+        f"{base_prompt}\n"
+        f"Main character: @Element1. Additional views: {extra}. "
+        "Use @Image1 as style reference."
+    )
 
 
 def _pick_kling_duration(target_seconds: float) -> str:
@@ -195,7 +228,8 @@ async def _generate_video_async(
     image_url: str,
     duration: int | str,
     video_model: str | None,
-    reference_element: dict | None,
+    reference_elements: list[dict] | None,
+    style_key: str | None,
     progress: dict,
     progress_lock: asyncio.Lock,
     total: int,
@@ -215,20 +249,37 @@ async def _generate_video_async(
             duration,
         )
 
-        if reference_element:
+        styled_prompt = _restyle_video_prompt(
+            scene.scene_prompt,
+            style_key=style_key,
+            face_mode=bool(reference_elements),
+        )
+        if reference_elements:
             reference_model = video_model or DEFAULT_REF_I2V_MODEL
             ref_prompt = (
-                scene.scene_prompt
+                styled_prompt
                 if reference_model.startswith("fal-ai/vidu/")
-                else (
-                    f"{scene.scene_prompt}\n"
-                    "Main character: @Element1. Use @Image1 as style reference."
-                )
+                else _build_reference_prompt(styled_prompt, len(reference_elements))
             )
+            image_refs = [image_url]
+            if not reference_model.startswith("fal-ai/vidu/"):
+                first_element = reference_elements[0] if reference_elements else None
+                if isinstance(first_element, dict):
+                    ref_images = first_element.get("reference_image_urls") or []
+                    if isinstance(ref_images, list) and ref_images:
+                        image_refs = [ref_images[0], image_url]
+            ref_elements = reference_elements
+            if reference_model.startswith("fal-ai/vidu/"):
+                ref_element = dict(reference_elements[0])
+                reference_urls = list(ref_element.get("reference_image_urls") or [])
+                if image_url and image_url not in reference_urls:
+                    reference_urls.append(image_url)
+                ref_element["reference_image_urls"] = reference_urls
+                ref_elements = [ref_element]
             video_response = await asyncio.to_thread(
                 generate_video_from_reference,
-                elements=[reference_element],
-                image_urls=[image_url],
+                elements=ref_elements,
+                image_urls=image_refs,
                 prompt=ref_prompt,
                 model=reference_model,
                 duration=duration,
@@ -240,7 +291,7 @@ async def _generate_video_async(
             video_response = await asyncio.to_thread(
                 generate_video_from_image,
                 image_url,
-                scene.scene_prompt,
+                styled_prompt,
                 **i2v_kwargs,
             )
         async with progress_lock:
@@ -269,7 +320,7 @@ async def _process_storyboard_parallel(
     output_dir: str | None,
     return_clips: bool,
     face_swap_url: str | None,
-    reference_element: dict | None,
+    reference_elements: list[dict] | None,
     fal_concurrency: int,
     style_key: str | None = None,
 ) -> dict:
@@ -332,7 +383,7 @@ async def _process_storyboard_parallel(
         if target_duration is None:
             target_duration = default_per_scene
 
-        if reference_element:
+        if reference_elements:
             duration = (
                 _pick_reference_duration(target_duration)
                 if target_duration
@@ -351,7 +402,8 @@ async def _process_storyboard_parallel(
                 image_url,
                 duration,
                 video_model,
-                reference_element,
+                reference_elements,
+                style_key,
                 progress,
                 progress_lock,
                 num_scenes,
@@ -468,7 +520,7 @@ def process_storyboard(
     output_dir: str | None = None,
     return_clips: bool = False,
     face_swap_url: str | None = None,
-    reference_element: dict | None = None,
+    reference_elements: list[dict] | None = None,
     fal_concurrency: int = DEFAULT_FAL_CONCURRENCY,
     style_key: str | None = None,
 ) -> dict:
@@ -481,7 +533,7 @@ def process_storyboard(
             Uses PuLID Flux (identity-conditioned) when a face reference is
             provided, otherwise plain Flux Dev.
     Step 2: Animate images into video clips with fal.ai / Kling (parallel).
-            If a reference element is provided, use Kling O1 reference-to-video
+            If reference elements are provided, use Kling O1 reference-to-video
             to preserve identity.
     Step 3: Download and adjust each clip to the target per-scene duration.
     Step 4: Concatenate all clips into one video with ffmpeg.
@@ -493,9 +545,9 @@ def process_storyboard(
         face_swap_url: URL of a reference face image. When provided, PuLID Flux
                        conditions generation on this face so the main character
                        inherits the person's identity.
-        reference_element: Reference element dict for Kling O1. When provided,
-                          this is used for identity conditioning during video
-                          generation.
+        reference_elements: Reference element dicts for Kling O1. When provided,
+                            these are used for identity conditioning during
+                            video generation (use @Element1, @Element2, ...).
         fal_concurrency: Maximum number of concurrent FAL API calls.
 
     Returns a result dict containing:
@@ -512,7 +564,7 @@ def process_storyboard(
             output_dir=output_dir,
             return_clips=return_clips,
             face_swap_url=face_swap_url,
-            reference_element=reference_element,
+            reference_elements=reference_elements,
             fal_concurrency=fal_concurrency,
             style_key=style_key,
         )

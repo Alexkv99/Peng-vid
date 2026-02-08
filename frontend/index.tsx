@@ -316,16 +316,16 @@ const Index = () => {
           <div className="w-full max-w-3xl text-center">
             {/* Hero Text */}
             <h1 className="mb-4 font-serif text-4xl font-bold leading-tight tracking-tight text-foreground opacity-0 animate-fade-in-up sm:text-5xl md:text-7xl">
-              Turn your blogs
+              Bring your words
               <br />
-              into videos
+              to life
             </h1>
 
             <p
               className="mx-auto mb-8 max-w-lg font-serif text-base text-foreground/50 opacity-0 animate-fade-in-up sm:mb-12 sm:text-lg"
               style={{ animationDelay: "0.2s" }}
             >
-              Upload your blog, upload your image, and upload your voice — we'll turn it into a great story.
+              Upload text, an image, and a voice — we'll turn it into a great visual story.
             </p>
 
             {/* Input Area */}

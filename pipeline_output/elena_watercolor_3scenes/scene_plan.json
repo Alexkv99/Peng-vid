@@ -1,0 +1,60 @@
+{
+  "project_id": null,
+  "style_preset": "watercolor",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "title": "Three-front war, one new lever",
+      "main_point": "AI raised expectations, broke distribution, and intensified competition; growth shifted to trust.",
+      "scene_summary": "AI raised expectations, collapsed channels, and attacked value props\u2014so growth shifted to trust.",
+      "key_elements": [
+        "AI-driven market pressure",
+        "Higher customer expectations",
+        "Collapsing distribution channels",
+        "Incumbents, startups, and customers competing",
+        "Trust as the new playbook"
+      ],
+      "scene_prompt": "Delicate watercolor painting style, soft washes, visible brush strokes, muted tones.\nIn a modern office war-room, a lone growth strategist stands at a whiteboard as three opposing forces\u2014incumbent suits, scrappy startup founders, and demanding customers\u2014press in from different sides.\nBehind them, fading icons of broken distribution channels and swirling AI symbols raise the tension, while the strategist reaches toward a single clear lever labeled \u201cTrust.\u201d"
+    },
+    {
+      "scene_id": 2,
+      "title": "Trust-based acquisition replaces broken channels",
+      "main_point": "SEO, SEM, and corporate social weakened; trust-forward channels drove word of mouth.",
+      "scene_summary": "SEO, SEM, and corporate social weakened; employees, creators, community, and product experience drove word of mouth.",
+      "key_elements": [
+        "SEO disrupted by AI content and answer engines",
+        "SEM costs rising and ROAS falling",
+        "Social platforms suppressing corporate links",
+        "Employee-led social transparency",
+        "Influencer/creator trust transfer",
+        "Community-driven growth",
+        "Product-led brand as trust signal",
+        "Word of mouth as ultimate trust signal",
+        "Sponsor mention: Cello referral platform"
+      ],
+      "scene_prompt": "Delicate watercolor painting style, soft washes, visible brush strokes, muted tones.\nIn the same war-room map setting from scene 1, the same startup team turns away from fading signs labeled SEO, SEM, and Corporate Social.\nThey link hands with employees, creators, and a small community circle, passing a \u201ctrust\u201d ribbon that becomes word-of-mouth arrows spreading outward, with a small \u201cCello\u201d referral card on the table."
+    },
+    {
+      "scene_id": 3,
+      "title": "Trust-based retention becomes the moat",
+      "main_point": "AI commoditized cheaper/faster value props; retention depended on confidence in ongoing outcomes.",
+      "scene_summary": "AI commoditized cheaper and faster value; customers stayed with products that kept earning trust.",
+      "key_elements": [
+        "Value prop triad: cheaper, more efficient, more effective",
+        "AI outcompeting efficiency and cost savings",
+        "Trust as confidence in future outcomes",
+        "Transparent roadmap sharing",
+        "Fast iteration from feedback",
+        "WOW moments in UX",
+        "Thoughtful lifecycle communications",
+        "Outcome-aligned monetization",
+        "Org alignment across product/marketing/success",
+        "Optimize for velocity and micro-releases",
+        "Build in public via real people",
+        "Closing warning: channels collapsing faster than expected"
+      ],
+      "scene_prompt": "Delicate watercolor painting style, soft washes, visible brush strokes, muted tones.\nIn the same war-room with the strategy board from earlier scenes, the same founder and cross-functional team (product, marketing, customer success) stand together, calmly placing a wide stone labeled \u201cTRUST\u201d as a moat around their product icon.\nOn the board, small notes read \u201ctransparent roadmap,\u201d \u201cfast feedback iterations,\u201d \u201cWOW UX,\u201d \u201clifecycle comms,\u201d and \u201coutcome-aligned pricing,\u201d while faded arrows labeled \u201ccheaper\u201d and \u201cfaster\u201d wash away beyond the moat, implying steady confidence."
+    }
+  ],
+  "warnings": []
+}

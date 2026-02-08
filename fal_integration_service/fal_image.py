@@ -18,6 +18,9 @@ DEFAULT_IMAGE_MODEL = "fal-ai/flux/dev"
 # generated character already looks like the target person.
 PULID_IMAGE_MODEL = "fal-ai/flux-pulid"
 
+# Nano Banana edit — image-to-image stylization.
+NANO_BANANA_EDIT_MODEL = "fal-ai/nano-banana/edit"
+
 
 def _ensure_api_key() -> None:
     if not os.environ.get("FAL_KEY"):
@@ -105,6 +108,37 @@ def generate_image(
     result = fal_client.subscribe(
         active_model,
         arguments=arguments,
+        with_logs=True,
+    )
+
+    return _extract_image_url(result)
+
+
+def generate_stylized_reference_image(
+    image_url: str,
+    *,
+    style_key: str | None = None,
+) -> str:
+    """Restyle a reference image with the selected art style."""
+    _ensure_api_key()
+    if not image_url:
+        raise RuntimeError("Missing image_url for stylized reference generation.")
+
+    style = get_style(style_key)
+    prompt = (
+        "Restyle this image in the following art style while preserving the "
+        "subject's identity and composition: "
+        f"{style.image_prefix}"
+    )
+
+    result = fal_client.subscribe(
+        NANO_BANANA_EDIT_MODEL,
+        arguments={
+            "prompt": prompt,
+            "image_urls": [image_url],
+            "num_images": 1,
+            "output_format": "png",
+        },
         with_logs=True,
     )
 

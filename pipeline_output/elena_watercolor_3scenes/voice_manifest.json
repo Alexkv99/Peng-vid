@@ -1,0 +1,45 @@
+{
+  "project_id": null,
+  "style_preset": "watercolor",
+  "voice_id": "gVJ57663V-6qJdOv",
+  "model_name": "default",
+  "output_format": "wav",
+  "items": [
+    {
+      "scene_id": 1,
+      "title": "Three-front war, one new lever",
+      "text_field": "scene_summary",
+      "text": "AI raised expectations, collapsed channels, and attacked value props\u2014so growth shifted to trust.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "pipeline_output/elena_watercolor_3scenes/voice_output/scene_001.wav",
+      "request_id": "8uqlD_AxIBg",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 2,
+      "title": "Trust-based acquisition replaces broken channels",
+      "text_field": "scene_summary",
+      "text": "SEO, SEM, and corporate social weakened; employees, creators, community, and product experience drove word of mouth.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "pipeline_output/elena_watercolor_3scenes/voice_output/scene_002.wav",
+      "request_id": "MISmFy-p9QU",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    },
+    {
+      "scene_id": 3,
+      "title": "Trust-based retention becomes the moat",
+      "text_field": "scene_summary",
+      "text": "AI commoditized cheaper and faster value; customers stayed with products that kept earning trust.",
+      "trimmed": false,
+      "max_seconds": 7.0,
+      "audio_path": "pipeline_output/elena_watercolor_3scenes/voice_output/scene_003.wav",
+      "request_id": "lTMY589CoY8",
+      "sample_rate": 48000,
+      "duration_sec": 44739.242645833336
+    }
+  ]
+}
